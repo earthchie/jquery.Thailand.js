@@ -54,7 +54,9 @@ $.Thailand({
 ## Contributers
 [earthchie](https://github.com/earthchie/)
 
-[dtinth](https://github.com/dtinth/) - First PR'er. Made a big improvement! Yay!
+[dtinth](https://github.com/dtinth/) - First accepted PR. Made a [big improvement!](https://github.com/earthchie/jquery.Thailand.js/pull/2) Yay!
+
+[saknarak](https://github.com/saknarak) - First [PR](https://github.com/earthchie/jquery.Thailand.js/pull/1).
 
 ## License
 WTFPL 2.0 http://www.wtfpl.net/
