@@ -3,7 +3,6 @@
  * @version 1.1.0
  * @update Apr 8, 2017
  * @website https://github.com/earthchie/jquery.Thailand.js
- * @author Earthchie http://www.earthchie.com/
  * @license WTFPL v.2 - http://www.wtfpl.net/
  *
  * @dependency: jQuery <https://jquery.com/>
