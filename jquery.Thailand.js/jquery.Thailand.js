@@ -17,7 +17,7 @@ $.Thailand = function (options) {
     
     options = $.extend({
         
-        database: './db.zip',
+        database: './db2.zip',
         autocomplete_size: 20,
         onComplete: function () {},
         
@@ -35,8 +35,10 @@ $.Thailand = function (options) {
         JSZip.loadAsync(data).then(function (zip) {
             
             // unzip db.json then parse into string
-            zip.file('db.json').async('string').then(function (json) {
-
+            zip.file('db2.json').async('string').then(function (json) {
+                json = JSON.parse(json).map(function(item) {
+                  return {d: item[0], a: item[1], p: item[2], z: item[3]}
+                })
                 var DB = new JQL(json), // make json query-able
                     typehead_options = {
                         hint: true,
