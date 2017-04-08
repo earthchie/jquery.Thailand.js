@@ -17,7 +17,7 @@ $.Thailand = function (options) {
 
     options = $.extend({
 
-        database: './db.json',
+        database: './data.json',
         autocomplete_size: 20,
         onComplete: function () {},
 
@@ -30,7 +30,7 @@ $.Thailand = function (options) {
 
     // get zip binary
     $.getJSON(options.database, function (json) {
-        var DB = new JQL(json), // make json query-able
+        var DB = new JQL(preprocess(json)), // make json query-able
             typehead_options = {
                 hint: true,
                 highlight: true,
@@ -143,4 +143,35 @@ $.Thailand = function (options) {
         .fail(function (err) {
             throw new Error('Error: File "'+options.database+'" is not exists.');
         });
+
+    function preprocess (data) {
+        if (!data[0].length) {
+            // non-compacted database
+            return data;
+        }
+        // compacted database in hierarchical form of:
+        // [["province",[["amphur",[["district",["zip"...]]...]]...]]...]
+        var expanded = [ ];
+        data.forEach(function (provinceEntry) {
+            var province = provinceEntry[0];
+            var amphurList = provinceEntry[1];
+            amphurList.forEach(function (amphurEntry) {
+                var amphur = amphurEntry[0];
+                var districtList = amphurEntry[1];
+                districtList.forEach(function (districtEntry) {
+                    var district = districtEntry[0];
+                    var zipCodeList = districtEntry[1];
+                    zipCodeList.forEach(function (zipCode) {
+                        expanded.push({
+                            d: district,
+                            a: amphur,
+                            p: province,
+                            z: zipCode
+                        });
+                    });
+                });
+            });
+        });
+        return expanded;
+    }
 };
