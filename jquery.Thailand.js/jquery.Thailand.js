@@ -35,9 +35,10 @@ $.Thailand = function (options) {
         JSZip.loadAsync(data).then(function (zip) {
             
             // unzip db.json then parse into string
-            zip.file('db2.json').async('string').then(function (json) {
-                json = JSON.parse(json).map(function(item) {
-                  return {d: item[0], a: item[1], p: item[2], z: item[3]}
+            zip.file('db3.json').async('string').then(function (text) {
+                var obj = JSON.parse(text)
+                var json = obj.data.map(function(item) {
+                  return {d: obj.lookup[item[0]], a: obj.lookup[item[1]], p: obj.lookup[item[2]], z: item[3]}
                 })
                 var DB = new JQL(json), // make json query-able
                     typehead_options = {
