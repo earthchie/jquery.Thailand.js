@@ -51,6 +51,10 @@ $.Thailand({
 });
 
 ```
+## Contributers
+[earthchie](https://github.com/earthchie/)
+
+[dtinth](https://github.com/dtinth/) - First PR'er. Made a big improvement! Yay!
 
 ## License
 WTFPL 2.0 http://www.wtfpl.net/
