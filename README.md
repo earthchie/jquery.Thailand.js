@@ -39,14 +39,49 @@ https://earthchie.github.io/jquery.Thailand.js/
 ```javascript
 
 $.Thailand({ 
-    database: 'jquery.Thailand.js/db.zip',
+    database: './jquery.Thailand.js/db.zip', // path หรือ url ไปยัง zip
+    autocomplete_size: 10, // ถ้าไม่ระบุ ค่า default คือ 20
     $district: $('#district'),
     $amphoe: $('#amphoe'),
     $province: $('#province'),
     $zipcode: $('#zipcode'),
+    onComplete: function(){
+        console.log('Autocomplete is ready!')
+    }
 });
 
 ```
+
+## Performance
+
+ใน [v1.1.0](https://github.com/earthchie/jquery.Thailand.js/tree/fe302996ca72f156e1542048419399484431c391) เป็นต้นมามีการปรับเปลี่ยนโครงสร้างข้อมูล ภายใต้สมมุติฐานว่า Server รองรับ gzip รายละเอียดดังนี้
+
+| ไฟล์ | ขนาดเมื่อถูก Gzip |
+| --- | ---:|
+| JQL.min.js | 1.3 KB |
+| typeahead.bundle.js | 14.6 KB |
+| jquery.Thailand.min.js | 1.2 KB |
+| data.json | 57.4 KB |
+| **รวม** | **74.5 KB** |
+
+แต่หากท่านใดที่ Server ไม่รองรับ gzip สามารถใช้ [zipped version](https://github.com/earthchie/jquery.Thailand.js/tree/zipped_version) แทนได้ โดยมีรายละเอียดดังนี้
+
+| ไฟล์ | ขนาดไฟล์ |
+| --- | ---:|
+| jszip.min.js | 99.5 KB |
+| jszip-utils.min.js | 1.7 KB |
+| JQL.min.js | 3.1 KB |
+| typeahead.bundle.js | 43.4 KB |
+| jquery.Thailand.min.js | 2.6 KB |
+| db.zip | 50.7 KB |
+| **รวม** | **201 KB** |
+
+## Contributers
+[earthchie](https://github.com/earthchie/) - Project Owner
+
+[dtinth](https://github.com/dtinth/) - First accepted PR. Made a [big improvement!](https://github.com/earthchie/jquery.Thailand.js/pull/2) Yay!
+
+[saknarak](https://github.com/saknarak) - First [PR](https://github.com/earthchie/jquery.Thailand.js/pull/1).
 
 ## License
 WTFPL 2.0 http://www.wtfpl.net/

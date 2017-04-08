@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <title>jquery.Thailand.js</title>
-    
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/css/uikit.css">
     <link rel="stylesheet" href="jquery.Thailand.js/jquery.Thailand.min.css">
-    
+
     <style>
-        a, h1, h2{
+        a, h1, .h2{
             font-family: 'Kanit', sans-serif !important;
             line-height: 1.6em;
         }
@@ -20,53 +20,46 @@
             font-size: 1.4em;
         }
         label{
+            font-size: 1.6em;
             display: block;
         }
     </style>
-    
+
 </head>
 <body>
-    
+
     <div class="uk-container uk-padding">
-        
+
         <h1>Auto Complete ที่อยู่ อย่างที่มันควรเป็น</h1>
-        
+
         <div id="loader">
             <div uk-spinner></div> รอสักครู่ กำลังโหลดฐานข้อมูล...
         </div>
-        
+
         <div id="address" style="display:none;" uk-grid>
 
             <div class="uk-width-1-2@m">
-                <label>
-                    <h2>ตำบล</h2>
-                    <input name="district" class="uk-input uk-width-1-1" type="text">
-                </label>
+                <label class="h2">ตำบล</label>
+                <input name="district" class="uk-input uk-width-1-1" type="text">
             </div>
 
             <div class="uk-width-1-2@m">
-                <label>
-                    <h2>อำเภอ</h2>
-                    <input name="amphoe" class="uk-input uk-width-1-1" type="text">
-                </label>
+				<label class="h2">อำเภอ</label>
+				<input name="amphoe" class="uk-input uk-width-1-1" type="text">
             </div>
 
             <div class="uk-width-1-2@m">
-                <label>
-                    <h2>จังหวัด</h2>
-                    <input name="province" class="uk-input uk-width-1-1" type="text">
-                </label>
+                <label class="h2">จังหวัด</label>
+                <input name="province" class="uk-input uk-width-1-1" type="text">
             </div>
 
             <div class="uk-width-1-2@m">
-                <label>
-                    <h2>รหัสไปรษณีย์</h2>
-                    <input name="zipcode" class="uk-input uk-width-1-1" type="text">
-                </label>
+                <label class="h2">รหัสไปรษณีย์</label>
+                <input name="zipcode" class="uk-input uk-width-1-1" type="text">
             </div>
 
         </div>
-    
+
         <div uk-grid>
             <div class="uk-width-1-2@m">
                 <a href="https://medium.com/@earthchie/ระบบ-auto-complete-ที่อยู่ไทย-อย่างที่มันควรเป็น-27360185d86a" target="_blank">
@@ -91,26 +84,29 @@
             </div>
         </div>
     </div>
-    
+
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/js/uikit.min.js"></script>
-    
-    <script type="text/javascript" src="jquery.Thailand.js/dependencies/jszip.min.js"></script>
-    <script type="text/javascript" src="jquery.Thailand.js/dependencies/jszip-utils.min.js"></script>
+
     <script type="text/javascript" src="jquery.Thailand.js/dependencies/JQL.min.js"></script>
     <script type="text/javascript" src="jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
-    
+
     <script type="text/javascript" src="jquery.Thailand.js/jquery.Thailand.min.js"></script>
-    
+
     <script type="text/javascript">
+<<<<<<< HEAD
         $.Thailand({ 
             database: 'jquery.Thailand.js/db3.zip',
+=======
+        $.Thailand({
+            database: 'jquery.Thailand.js/data.json',
+>>>>>>> f8d1283c68ebe084c96a99c3ac0e108ec13f9688
             onComplete: function(){
                 $('#loader, #address').toggle();
             }
         });
     </script>
-    
+
 </body>
 </html>
