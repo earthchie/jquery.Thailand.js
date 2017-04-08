@@ -1,6 +1,6 @@
 /**
  * @name jquery.Thailand.js
- * @version 1.0.0
+ * @version 1.0.1
  * @update Apr 8, 2017
  * @website https://github.com/earthchie/jquery.Thailand.js
  * @author Earthchie http://www.earthchie.com/
@@ -18,6 +18,7 @@ $.Thailand = function (options) {
     options = $.extend({
         
         database: './db.zip',
+        autocomplete_size: 20,
         onComplete: function () {},
         
         $district: $('[name="district"]'),
@@ -57,7 +58,7 @@ $.Thailand = function (options) {
                 
                 // init auto complete for district
                 options.$district.typeahead(typehead_options, {
-                    limit: 20,
+                    limit: options.autocomplete_size,
                     templates: templates,
                     source: (function (str) {
 
@@ -77,7 +78,7 @@ $.Thailand = function (options) {
                 
                 // init auto complete for amphoe
                 options.$amphoe.typeahead(typehead_options, {
-                    limit: 20,
+                    limit: options.autocomplete_size,
                     templates: templates,
                     source: (function (str) {
 
@@ -97,7 +98,7 @@ $.Thailand = function (options) {
                 
                 // init auto complete for province
                 options.$province.typeahead(typehead_options, {
-                    limit: 20,
+                    limit: options.autocomplete_size,
                     templates: templates,
                     source: (function (str) {
 
@@ -117,7 +118,7 @@ $.Thailand = function (options) {
                 
                 // init auto complete for zipcode
                 options.$zipcode.typeahead(typehead_options, {
-                    limit: 20,
+                    limit: options.autocomplete_size,
                     templates: templates,
                     source: (function (str) {
 
@@ -136,7 +137,10 @@ $.Thailand = function (options) {
                 });
                 
                 // on autocomplete
-                $('[name="district"],[name="amphoe"],[name="province"],[name="zipcode"]').bind('typeahead:select typeahead:autocomplete', autocomplete_handler);
+                options.$district.bind('typeahead:select typeahead:autocomplete', autocomplete_handler);
+                options.$amphoe.bind('typeahead:select typeahead:autocomplete', autocomplete_handler);
+                options.$province.bind('typeahead:select typeahead:autocomplete', autocomplete_handler);
+                options.$zipcode.bind('typeahead:select typeahead:autocomplete', autocomplete_handler);
                 
                 // callback
                 if (typeof options.onComplete === 'function') {
