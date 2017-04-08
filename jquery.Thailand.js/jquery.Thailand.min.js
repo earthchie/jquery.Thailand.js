@@ -1,6 +1,6 @@
 /**
  * @name jquery.Thailand.js
- * @version z1.0.2
+ * @version z1.1.0
  * @update Apr 8, 2017
  * @website https://github.com/earthchie/jquery.Thailand.js/tree/zipped_version
  * @license WTFPL v.2 - http://www.wtfpl.net/
