@@ -45,6 +45,9 @@ $.Thailand({
     $amphoe: $('#amphoe'),
     $province: $('#province'),
     $zipcode: $('#zipcode'),
+    onComplete: function(){
+        console.log('Autocomplete is ready!')
+    }
 });
 
 ```
