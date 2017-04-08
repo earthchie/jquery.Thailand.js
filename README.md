@@ -51,6 +51,31 @@ $.Thailand({
 });
 
 ```
+
+## Performance
+
+ใน v1.1.0 เป็นต้นมามีการปรับเปลี่ยนโครงสร้างข้อมูล ภายใต้สมมุติฐานว่า Server รองรับ gzip รายละเอียดดังนี้
+
+| ไฟล์ | ขนาดไฟล์ | ขนาดเมื่อถูก Gzip |
+| --- | ---:| ---:|
+| JQL.min.js | 3.1 KB | 1.3 KB |
+| typeahead.bundle.js | 43.4 KB | 14.6 KB |
+| jquery.Thailand.min.js | 2.5 KB | 1.2 KB |
+| data.json | 286.0 KB | 57.4 KB |
+| **รวม** | 335.0 KB | **74.5 KB** |
+
+แต่หากท่านใดที่ Server ไม่รองรับ gzip สามารถใช้ [v1.0.2](https://github.com/earthchie/jquery.Thailand.js/tree/747b09ba84d8acb19cf0aca4e8debfee35e36176) แทนได้ โดยมีรายละเอียดดังนี้
+
+| ไฟล์ | ขนาดไฟล์ | ขนาดเมื่อถูก Gzip |
+| --- | ---:| ---:|
+| jszip.min.js | 99.5 KB | 29.7 KB |
+| jszip-utils.min.js | 1.7 KB | 1.2 KB |
+| JQL.min.js | 3.1 KB | 1.3 KB |
+| typeahead.bundle.js | 43.4 KB | 14.6 KB |
+| jquery.Thailand.min.js | 2.4 KB | 1.2 KB |
+| db.zip | 65.3 KB | 65.6 KB |
+| **รวม** | **215.4 KB** | 113.6 KB |
+
 ## Contributers
 [earthchie](https://github.com/earthchie/) - Project Owner
 
