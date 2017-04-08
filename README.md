@@ -67,7 +67,7 @@ $.Thailand({
 แต่หากท่านใดที่ Server ไม่รองรับ gzip สามารถใช้ [zipped version](https://github.com/earthchie/jquery.Thailand.js/tree/zipped_version) แทนได้ โดยมีรายละเอียดดังนี้
 
 | ไฟล์ | ขนาดไฟล์ |
-| --- | ---:| ---:|
+| --- | ---:|
 | jszip.min.js | 99.5 KB |
 | jszip-utils.min.js | 1.7 KB |
 | JQL.min.js | 3.1 KB |
