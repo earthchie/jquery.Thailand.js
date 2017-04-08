@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="jquery.Thailand.js/jquery.Thailand.min.css">
     
     <style>
-        a, h1, h2{
+        a, h1, .h2{
             font-family: 'Kanit', sans-serif !important;
             line-height: 1.6em;
         }
@@ -20,49 +20,42 @@
             font-size: 1.4em;
         }
         label{
+            font-size: 1.6em;
             display: block;
         }
     </style>
-    
+
 </head>
 <body>
-    
+
     <div class="uk-container uk-padding">
-        
+
         <h1>Auto Complete ที่อยู่ อย่างที่มันควรเป็น</h1>
-        
+
         <div id="loader">
             <div uk-spinner></div> รอสักครู่ กำลังโหลดฐานข้อมูล...
         </div>
-        
+
         <div id="address" style="display:none;" uk-grid>
 
             <div class="uk-width-1-2@m">
-                <label>
-                    <h2>ตำบล</h2>
-                    <input name="district" class="uk-input uk-width-1-1" type="text">
-                </label>
+                <label class="h2">ตำบล</label>
+                <input name="district" class="uk-input uk-width-1-1" type="text">
             </div>
 
             <div class="uk-width-1-2@m">
-                <label>
-                    <h2>อำเภอ</h2>
-                    <input name="amphoe" class="uk-input uk-width-1-1" type="text">
-                </label>
+				<label class="h2">อำเภอ</label>
+				<input name="amphoe" class="uk-input uk-width-1-1" type="text">
             </div>
 
             <div class="uk-width-1-2@m">
-                <label>
-                    <h2>จังหวัด</h2>
-                    <input name="province" class="uk-input uk-width-1-1" type="text">
-                </label>
+                <label class="h2">จังหวัด</label>
+                <input name="province" class="uk-input uk-width-1-1" type="text">
             </div>
 
             <div class="uk-width-1-2@m">
-                <label>
-                    <h2>รหัสไปรษณีย์</h2>
-                    <input name="zipcode" class="uk-input uk-width-1-1" type="text">
-                </label>
+                <label class="h2">รหัสไปรษณีย์</label>
+                <input name="zipcode" class="uk-input uk-width-1-1" type="text">
             </div>
 
         </div>
