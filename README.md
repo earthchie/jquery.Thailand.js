@@ -1,6 +1,9 @@
 # jquery.Thailand.js
 ตัวช่วยกรอกที่อยู่ที่ดีที่สุดในไทย ไม่ต้องใช้ Server Side!
 
+# Demo
+https://earthchie.github.io/jquery.Thailand.js/
+
 # วิธีใช้
 
 1. ติดตั้ง Dependency ให้ครบ
