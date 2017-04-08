@@ -6,7 +6,6 @@
  * @license WTFPL v.2 - http://www.wtfpl.net/
  *
  * @dependency: jQuery <https://jquery.com/>
- *              JSZIP <https://stuk.github.io/jszip/>
  *              typehead.js <https://twitter.github.io/typeahead.js/>
  *              JQL.js <https://github.com/earthchie/JQL.js>
  **/
