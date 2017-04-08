@@ -39,7 +39,8 @@ https://earthchie.github.io/jquery.Thailand.js/
 ```javascript
 
 $.Thailand({ 
-    database: 'jquery.Thailand.js/db.zip',
+    database: './jquery.Thailand.js/db.zip', // path หรือ url ไปยัง zip
+    autocomplete_size: 10, // ถ้าไม่ระบุ ค่า default คือ 20
     $district: $('#district'),
     $amphoe: $('#amphoe'),
     $province: $('#province'),
