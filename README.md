@@ -52,7 +52,7 @@ $.Thailand({
 
 ```
 ## Contributers
-[earthchie](https://github.com/earthchie/)
+[earthchie](https://github.com/earthchie/) - Project Owner
 
 [dtinth](https://github.com/dtinth/) - First accepted PR. Made a [big improvement!](https://github.com/earthchie/jquery.Thailand.js/pull/2) Yay!
 
