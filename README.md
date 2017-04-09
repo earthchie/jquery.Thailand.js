@@ -3,6 +3,10 @@
 
 อ่านแนวคิด และที่มาที่ไปได้ที่นี่ https://medium.com/@earthchie/ระบบ-auto-complete-ที่อยู่ไทย-อย่างที่มันควรเป็น-27360185d86a
 
+# Todo
+- Clean up repo
+- Need help! with database https://github.com/earthchie/jquery.Thailand.js/issues/4
+
 # Demo
 https://earthchie.github.io/jquery.Thailand.js/
 
