@@ -15,7 +15,7 @@ $.Thailand = function (options) {
 
     options = $.extend({
 
-        database: './data2.json',
+        database: './data.json',
         autocomplete_size: 20,
         onComplete: function () {},
 
@@ -158,10 +158,10 @@ $.Thailand = function (options) {
                 var districtList = amphurEntry[1];
                 districtList.forEach(function (districtEntry) {
                     var district = districtEntry[0];
-                    var zipCodeList = districtEntry[1] instanceof Array ? districtEntry[1] : [districtEntry[1]];
+                    var zipCodeList = districtEntry[1];
                     zipCodeList.forEach(function (zipCode) {
                         expanded.push({
-                            d: district === 0 ? amphur : district,
+                            d: district,
                             a: amphur,
                             p: province,
                             z: zipCode
