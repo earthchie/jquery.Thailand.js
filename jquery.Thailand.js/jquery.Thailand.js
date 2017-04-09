@@ -158,10 +158,7 @@ $.Thailand = function (options) {
                 var districtList = amphurEntry[1];
                 districtList.forEach(function (districtEntry) {
                     var district = districtEntry[0];
-                    var zipCodeList = districtEntry[1];
-                    if (!(zipCodeList instanceof Array)) {
-                      zipCodeList = [zipCodeList]
-                    }
+                    var zipCodeList = districtEntry[1] instanceof Array ? districtEntry[1] : [districtEntry[1]];
                     zipCodeList.forEach(function (zipCode) {
                         expanded.push({
                             d: district === 0 ? amphur : district,
