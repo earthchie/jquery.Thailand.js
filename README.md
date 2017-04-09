@@ -83,6 +83,9 @@ $.Thailand({
 
 [saknarak](https://github.com/saknarak) - First [PR](https://github.com/earthchie/jquery.Thailand.js/pull/1).
 
+## Fork
+- **Rungsikorn** [Reimplemented in React (jQuery free)](https://github.com/zapkub/react-thailand-address-typeahead), [Storybook Example](http://zapkub.github.io/react-thailand-address/)
+
 ## License
 WTFPL 2.0 http://www.wtfpl.net/
 
