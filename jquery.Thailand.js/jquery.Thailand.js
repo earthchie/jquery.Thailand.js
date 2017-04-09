@@ -15,7 +15,7 @@ $.Thailand = function (options) {
 
     options = $.extend({
 
-        database: './data2.json',
+        database: './data3.json',
         autocomplete_size: 20,
         onComplete: function () {},
 
@@ -143,6 +143,30 @@ $.Thailand = function (options) {
         });
 
     function preprocess (data) {
+        var lookup = []
+        var words = []
+        var useLookup = false
+        if (data.lookup && data.words) {
+          // compact with dictionary and lookup
+          useLookup = true
+          lookup = data.lookup.split('|')
+          words = data.words.split('|')
+          data = data.data
+        }
+        function t(text) {
+          function repl(m) {
+            var ch = m.charCodeAt(0)
+            return words[ch < 97 ? ch - 65 : 26 + ch - 97]
+          }
+          if (!useLookup) {
+            return text
+          }
+          if (typeof text === 'number') {
+            text = lookup[text]
+          }
+          return text.replace(/[A-Z]/ig, repl)
+        }
+
         if (!data[0].length) {
             // non-compacted database
             return data;
@@ -161,9 +185,9 @@ $.Thailand = function (options) {
                     var zipCodeList = districtEntry[1] instanceof Array ? districtEntry[1] : [districtEntry[1]];
                     zipCodeList.forEach(function (zipCode) {
                         expanded.push({
-                            d: district === 0 ? amphur : district,
-                            a: amphur,
-                            p: province,
+                            d: t(district),
+                            a: t(amphur),
+                            p: t(province),
                             z: zipCode
                         });
                     });
