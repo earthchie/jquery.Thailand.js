@@ -1,6 +1,6 @@
 /**
  * @name jquery.Thailand.js
- * @version z1.3.1
+ * @version z1.3.3
  * @update Apr 16, 2017
  * @website https://github.com/earthchie/jquery.Thailand.js/tree/zipped_version
  * @license WTFPL v.2 - http://www.wtfpl.net/
@@ -196,8 +196,8 @@ $.Thailand = function (options) {
                                     i;
                                 try {
                                     possibles = new JQL(possibles
-                                        .concat(DB.select('*').where('a').match('^' + str).fetch())
                                         .concat(DB.select('*').where('d').match('^' + str).fetch())
+                                        .concat(DB.select('*').where('a').match('^' + str).fetch())
                                         .concat(DB.select('*').where('p').match('^' + str).fetch())
                                         .concat(DB.select('*').where('z').match('^' + str).fetch())
                                         .filter(function (self, index, parent) { // remove duplicated data
@@ -208,7 +208,7 @@ $.Thailand = function (options) {
                                                 }
                                             }
                                             return isUnique;
-                                        })).select('*').orderBy('a').fetch();
+                                        })).select('*').orderBy('d').fetch();
                                 } catch (e) {}
 
                                 callback(possibles);
