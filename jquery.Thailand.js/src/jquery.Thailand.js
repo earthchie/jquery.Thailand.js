@@ -85,7 +85,7 @@ $.Thailand = function (options) {
             return expanded;
         },
         similar_text = function (first, second, percentage) {
-            
+
             first += '';
             second += '';
 
@@ -120,21 +120,21 @@ $.Thailand = function (options) {
                 }
             }
 
-            if(percentage === false){
+            if (percentage === false) {
                 return sum;
-            }else{
-                if(first === second){
+            } else {
+                if (first === second) {
                     return 100;
-                }else{
-                    if(firstLength > secondLength){
-                        return Math.floor(sum/firstLength*100);
-                    }else{
-                        return Math.floor(sum/secondLength*100);
+                } else {
+                    if (firstLength > secondLength) {
+                        return Math.floor(sum / firstLength * 100);
+                    } else {
+                        return Math.floor(sum / secondLength * 100);
                     }
                 }
             }
 
-        }
+        };
 
     // get zip binary
     $.getJSON(options.database, function (json) {
@@ -270,13 +270,15 @@ $.Thailand = function (options) {
                                         }
                                     }
                                     return isUnique;
-                                }).map(function(self){ // give a likely score, will use to sort data later
+                                }).map(function (self) { // give a likely score, will use to sort data later
                                     self.likely = [
-                                        similar_text(str, self.d)*5,
-                                        similar_text(str, self.a.replace(/^เมือง/,''))*3,
+                                        similar_text(str, self.d) * 5,
+                                        similar_text(str, self.a.replace(/^เมือง/, '')) * 3,
                                         similar_text(str, self.p),
                                         similar_text(str, self.z)
-                                    ].sort(function(a,b){return a-b}).pop();
+                                    ].sort(function (a, b) {
+                                        return a - b
+                                    }).pop();
 
                                     return self;
                                 })).select('*').orderBy('likely desc').fetch();
