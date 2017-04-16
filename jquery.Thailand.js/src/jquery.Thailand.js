@@ -1,6 +1,6 @@
 /**
  * @name jquery.Thailand.js
- * @version 1.3.5
+ * @version 1.3.6
  * @update Apr 16, 2017
  * @website https://github.com/earthchie/jquery.Thailand.js
  * @license WTFPL v.2 - http://www.wtfpl.net/
@@ -250,7 +250,11 @@ $.Thailand = function (options) {
             }
 
             if (options.$search) {
-                options.$search.typeahead(typehead_options, {
+                options.$search.typeahead({
+                    hint: true,
+                    highlight: true,
+                    minLength: 2
+                }, {
                     limit: options.autocomplete_size,
                     templates: templates,
                     source: function (str, callback) {
