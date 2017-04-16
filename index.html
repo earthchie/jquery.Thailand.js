@@ -9,10 +9,10 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/css/uikit.css">
-    <link rel="stylesheet" href="jquery.Thailand.js/jquery.Thailand.min.css">
+    <link rel="stylesheet" href="./jquery.Thailand.js/dist/jquery.Thailand.min.css">
 
     <style>
-        a, h1, .h2{
+        a, h1, h2, .h2{
             font-family: 'Kanit', sans-serif !important;
             line-height: 1.6em;
         }
@@ -30,13 +30,14 @@
 
     <div class="uk-container uk-padding">
 
+        <!-- DEMO 1 -->
         <h1>Auto Complete ที่อยู่ อย่างที่มันควรเป็น</h1>
 
         <div id="loader">
             <div uk-spinner></div> รอสักครู่ กำลังโหลดฐานข้อมูล...
         </div>
 
-        <div id="address" style="display:none;" uk-grid>
+        <form id="demo1" class="demo" style="display:none;" autocomplete="off" uk-grid >
 
             <div class="uk-width-1-2@m">
                 <label class="h2">ตำบล</label>
@@ -58,7 +59,20 @@
                 <input name="zipcode" class="uk-input uk-width-1-1" type="text">
             </div>
 
-        </div>
+        </form>
+        <!-- END DEMO 1 -->
+
+        <!-- DEMO 2 -->
+        <hr>
+        <h2>ใหม่! โหมดค้นหา</h2>
+        <form id="demo2" class="demo" style="display:none;" autocomplete="off">
+            <label class="h2">ค้นหาที่อยู่ของคุณ</label>
+            <small>ลองกรอกอย่างใดอย่างหนึ่ง ตำบล, อำเภอ, จังหวัด หรือ รหัสไปรษณีย์</small>
+            <input name="search" class="uk-input uk-width-1-1" type="text">
+
+            <div id="demo2-output" class="uk-margin"></div>
+        </form>
+        <!-- END DEMO 2 -->
 
         <div uk-grid>
             <div class="uk-width-1-2@m">
@@ -83,24 +97,70 @@
                 </a>
             </div>
         </div>
+
     </div>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/js/uikit.min.js"></script>
+    <script type="text/javascript" src="./jquery.Thailand.js/dependencies/JQL.min.js"></script>
+    <script type="text/javascript" src="./jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
 
-    <script type="text/javascript" src="jquery.Thailand.js/dependencies/JQL.min.js"></script>
-    <script type="text/javascript" src="jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
-
-    <script type="text/javascript" src="jquery.Thailand.js/jquery.Thailand.min.js"></script>
+    <script type="text/javascript" src="./jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
 
     <script type="text/javascript">
+
+        /******************\
+         *     DEMO 1     *
+        \******************/ 
         $.Thailand({
-            database: 'jquery.Thailand.js/data3.json',
-            onComplete: function(){
-                $('#loader, #address').toggle();
+            database: './jquery.Thailand.js/dist/db.json',
+
+            $district: $('#demo1 [name="district"]'),
+            $amphoe: $('#demo1 [name="amphoe"]'),
+            $province: $('#demo1 [name="province"]'),
+            $zipcode: $('#demo1 [name="zipcode"]'),
+
+            onDataFill: function(data){
+                console.info('Data Filled', data);
+            },
+
+            onLoad: function(){
+                console.info('Autocomplete is ready!');
+                $('#loader, .demo').toggle();
             }
         });
+
+        // watch on change
+
+        $('#demo1 [name="district"]').change(function(){
+            console.log('ตำบล', this.value);
+        });
+        $('#demo1 [name="amphoe"]').change(function(){
+            console.log('อำเภอ', this.value);
+        });
+        $('#demo1 [name="province"]').change(function(){
+            console.log('จังหวัด', this.value);
+        });
+        $('#demo1 [name="zipcode"]').change(function(){
+            console.log('รหัสไปรษณีย์', this.value);
+        });
+
+
+        /******************\
+         *     DEMO 2     *
+        \******************/ 
+
+        $.Thailand({
+            database: './jquery.Thailand.js/dist/db.json',
+            $search: $('#demo2 [name="search"]'),
+
+            onDataFill: function(data){
+                var html = '<b>ที่อยู่:</b> ตำบล' + data.district + ' อำเภอ' + data.amphoe + ' จังหวัด' + data.province + ' ' + data.zipcode;
+                $('#demo2-output').prepend('<div class="uk-alert-warning" uk-alert><a class="uk-alert-close" uk-close></a>' + html + '</div>');
+            }
+
+        });
+
     </script>
 
 </body>

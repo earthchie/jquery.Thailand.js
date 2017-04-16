@@ -1,16 +1,24 @@
 # jquery.Thailand.js
 ตัวช่วยกรอกที่อยู่ที่ดีที่สุดในไทย ไม่ต้องใช้ Server Side!
 
-อ่านแนวคิด และที่มาที่ไปได้ที่นี่ https://medium.com/@earthchie/ระบบ-auto-complete-ที่อยู่ไทย-อย่างที่มันควรเป็น-27360185d86a
+อ่านแนวคิด และที่มาที่ไปได้ที่นี่ [ระบบ Auto Complete ที่อยู่ไทย อย่างที่มันควรเป็น](https://medium.com/@earthchie/ระบบ-auto-complete-ที่อยู่ไทย-อย่างที่มันควรเป็น-27360185d86a)
 
-# Todo
-- Clean up repo
-- Need help! with database https://github.com/earthchie/jquery.Thailand.js/issues/4
+## Changelogs 1.3.0
+- อัพเดตจาก 1.2.0
+- เพิ่ม callback onDataFill() ตาม [request](https://github.com/earthchie/jquery.Thailand.js/issues/9)
+- แก้บัค ฟิลด์ข้อมูลไม่ยิง event change เมื่อเกิด autocomplete แล้ว (สำหรับตัวอย่างเพิ่มเติม ดูโค้ดใน [Demo](https://earthchie.github.io/jquery.Thailand.js/))
+- จัดระเบียบโครงสร้างโปรเจค และลบไฟล์ที่ไม่จำเป็นทิ้ง
+- เพิ่มฐานข้อมูลต้นฉบับ เป็นไฟล์ .xls อัพเดตข้อมูลล่าสุด เดือนตุลา 2559
+- ฟิลด์ใหม่ ``$search`` ใช้สำหรับค้นหา ดูตัวอย่างได้จากโค้ดใน [Demo](https://earthchie.github.io/jquery.Thailand.js/)
+
+## Todo
+- [x] Clean up repo
+- [ ] Need help! with database https://github.com/earthchie/jquery.Thailand.js/issues/4
 
 # Demo
-https://earthchie.github.io/jquery.Thailand.js/
+[https://earthchie.github.io/jquery.Thailand.js/](https://earthchie.github.io/jquery.Thailand.js/)
 
-# วิธีใช้
+## วิธีใช้
 
 1. ติดตั้ง Dependency ให้ครบ
 
@@ -23,8 +31,8 @@ https://earthchie.github.io/jquery.Thailand.js/
 2. ติดตั้ง jquery.Thailand.js
 
 ```html
-<link rel="stylesheet" href="jquery.Thailand.js/jquery.Thailand.min.css">
-<script type="text/javascript" src="jquery.Thailand.js/jquery.Thailand.min.js"></script>
+<link rel="stylesheet" href="./jquery.Thailand.js/dist/jquery.Thailand.min.css">
+<script type="text/javascript" src="./jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
 ```
 
 3. สร้าง input สำหรับกรอก ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์
@@ -41,14 +49,21 @@ https://earthchie.github.io/jquery.Thailand.js/
 ```javascript
 
 $.Thailand({ 
-    database: './jquery.Thailand.js/db.zip', // path หรือ url ไปยัง zip
-    autocomplete_size: 10, // ถ้าไม่ระบุ ค่า default คือ 20
-    $district: $('#district'),
-    $amphoe: $('#amphoe'),
-    $province: $('#province'),
-    $zipcode: $('#zipcode'),
-    onComplete: function(){
-        console.log('Autocomplete is ready!')
+    
+    database: './jquery.Thailand.js/dist/db.json', // path หรือ url ไปยัง zip
+    autocomplete_size: 10, // ขนาดของตัวเลือก ถ้าไม่ระบุ ค่า default คือ 20
+
+    $district: $('[name="district"]'), // input ของตำบล
+    $amphoe: $('[name="amphoe"]'), // input ของอำเภอ
+    $province: $('[name="province"]'), // input ของจังหวัด
+    $zipcode: $('[name="zipcode"]'), // input ของรหัสไปรษณีย์
+
+    onDataFill: function(data){ // callback เมื่อเกิดการ auto complete ขึ้น
+        console.info('Data Filled', data);
+    },
+
+    onLoad: function(){ // callback เมื่อโหลดฐานข้อมูลเสร็จและระบบ Auto Complete พร้อมที่จะทำงาน
+        console.info('Autocomplete is ready!');
     }
 });
 
@@ -58,7 +73,7 @@ $.Thailand({
 
 ใน [v1.1.0](https://github.com/earthchie/jquery.Thailand.js/tree/fe302996ca72f156e1542048419399484431c391) เป็นต้นมามีการปรับเปลี่ยนโครงสร้างข้อมูล ภายใต้สมมุติฐานว่า Server รองรับ gzip รายละเอียดดังนี้
 
-| ไฟล์ | ขนาดเมื่อถูก Gzip |
+| ไฟล์ | ขนาดเมื่อถูก gzip |
 | --- | ---:|
 | JQL.min.js | 1.3 KB |
 | typeahead.bundle.js | 14.6 KB |
