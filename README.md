@@ -80,8 +80,8 @@ $.Thailand({
 
 | ไฟล์ | ขนาดเมื่อถูก Gzip |
 | --- | ---:|
-| data.json | 57.4 KB |
-| **รวม** | **57.4 KB** |
+| data.json | 57.9 KB |
+| **รวม** | **57.9 KB** |
 
 แต่หากท่านใดที่ Server ไม่รองรับ gzip สามารถใช้ [zipped version](https://github.com/earthchie/jquery.Thailand.js/tree/zipped_version) แทนได้ โดยมีรายละเอียดดังนี้
 
