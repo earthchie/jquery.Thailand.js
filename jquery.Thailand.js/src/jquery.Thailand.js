@@ -239,7 +239,11 @@ $.Thailand = function (options) {
                     }
 
                     if (options.$search) {
-                        options.$search.typeahead(typehead_options, {
+                        options.$search.typeahead({
+                            hint: true,
+                            highlight: true,
+                            minLength: 2
+                        }, {
                             limit: options.autocomplete_size,
                             templates: templates,
                             source: function (str, callback) {
