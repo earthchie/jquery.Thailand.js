@@ -84,14 +84,8 @@ $.Thailand = function (options) {
             });
             return expanded;
         },
-        similar_text = function (first, second) {
-            // Calculates the similarity between two strings  
-            // discuss at: http://phpjs.org/functions/similar_text
-
-            if (first === null || second === null || typeof first === 'undefined' || typeof second === 'undefined') {
-                return 0;
-            }
-
+        similar_text = function (first, second, percentage) {
+            
             first += '';
             second += '';
 
@@ -101,8 +95,6 @@ $.Thailand = function (options) {
                 firstLength = first.length,
                 secondLength = second.length,
                 p, q, l, sum;
-
-            max = 0;
 
             for (p = 0; p < firstLength; p++) {
                 for (q = 0; q < secondLength; q++) {
@@ -120,15 +112,28 @@ $.Thailand = function (options) {
 
             if (sum) {
                 if (pos1 && pos2) {
-                    sum += this.similar_text(first.substr(0, pos2), second.substr(0, pos2));
+                    sum += similar_text(first.substr(0, pos2), second.substr(0, pos2), false);
                 }
 
                 if ((pos1 + max < firstLength) && (pos2 + max < secondLength)) {
-                    sum += this.similar_text(first.substr(pos1 + max, firstLength - pos1 - max), second.substr(pos2 + max, secondLength - pos2 - max));
+                    sum += similar_text(first.substr(pos1 + max, firstLength - pos1 - max), second.substr(pos2 + max, secondLength - pos2 - max), false);
                 }
             }
 
-            return sum;
+            if(percentage === false){
+                return sum;
+            }else{
+                if(first === second){
+                    return 100;
+                }else{
+                    if(firstLength > secondLength){
+                        return Math.floor(sum/firstLength*100);
+                    }else{
+                        return Math.floor(sum/secondLength*100);
+                    }
+                }
+            }
+
         }
 
     // get zip binary
@@ -266,8 +271,15 @@ $.Thailand = function (options) {
                                     }
                                     return isUnique;
                                 }).map(function(self){ // give a likely score, will use to sort data later
-                                    self.likely = [similar_text(str, self.d),similar_text(str, self.a),similar_text(str, self.p),similar_text(str, self.z),].sort().pop();
-                                })).select('*').orderBy('likely').fetch();
+                                    self.likely = [
+                                        similar_text(str, self.d)*5,
+                                        similar_text(str, self.a.replace(/^เมือง/,''))*3,
+                                        similar_text(str, self.p),
+                                        similar_text(str, self.z)
+                                    ].sort(function(a,b){return a-b}).pop();
+
+                                    return self;
+                                })).select('*').orderBy('likely desc').fetch();
                         } catch (e) {}
 
                         callback(possibles);
