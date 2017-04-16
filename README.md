@@ -7,8 +7,19 @@ Branch นี้เหมาะสำหรับ Server ที่ไม่ร�
 
 อ่านแนวคิด และที่มาที่ไปได้ที่นี่ https://medium.com/@earthchie/ระบบ-auto-complete-ที่อยู่ไทย-อย่างที่มันควรเป็น-27360185d86a
 
+## Changelogs 1.3.1
+- เพิ่ม callback onDataFill() ตาม [request](https://github.com/earthchie/jquery.Thailand.js/issues/9)
+- แก้บัค ฟิลด์ข้อมูลไม่ยิง event change เมื่อเกิด autocomplete แล้ว (สำหรับตัวอย่างเพิ่มเติม ดูโค้ดใน [Demo](https://earthchie.github.io/jquery.Thailand.js/))
+- จัดระเบียบโครงสร้างโปรเจค และลบไฟล์ที่ไม่จำเป็นทิ้ง
+- เพิ่มฐานข้อมูลต้นฉบับ เป็นไฟล์ .xls อัพเดตข้อมูลล่าสุด เดือนตุลา 2559
+- ฟิลด์ใหม่ ``$search`` ใช้สำหรับค้นหา ดูตัวอย่างได้จากโค้ดใน [Demo](https://earthchie.github.io/jquery.Thailand.js/)
+
+## Todo
+- [x] Clean up repo
+- [ ] Need help! with database https://github.com/earthchie/jquery.Thailand.js/issues/4
+
 # Demo
-https://earthchie.github.io/jquery.Thailand.js/
+[https://earthchie.github.io/jquery.Thailand.js/](https://earthchie.github.io/jquery.Thailand.js/)
 
 # วิธีใช้
 
@@ -43,30 +54,34 @@ https://earthchie.github.io/jquery.Thailand.js/
 ```javascript
 
 $.Thailand({ 
-    database: './jquery.Thailand.js/db.zip', // path หรือ url ไปยัง zip
-    autocomplete_size: 10, // ถ้าไม่ระบุ ค่า default คือ 20
-    $district: $('#district'),
-    $amphoe: $('#amphoe'),
-    $province: $('#province'),
-    $zipcode: $('#zipcode'),
-    onComplete: function(){
-        console.log('Autocomplete is ready!')
+    
+    database: './jquery.Thailand.js/dist/db.zip', // path หรือ url ไปยัง zip
+    autocomplete_size: 10, // ขนาดของตัวเลือก ถ้าไม่ระบุ ค่า default คือ 20
+
+    $district: $('[name="district"]'), // input ของตำบล
+    $amphoe: $('[name="amphoe"]'), // input ของอำเภอ
+    $province: $('[name="province"]'), // input ของจังหวัด
+    $zipcode: $('[name="zipcode"]'), // input ของรหัสไปรษณีย์
+
+    onDataFill: function(data){ // callback เมื่อเกิดการ auto complete ขึ้น
+        console.info('Data Filled', data);
+    },
+
+    onLoad: function(){ // callback เมื่อโหลดฐานข้อมูลเสร็จและระบบ Auto Complete พร้อมที่จะทำงาน
+        console.info('Autocomplete is ready!');
     }
 });
 
 ```
 
-## Performance
+## ขนาดของข้อมูล
 
 ใน [v1.1.0](https://github.com/earthchie/jquery.Thailand.js/tree/fe302996ca72f156e1542048419399484431c391) เป็นต้นมามีการปรับเปลี่ยนโครงสร้างข้อมูล ภายใต้สมมุติฐานว่า Server รองรับ gzip รายละเอียดดังนี้
 
 | ไฟล์ | ขนาดเมื่อถูก Gzip |
 | --- | ---:|
-| JQL.min.js | 1.3 KB |
-| typeahead.bundle.js | 14.6 KB |
-| jquery.Thailand.min.js | 1.2 KB |
 | data.json | 57.4 KB |
-| **รวม** | **74.5 KB** |
+| **รวม** | **57.4 KB** |
 
 แต่หากท่านใดที่ Server ไม่รองรับ gzip สามารถใช้ [zipped version](https://github.com/earthchie/jquery.Thailand.js/tree/zipped_version) แทนได้ โดยมีรายละเอียดดังนี้
 
@@ -74,11 +89,8 @@ $.Thailand({
 | --- | ---:|
 | jszip.min.js | 99.5 KB |
 | jszip-utils.min.js | 1.7 KB |
-| JQL.min.js | 3.1 KB |
-| typeahead.bundle.js | 43.4 KB |
-| jquery.Thailand.min.js | 2.6 KB |
 | db.zip | 50.7 KB |
-| **รวม** | **201 KB** |
+| **รวม** | **151.9 KB** |
 
 ## Contributers
 [earthchie](https://github.com/earthchie/) - Project Owner
