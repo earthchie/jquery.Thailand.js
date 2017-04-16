@@ -83,8 +83,8 @@ $.Thailand({
 | --- | ---:|
 | jszip.min.js | 99.5 KB |
 | jszip-utils.min.js | 1.7 KB |
-| db.zip | 50.7 KB |
-| **รวม** | **151.9 KB** |
+| db.zip | 51.1 KB |
+| **รวม** | **152.3 KB** |
 
 ## Contributers
 [earthchie](https://github.com/earthchie/) - Project Owner
