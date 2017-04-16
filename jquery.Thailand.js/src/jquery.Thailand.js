@@ -1,6 +1,6 @@
 /**
  * @name jquery.Thailand.js
- * @version z1.3.3
+ * @version z1.3.4
  * @update Apr 16, 2017
  * @website https://github.com/earthchie/jquery.Thailand.js/tree/zipped_version
  * @license WTFPL v.2 - http://www.wtfpl.net/
@@ -32,37 +32,88 @@ $.Thailand = function (options) {
 
     // author dtinth <https://github.com/dtinth/>
     var preprocess = function (data) {
-        data = JSON.parse(data);
+            data = JSON.parse(data);
 
-        if (!data[0].length) {
-            // non-compacted database
-            return data;
-        }
-        // compacted database in hierarchical form of:
-        // [["province",[["amphur",[["district",["zip"...]]...]]...]]...]
-        var expanded = [];
-        data.forEach(function (provinceEntry) {
-            var province = provinceEntry[0];
-            var amphurList = provinceEntry[1];
-            amphurList.forEach(function (amphurEntry) {
-                var amphur = amphurEntry[0];
-                var districtList = amphurEntry[1];
-                districtList.forEach(function (districtEntry) {
-                    var district = districtEntry[0];
-                    var zipCodeList = districtEntry[1];
-                    zipCodeList.forEach(function (zipCode) {
-                        expanded.push({
-                            d: district,
-                            a: amphur,
-                            p: province,
-                            z: zipCode
+            if (!data[0].length) {
+                // non-compacted database
+                return data;
+            }
+            // compacted database in hierarchical form of:
+            // [["province",[["amphur",[["district",["zip"...]]...]]...]]...]
+            var expanded = [];
+            data.forEach(function (provinceEntry) {
+                var province = provinceEntry[0];
+                var amphurList = provinceEntry[1];
+                amphurList.forEach(function (amphurEntry) {
+                    var amphur = amphurEntry[0];
+                    var districtList = amphurEntry[1];
+                    districtList.forEach(function (districtEntry) {
+                        var district = districtEntry[0];
+                        var zipCodeList = districtEntry[1];
+                        zipCodeList.forEach(function (zipCode) {
+                            expanded.push({
+                                d: district,
+                                a: amphur,
+                                p: province,
+                                z: zipCode
+                            });
                         });
                     });
                 });
             });
-        });
-        return expanded;
-    };
+            return expanded;
+        },
+        similar_text = function (first, second, percentage) {
+
+            first += '';
+            second += '';
+
+            var pos1 = 0,
+                pos2 = 0,
+                max = 0,
+                firstLength = first.length,
+                secondLength = second.length,
+                p, q, l, sum;
+
+            for (p = 0; p < firstLength; p++) {
+                for (q = 0; q < secondLength; q++) {
+                    for (l = 0;
+                        (p + l < firstLength) && (q + l < secondLength) && (first.charAt(p + l) === second.charAt(q + l)); l++);
+                    if (l > max) {
+                        max = l;
+                        pos1 = p;
+                        pos2 = q;
+                    }
+                }
+            }
+
+            sum = max;
+
+            if (sum) {
+                if (pos1 && pos2) {
+                    sum += similar_text(first.substr(0, pos2), second.substr(0, pos2), false);
+                }
+
+                if ((pos1 + max < firstLength) && (pos2 + max < secondLength)) {
+                    sum += similar_text(first.substr(pos1 + max, firstLength - pos1 - max), second.substr(pos2 + max, secondLength - pos2 - max), false);
+                }
+            }
+
+            if (percentage === false) {
+                return sum;
+            } else {
+                if (first === second) {
+                    return 100;
+                } else {
+                    if (firstLength > secondLength) {
+                        return Math.floor(sum / firstLength * 100);
+                    } else {
+                        return Math.floor(sum / secondLength * 100);
+                    }
+                }
+            }
+
+        };
 
     // get zip binary
     JSZipUtils.getBinaryContent(options.database, function (err, data) {
@@ -208,7 +259,18 @@ $.Thailand = function (options) {
                                                 }
                                             }
                                             return isUnique;
-                                        })).select('*').orderBy('d').fetch();
+                                        }).map(function (self) { // give a likely score, will use to sort data later
+                                            self.likely = [
+                                                similar_text(str, self.d) * 5,
+                                                similar_text(str, self.a.replace(/^เมือง/, '')) * 3,
+                                                similar_text(str, self.p),
+                                                similar_text(str, self.z)
+                                            ].sort(function (a, b) {
+                                                return a - b
+                                            }).pop();
+
+                                            return self;
+                                        })).select('*').orderBy('likely desc').fetch();
                                 } catch (e) {}
 
                                 callback(possibles);
