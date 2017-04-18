@@ -11,6 +11,7 @@
 - ระบุ database เป็นไฟล์ json หรือ zip ก็ได้ ระบบจะแยกแยะจากนามสกุลไฟล์ให้เอง
 - ในกรณีที่ url ไปยัง database ไม่มีนามสกุลไฟล์ (ใช้ mod_rewrite) ให้ระบุประเภทไฟล์ผ่าน option ``database_type`` ว่าเป็น ``json`` หรือ ``zip`` แทน
 - สามารถอัพเดตจากเวอร์ชัน 1.3.x ได้ทันที ไม่กระทบโค้ดเดิมที่คุณใช้งาน
+- ย้ายไฟล์ database ออกมาจากโฟลเดอร์ source code เพื่อความง่ายในการ maintainance ในอนาคต
 
 ## Changelogs 1.3.x
 - เพิ่ม callback ``onDataFill()`` ตาม [request](https://github.com/earthchie/jquery.Thailand.js/issues/9)
@@ -60,10 +61,10 @@
 
 $.Thailand({
     database: './jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
-    $district: $('[name="district"]'), // input ของตำบล
-    $amphoe: $('[name="amphoe"]'), // input ของอำเภอ
-    $province: $('[name="province"]'), // input ของจังหวัด
-    $zipcode: $('[name="zipcode"]'), // input ของรหัสไปรษณีย์
+    $district: $('#district'), // input ของตำบล
+    $amphoe: $('#amphoe'), // input ของอำเภอ
+    $province: $('#province'), // input ของจังหวัด
+    $zipcode: $('#zipcode'), // input ของรหัสไปรษณีย์
 });
 
 ```
@@ -171,7 +172,7 @@ $.Thailand({
 ```javascript
 
 $.Thailand({ 
-    database: './jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
+    database: './jquery.Thailand.js/database/db.zip', // ฐานข้อมูลเป็นไฟล์ zip
     $district: $('#district'), // input ของตำบล
     $amphoe: $('#amphoe'), // input ของอำเภอ
     $province: $('#province'), // input ของจังหวัด
@@ -189,10 +190,10 @@ $.Thailand({
 
 ```javascript
 $.Thailand({ 
-    database: './jquery.Thailand.js/database/db.zip', // path หรือ url ไปยัง database
+    database: './jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
     $search: $('#search'), // input ของช่องค้นหา
     onDataFill: function(data){ // callback เมื่อเกิดการ auto complete ขึ้น
-        console.info(data);
+        console.log(data);
     }
 });
 ```
@@ -215,7 +216,7 @@ $.Thailand({
     $search: $('#search'), // input ของช่องค้นหา 
 
     onDataFill: function(data){ // callback เมื่อเกิดการ auto complete ขึ้น
-        console.info('Data Filled', data);
+        console.log('Data Filled', data);
     },
 
     onLoad: function(){ // callback เมื่อโหลดฐานข้อมูลเสร็จและระบบ Auto Complete พร้อมที่จะทำงาน
