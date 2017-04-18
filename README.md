@@ -1,9 +1,9 @@
+# Zipped Version
+Branch นี้เหมาะสำหรับ Server ที่ไม่รองรับ gzip นะครับ เหมาะสำหรับท่านที่ใช้งาน shared host ที่ไม่สามารถเปิดใช้ gzip ได้
+แต่หากใครที่เซิร์ฟเวอร์รองรับ gzip แนะนำให้ไปใช้ Branch [Master](https://github.com/earthchie/jquery.Thailand.js/tree/master) แทนนะครับ
+
 # Demo
 [https://earthchie.github.io/jquery.Thailand.js/](https://earthchie.github.io/jquery.Thailand.js/)
-
-# Zipped Version
-Branch นี้เหมาะสำหรับ Server ที่ไม่รองรับ Gzip นะครับ เหมาะสำหรับท่านที่ใช้งาน shared host ที่ไม่สามารถเปิดใช้ Gzip ได้
-แต่หากใครที่เซิร์ฟเวอร์รองรับ Gzip แนะนำให้ไปใช้ Branch [Master](https://github.com/earthchie/jquery.Thailand.js/tree/master) แทนนะครับ
 
 ## jquery.Thailand.js
 ตัวช่วยกรอกที่อยู่ที่ดีที่สุดในไทย ไม่ต้องใช้ Server Side!
@@ -80,7 +80,7 @@ $.Thailand({
 
 ใน [v1.1.0](https://github.com/earthchie/jquery.Thailand.js/tree/fe302996ca72f156e1542048419399484431c391) เป็นต้นมามีการปรับเปลี่ยนโครงสร้างข้อมูล ภายใต้สมมุติฐานว่า Server รองรับ gzip รายละเอียดดังนี้
 
-| ไฟล์ | ขนาดเมื่อถูก Gzip |
+| ไฟล์ | ขนาดเมื่อถูก gzip |
 | --- | ---:|
 | data.json | 68.9 KB |
 | **รวม** | **68.9 KB** |
