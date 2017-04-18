@@ -1,3 +1,6 @@
+# Demo
+[https://earthchie.github.io/jquery.Thailand.js/](https://earthchie.github.io/jquery.Thailand.js/)
+
 # jquery.Thailand.js
 ตัวช่วยกรอกที่อยู่ที่ดีที่สุดในไทย ไม่ต้องใช้ Server Side!
 
@@ -13,9 +16,6 @@
 ## Todo
 - [x] Clean up repo
 - [ ] Need help! with database https://github.com/earthchie/jquery.Thailand.js/issues/4
-
-# Demo
-[https://earthchie.github.io/jquery.Thailand.js/](https://earthchie.github.io/jquery.Thailand.js/)
 
 ## วิธีใช้
 
