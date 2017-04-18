@@ -1,3 +1,6 @@
+# Demo
+[https://earthchie.github.io/jquery.Thailand.js/](https://earthchie.github.io/jquery.Thailand.js/)
+
 # Zipped Version
 Branch นี้เหมาะสำหรับ Server ที่ไม่รองรับ Gzip นะครับ เหมาะสำหรับท่านที่ใช้งาน shared host ที่ไม่สามารถเปิดใช้ Gzip ได้
 แต่หากใครที่เซิร์ฟเวอร์รองรับ Gzip แนะนำให้ไปใช้ Branch [Master](https://github.com/earthchie/jquery.Thailand.js/tree/master) แทนนะครับ
@@ -18,8 +21,7 @@ Branch นี้เหมาะสำหรับ Server ที่ไม่ร�
 - [x] Clean up repo
 - [ ] Need help! with database https://github.com/earthchie/jquery.Thailand.js/issues/4
 
-# Demo
-[https://earthchie.github.io/jquery.Thailand.js/](https://earthchie.github.io/jquery.Thailand.js/)
+
 
 # วิธีใช้
 
