@@ -60,10 +60,10 @@ $.Thailand({
     database: './jquery.Thailand.js/dist/db.zip', // path หรือ url ไปยัง zip
     autocomplete_size: 10, // ขนาดของตัวเลือก ถ้าไม่ระบุ ค่า default คือ 20
 
-    $district: $('[name="district"]'), // input ของตำบล
-    $amphoe: $('[name="amphoe"]'), // input ของอำเภอ
-    $province: $('[name="province"]'), // input ของจังหวัด
-    $zipcode: $('[name="zipcode"]'), // input ของรหัสไปรษณีย์
+    $district: $('#district'), // input ของตำบล
+    $amphoe: $('#amphoe'), // input ของอำเภอ
+    $province: $('#province'), // input ของจังหวัด
+    $zipcode: $('#zipcode'), // input ของรหัสไปรษณีย์
 
     onDataFill: function(data){ // callback เมื่อเกิดการ auto complete ขึ้น
         console.info('Data Filled', data);
