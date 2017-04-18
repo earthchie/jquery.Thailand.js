@@ -66,16 +66,16 @@ $.Thailand = function (options) {
             }
             // decompacted database in hierarchical form of:
             // [["province",[["amphur",[["district",["zip"...]]...]]...]]...]
-            data.map(function (provinceEntry) {
-                provinceEntry[1].map(function (amphurEntry) {
-                    amphurEntry[1].map(function (districtEntry) {
-                        districtEntry[1] = districtEntry[1] instanceof Array ? districtEntry[1] : [districtEntry[1]];
-                        districtEntry[1].map(function (zipCode) {
+            data.map(function (provinces) {
+                provinces[1].map(function (amphoes) {
+                    amphoes[1].map(function (districts) {
+                        districts[1] = districts[1] instanceof Array ? districts[1] : [districts[1]];
+                        districts[1].map(function (zipcode) {
                             expanded.push({
-                                d: t(districtEntry[0]),
-                                a: t(amphurEntry[0]),
-                                p: t(provinceEntry[0]),
-                                z: zipCode
+                                d: t(districts[0]),
+                                a: t(amphoes[0]),
+                                p: t(provinces[0]),
+                                z: zipcode
                             });
                         });
                     });

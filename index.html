@@ -103,8 +103,11 @@
     
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/js/uikit.min.js"></script>
     
+    <!-- dependencies for zip mode -->
     <script type="text/javascript" src="./jquery.Thailand.js/dependencies/jszip.min.js"></script>
     <script type="text/javascript" src="./jquery.Thailand.js/dependencies/jszip-utils.min.js"></script>
+    <!-- / dependencies for zip mode -->
+
     <script type="text/javascript" src="./jquery.Thailand.js/dependencies/JQL.min.js"></script>
     <script type="text/javascript" src="./jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
     
@@ -114,8 +117,10 @@
         /******************\
          *     DEMO 1     *
         \******************/ 
+        // demo 1: load database from json. if your server is support gzip. we recommended to use this rather than zip.
+        // for more info check README.md
         $.Thailand({
-            database: './jquery.Thailand.js/dist/db.zip',
+            database: './jquery.Thailand.js/database/db.json', 
 
             $district: $('#demo1 [name="district"]'),
             $amphoe: $('#demo1 [name="amphoe"]'),
@@ -150,9 +155,10 @@
         /******************\
          *     DEMO 2     *
         \******************/ 
-
+        // demo 2: load database from zip. for those who doesn't have server that supported gzip.
+        // for more info check README.md
         $.Thailand({
-            database: './jquery.Thailand.js/dist/db.zip',
+            database: './jquery.Thailand.js/database/db.zip', 
             $search: $('#demo2 [name="search"]'),
 
             onDataFill: function(data){
