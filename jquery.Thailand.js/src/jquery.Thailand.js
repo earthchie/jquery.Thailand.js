@@ -1,7 +1,7 @@
 /**
  * @name jquery.Thailand.js
- * @version z1.3.5
- * @update Apr 16, 2017
+ * @version z1.3.7
+ * @update Apr 18, 2017
  * @website https://github.com/earthchie/jquery.Thailand.js/tree/zipped_version
  * @license WTFPL v.2 - http://www.wtfpl.net/
  *
@@ -30,31 +30,51 @@ $.Thailand = function (options) {
 
     }, options);
 
-    // author dtinth <https://github.com/dtinth/>
     var preprocess = function (data) {
             data = JSON.parse(data);
+            var lookup = [],
+                words = [],
+                expanded = [],
+                useLookup = false,
+                t;
+
+            if (data.lookup && data.words) {
+                // compact with dictionary and lookup
+                useLookup = true;
+                lookup = data.lookup.split('|');
+                words = data.words.split('|');
+                data = data.data;
+            }
+
+            t = function (text) {
+                function repl(m) {
+                    var ch = m.charCodeAt(0);
+                    return words[ch < 97 ? ch - 65 : 26 + ch - 97];
+                }
+                if (!useLookup) {
+                    return text;
+                }
+                if (typeof text === 'number') {
+                    text = lookup[text];
+                }
+                return text.replace(/[A-Z]/ig, repl);
+            };
 
             if (!data[0].length) {
                 // non-compacted database
                 return data;
             }
-            // compacted database in hierarchical form of:
+            // decompacted database in hierarchical form of:
             // [["province",[["amphur",[["district",["zip"...]]...]]...]]...]
-            var expanded = [];
-            data.forEach(function (provinceEntry) {
-                var province = provinceEntry[0];
-                var amphurList = provinceEntry[1];
-                amphurList.forEach(function (amphurEntry) {
-                    var amphur = amphurEntry[0];
-                    var districtList = amphurEntry[1];
-                    districtList.forEach(function (districtEntry) {
-                        var district = districtEntry[0];
-                        var zipCodeList = districtEntry[1];
-                        zipCodeList.forEach(function (zipCode) {
+            data.map(function (provinceEntry) {
+                provinceEntry[1].map(function (amphurEntry) {
+                    amphurEntry[1].map(function (districtEntry) {
+                        districtEntry[1] = districtEntry[1] instanceof Array ? districtEntry[1] : [districtEntry[1]];
+                        districtEntry[1].map(function (zipCode) {
                             expanded.push({
-                                d: district,
-                                a: amphur,
-                                p: province,
+                                d: t(districtEntry[0]),
+                                a: t(amphurEntry[0]),
+                                p: t(provinceEntry[0]),
                                 z: zipCode
                             });
                         });
@@ -64,7 +84,7 @@ $.Thailand = function (options) {
             return expanded;
         },
         similar_text = function (first, second, percentage) {
-
+            // compare 2 strings, return value of similarity compare to each other. more value = more similarity
             first += '';
             second += '';
 
@@ -73,12 +93,17 @@ $.Thailand = function (options) {
                 max = 0,
                 firstLength = first.length,
                 secondLength = second.length,
-                p, q, l, sum;
+                p,
+                q,
+                l,
+                sum;
 
-            for (p = 0; p < firstLength; p++) {
-                for (q = 0; q < secondLength; q++) {
-                    for (l = 0;
-                        (p + l < firstLength) && (q + l < secondLength) && (first.charAt(p + l) === second.charAt(q + l)); l++);
+            for (p = 0; p < firstLength; p = p + 1) {
+                for (q = 0; q < secondLength; q = q + 1) {
+                    l = 0;
+                    while ((p + l < firstLength) && (q + l < secondLength) && (first.charAt(p + l) === second.charAt(q + l))) {
+                        l = l + 1;
+                    }
                     if (l > max) {
                         max = l;
                         pos1 = p;
@@ -112,14 +137,13 @@ $.Thailand = function (options) {
                     }
                 }
             }
-
         };
 
     // get zip binary
     JSZipUtils.getBinaryContent(options.database, function (err, data) {
 
         if (err) {
-            throw 'Error: File "' + options.database + '" is not exists.'
+            throw 'Error: File "' + options.database + '" is not exists.';
         } else {
             // read zip
             JSZip.loadAsync(data).then(function (zip) {
@@ -142,16 +166,16 @@ $.Thailand = function (options) {
                         autocomplete_handler = function (e, v) { // set value when user selected autocomplete choice
 
                             if (options.$district) {
-                                options.$district.val(v.d).trigger('change');
+                                options.$district.typeahead('val', v.d).trigger('change');
                             }
                             if (options.$amphoe) {
-                                options.$amphoe.val(v.a).trigger('change');
+                                options.$amphoe.typeahead('val', v.a).trigger('change');
                             }
                             if (options.$province) {
-                                options.$province.val(v.p).trigger('change');
+                                options.$province.typeahead('val', v.p).trigger('change');
                             }
                             if (options.$zipcode) {
-                                options.$zipcode.val(v.z).trigger('change');
+                                options.$zipcode.typeahead('val', v.z).trigger('change');
                             }
 
                             if (typeof options.onDataFill === 'function') {
@@ -256,29 +280,28 @@ $.Thailand = function (options) {
                                         .concat(DB.select('*').where('p').match(str).fetch())
                                         .concat(DB.select('*').where('z').match(str).fetch())
                                         .filter(function (self, index, parent) { // remove duplicated data
-                                            var isUnique = true
-                                            for (i = 0; i < parent.length; i++) {
-                                                if (index !== i && parent[i].a == self.d && parent[i].d === self.d) {
-                                                    isUnique = false;
+                                            for (i = 0; i < parent.length; i = i + 1) {
+                                                if (index !== i && parent[i].a === self.d && parent[i].d === self.d) {
+                                                    return false;
                                                 }
                                             }
-                                            return isUnique;
+                                            return true;
                                         }).map(function (self) { // give a likely score, will use to sort data later
                                             self.likely = [
                                                 similar_text(str, self.d) * 5,
                                                 similar_text(str, self.a.replace(/^เมือง/, '')) * 3,
                                                 similar_text(str, self.p),
                                                 similar_text(str, self.z)
-                                            ].sort(function (a, b) {
-                                                return a - b
-                                            }).pop();
-
+                                            ].reduce(function (a, b) {
+                                                return Math.max(a, b);
+                                            });
                                             return self;
                                         })).select('*').orderBy('likely desc').fetch();
                                 } catch (e) {}
 
                                 callback(possibles);
                             },
+
                             display: function (data) {
                                 return '';
                             }
@@ -286,28 +309,24 @@ $.Thailand = function (options) {
                     }
 
                     // on autocomplete
-                    if (options.$district) {
-                        options.$district.bind('typeahead:select typeahead:autocomplete', autocomplete_handler);
-                    }
-                    if (options.$amphoe) {
-                        options.$amphoe.bind('typeahead:select typeahead:autocomplete', autocomplete_handler);
-                    }
-                    if (options.$province) {
-                        options.$province.bind('typeahead:select typeahead:autocomplete', autocomplete_handler);
-                    }
-                    if (options.$zipcode) {
-                        options.$zipcode.bind('typeahead:select typeahead:autocomplete', autocomplete_handler);
-                    }
-                    if (options.$search) {
-                        options.$search.bind('typeahead:select typeahead:autocomplete', autocomplete_handler);
-                    }
+                    [options.$district, options.$amphoe, options.$province, options.$zipcode, options.$search].map(function ($$) {
+                        if ($$) {
+                            $$
+                                .bind('typeahead:select typeahead:autocomplete', autocomplete_handler)
+                                .blur(function () {
+                                    if (!this.value) {
+                                        $(this).parent().find('.tt-dataset').html('');
+                                    }
+                                });
+                        }
+                    });
 
                     // callback
                     if (typeof options.onLoad === 'function') {
                         options.onLoad();
                     }
 
-                    // callback, fallback version 1.2.
+                    // callback, fallback to version 1.2.
                     if (typeof options.onComplete === 'function') {
                         options.onComplete();
                     }
