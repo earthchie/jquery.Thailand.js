@@ -79,6 +79,7 @@ $.Thailand({
 | --- | ---:|
 | data.json | 68.9 KB |
 | **รวม** | **68.9 KB** |
+
 *ผลลัพธ์อ้างอิงจากระบบ gzip ของ github page*
 
 แต่หากท่านใดที่ Server ไม่รองรับ gzip สามารถใช้ [zipped version](https://github.com/earthchie/jquery.Thailand.js/tree/zipped_version) แทนได้ โดยมีรายละเอียดดังนี้
