@@ -4,7 +4,7 @@
 ## jquery.Thailand.js
 ตัวช่วยกรอกที่อยู่ที่ดีที่สุดในไทย ไม่ต้องใช้ Server Side!
 
-อ่านแนวคิด และที่มาที่ไปได้ที่นี่ (ระบบ Auto Complete ที่อยู่ไทย อย่างที่มันควรเป็น)[https://medium.com/@earthchie/ระบบ-auto-complete-ที่อยู่ไทย-อย่างที่มันควรเป็น-27360185d86a]
+อ่านแนวคิด และที่มาที่ไปได้ที่นี่ [ระบบ Auto Complete ที่อยู่ไทย อย่างที่มันควรเป็น](https://medium.com/@earthchie/ระบบ-auto-complete-ที่อยู่ไทย-อย่างที่มันควรเป็น-27360185d86a)
 
 ## Changelogs 1.4.x
 - รวม 2 branches เข้าด้วยกัน เพื่อความสะดวกในการ maintainance repo

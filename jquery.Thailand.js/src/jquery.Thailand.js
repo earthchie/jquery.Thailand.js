@@ -1,12 +1,11 @@
 /**
  * @name jquery.Thailand.js
- * @version z1.3.7
+ * @version 1.4.0
  * @update Apr 18, 2017
- * @website https://github.com/earthchie/jquery.Thailand.js/tree/zipped_version
+ * @website https://github.com/earthchie/jquery.Thailand.js
  * @license WTFPL v.2 - http://www.wtfpl.net/
  *
- * @dependency: jQuery <https://jquery.com/>
- *              JSZIP <https://stuk.github.io/jszip/>
+ * @dependencies: jQuery <https://jquery.com/>
  *              typeahead.js <https://twitter.github.io/typeahead.js/>
  *              JQL.js <https://github.com/earthchie/JQL.js>
  **/
@@ -16,7 +15,8 @@ $.Thailand = function (options) {
 
     options = $.extend({
 
-        database: './db.zip',
+        database: '../database/db.json',
+        database_type: 'auto', // json or zip; any other value will be ignored and script will attempt to evaluate the type from file extension instead.
         autocomplete_size: 20,
 
         onLoad: function () {},
@@ -31,7 +31,6 @@ $.Thailand = function (options) {
     }, options);
 
     var preprocess = function (data) {
-            data = JSON.parse(data);
             var lookup = [],
                 words = [],
                 expanded = [],
@@ -137,202 +136,229 @@ $.Thailand = function (options) {
                     }
                 }
             }
-        };
+        },
+        loadDB = function(callback){
+            var type = options.database_type.toLowerCase();
 
-    // get zip binary
-    JSZipUtils.getBinaryContent(options.database, function (err, data) {
+            if (type !== 'json' && type !== 'zip') {
+                type = options.database.split('.').pop(); // attempt to use file extension instead
+            }
 
-        if (err) {
-            throw 'Error: File "' + options.database + '" is not exists.';
-        } else {
-            // read zip
-            JSZip.loadAsync(data).then(function (zip) {
+            switch (type) {
 
-                // unzip db.json then parse into string
-                zip.file('db.json').async('string').then(function (json) {
+                case 'json': 
 
-                    var DB = new JQL(preprocess(json)), // make json query-able
-                        typehead_options = {
-                            hint: true,
-                            highlight: true,
-                            minLength: 1
-                        },
-                        templates = { // template of autocomplete choices
-                            empty: ' ',
-                            suggestion: function (data) {
-                                return '<div>' + data.d + ' » ' + data.a + ' » ' + data.p + ' » ' + (data.z || '<i>ไม่มีรหัสไปรษณีย์</i>') + '</div>';
-                            }
-                        },
-                        autocomplete_handler = function (e, v) { // set value when user selected autocomplete choice
+                    $.getJSON(options.database, function (json) {
+                        callback(new JQL(preprocess(json)));
+                    }).fail(function (err) {
+                        throw new Error('File "' + options.database + '" is not exists.');
+                    });
+                    break;
 
-                            if (options.$district) {
-                                options.$district.typeahead('val', v.d).trigger('change');
-                            }
-                            if (options.$amphoe) {
-                                options.$amphoe.typeahead('val', v.a).trigger('change');
-                            }
-                            if (options.$province) {
-                                options.$province.typeahead('val', v.p).trigger('change');
-                            }
-                            if (options.$zipcode) {
-                                options.$zipcode.typeahead('val', v.z).trigger('change');
-                            }
+                case 'zip': 
 
-                            if (typeof options.onDataFill === 'function') {
-                                options.onDataFill({
-                                    district: v.d,
-                                    amphoe: v.a,
-                                    province: v.p,
-                                    zipcode: v.z
+                    options.database_type = 'zip'; 
+                    JSZipUtils.getBinaryContent(options.database, function (err, data) {
+                        if (err) {
+                            throw new Error('File "' + options.database + '" is not exists.');
+                        } else {
+                            // read zip
+                            JSZip.loadAsync(data).then(function (zip) {
+                                // unzip db.json then parse into string
+                                zip.file('db.json').async('string').then(function (json) {
+                                    callback(new JQL(preprocess(JSON.parse(json))))
                                 });
-                            }
-
-                        };
-
-                    // init auto complete for district
-                    if (options.$district) {
-                        options.$district.typeahead(typehead_options, {
-                            limit: options.autocomplete_size,
-                            templates: templates,
-                            source: function (str, callback) {
-                                var possibles = [];
-                                try {
-                                    possibles = DB.select('*').where('d').match('^' + str).orderBy('d').fetch();
-                                } catch (e) {}
-                                callback(possibles);
-                            },
-                            display: function (data) {
-                                return data.d;
-                            }
-                        });
-                    }
-
-                    // init auto complete for amphoe
-                    if (options.$amphoe) {
-                        options.$amphoe.typeahead(typehead_options, {
-                            limit: options.autocomplete_size,
-                            templates: templates,
-                            source: function (str, callback) {
-                                var possibles = [];
-                                try {
-                                    possibles = DB.select('*').where('a').match('^' + str).orderBy('a').fetch();
-                                } catch (e) {}
-                                callback(possibles);
-                            },
-                            display: function (data) {
-                                return data.a;
-                            }
-                        });
-                    }
-
-                    // init auto complete for province
-                    if (options.$province) {
-                        options.$province.typeahead(typehead_options, {
-                            limit: options.autocomplete_size,
-                            templates: templates,
-                            source: function (str, callback) {
-                                var possibles = [];
-                                try {
-                                    possibles = DB.select('*').where('p').match('^' + str).orderBy('p').fetch();
-                                } catch (e) {}
-                                callback(possibles);
-                            },
-                            display: function (data) {
-                                return data.p;
-                            }
-                        });
-                    }
-
-
-                    // init auto complete for zipcode
-                    if (options.$zipcode) {
-                        options.$zipcode.typeahead(typehead_options, {
-                            limit: options.autocomplete_size,
-                            templates: templates,
-                            source: function (str, callback) {
-                                var possibles = [];
-                                try {
-                                    possibles = DB.select('*').where('z').match('^' + str).orderBy('z').fetch();
-                                } catch (e) {}
-                                callback(possibles);
-                            },
-                            display: function (data) {
-                                return data.z;
-                            }
-                        });
-                    }
-
-                    if (options.$search) {
-                        options.$search.typeahead({
-                            hint: true,
-                            highlight: true,
-                            minLength: 2
-                        }, {
-                            limit: options.autocomplete_size,
-                            templates: templates,
-                            source: function (str, callback) {
-                                var possibles = [],
-                                    i;
-                                try {
-                                    possibles = new JQL(possibles
-                                        .concat(DB.select('*').where('d').match(str).fetch())
-                                        .concat(DB.select('*').where('a').match(str).fetch())
-                                        .concat(DB.select('*').where('p').match(str).fetch())
-                                        .concat(DB.select('*').where('z').match(str).fetch())
-                                        .filter(function (self, index, parent) { // remove duplicated data
-                                            for (i = 0; i < parent.length; i = i + 1) {
-                                                if (index !== i && parent[i].a === self.d && parent[i].d === self.d) {
-                                                    return false;
-                                                }
-                                            }
-                                            return true;
-                                        }).map(function (self) { // give a likely score, will use to sort data later
-                                            self.likely = [
-                                                similar_text(str, self.d) * 5,
-                                                similar_text(str, self.a.replace(/^เมือง/, '')) * 3,
-                                                similar_text(str, self.p),
-                                                similar_text(str, self.z)
-                                            ].reduce(function (a, b) {
-                                                return Math.max(a, b);
-                                            });
-                                            return self;
-                                        })).select('*').orderBy('likely desc').fetch();
-                                } catch (e) {}
-
-                                callback(possibles);
-                            },
-
-                            display: function (data) {
-                                return '';
-                            }
-                        });
-                    }
-
-                    // on autocomplete
-                    [options.$district, options.$amphoe, options.$province, options.$zipcode, options.$search].map(function ($$) {
-                        if ($$) {
-                            $$
-                                .bind('typeahead:select typeahead:autocomplete', autocomplete_handler)
-                                .blur(function () {
-                                    if (!this.value) {
-                                        $(this).parent().find('.tt-dataset').html('');
-                                    }
-                                });
+                            });
                         }
                     });
+                    break;
 
-                    // callback
-                    if (typeof options.onLoad === 'function') {
-                        options.onLoad();
-                    }
+                default: 
+                    throw new Error('Unknown database type: "' + options.database_type + '". Please define database_type explicitly (json or zip)');
+            }
 
-                    // callback, fallback to version 1.2.
-                    if (typeof options.onComplete === 'function') {
-                        options.onComplete();
-                    }
+        };
 
-                });
+    // get database
+    loadDB(function (DB) {
+        var typehead_options = {
+                hint: true,
+                highlight: true,
+                minLength: 1
+            },
+            templates = { // template of autocomplete choices
+                empty: ' ',
+                suggestion: function (data) {
+                    return '<div>' + data.d + ' » ' + data.a + ' » ' + data.p + ' » ' + (data.z || '<i>ไม่มีรหัสไปรษณีย์</i>') + '</div>';
+                }
+            },
+            autocomplete_handler = function (e, v) { // set value when user selected autocomplete choice
+
+                if (options.$district) {
+                    options.$district.typeahead('val', v.d).trigger('change');
+                }
+                if (options.$amphoe) {
+                    options.$amphoe.typeahead('val', v.a).trigger('change');
+                }
+                if (options.$province) {
+                    options.$province.typeahead('val', v.p).trigger('change');
+                }
+                if (options.$zipcode) {
+                    options.$zipcode.typeahead('val', v.z).trigger('change');
+                }
+
+                if (typeof options.onDataFill === 'function') {
+                    options.onDataFill({
+                        district: v.d,
+                        amphoe: v.a,
+                        province: v.p,
+                        zipcode: v.z
+                    });
+                }
+
+            };
+
+        // init auto complete for district
+        if (options.$district) {
+            options.$district.typeahead(typehead_options, {
+                limit: options.autocomplete_size,
+                templates: templates,
+                source: function (str, callback) {
+                    var possibles = [];
+                    try {
+                        possibles = DB.select('*').where('d').match('^' + str).orderBy('d').fetch();
+                    } catch (e) {}
+                    callback(possibles);
+                },
+                display: function (data) {
+                    return data.d;
+                }
             });
         }
+
+        // init auto complete for amphoe
+        if (options.$amphoe) {
+            options.$amphoe.typeahead(typehead_options, {
+                limit: options.autocomplete_size,
+                templates: templates,
+                source: function (str, callback) {
+                    var possibles = [];
+                    try {
+                        possibles = DB.select('*').where('a').match('^' + str).orderBy('a').fetch();
+                    } catch (e) {}
+                    callback(possibles);
+                },
+                display: function (data) {
+                    return data.a;
+                }
+            });
+        }
+
+        // init auto complete for province
+        if (options.$province) {
+            options.$province.typeahead(typehead_options, {
+                limit: options.autocomplete_size,
+                templates: templates,
+                source: function (str, callback) {
+                    var possibles = [];
+                    try {
+                        possibles = DB.select('*').where('p').match('^' + str).orderBy('p').fetch();
+                    } catch (e) {}
+                    callback(possibles);
+                },
+                display: function (data) {
+                    return data.p;
+                }
+            });
+        }
+
+
+        // init auto complete for zipcode
+        if (options.$zipcode) {
+            options.$zipcode.typeahead(typehead_options, {
+                limit: options.autocomplete_size,
+                templates: templates,
+                source: function (str, callback) {
+                    var possibles = [];
+                    try {
+                        possibles = DB.select('*').where('z').match('^' + str).orderBy('z').fetch();
+                    } catch (e) {}
+                    callback(possibles);
+                },
+                display: function (data) {
+                    return data.z;
+                }
+            });
+        }
+
+        if (options.$search) {
+            options.$search.typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2
+            }, {
+                limit: options.autocomplete_size,
+                templates: templates,
+                source: function (str, callback) {
+                    var possibles = [],
+                        i;
+                    try {
+                        possibles = new JQL(possibles
+                            .concat(DB.select('*').where('d').match(str).fetch())
+                            .concat(DB.select('*').where('a').match(str).fetch())
+                            .concat(DB.select('*').where('p').match(str).fetch())
+                            .concat(DB.select('*').where('z').match(str).fetch())
+                            .filter(function (self, index, parent) { // remove duplicated data
+                                for (i = 0; i < parent.length; i = i + 1) {
+                                    if (index !== i && parent[i].a === self.d && parent[i].d === self.d) {
+                                        return false;
+                                    }
+                                }
+                                return true;
+                            }).map(function (self) { // give a likely score, will use to sort data later
+                                self.likely = [
+                                    similar_text(str, self.d) * 5,
+                                    similar_text(str, self.a.replace(/^เมือง/, '')) * 3,
+                                    similar_text(str, self.p),
+                                    similar_text(str, self.z)
+                                ].reduce(function (a, b) {
+                                    return Math.max(a, b);
+                                });
+                                return self;
+                            })).select('*').orderBy('likely desc').fetch();
+                    } catch (e) {}
+
+                    callback(possibles);
+                },
+                
+                display: function (data) {
+                    return '';
+                }
+            });
+        }
+
+        // on autocomplete
+        [options.$district, options.$amphoe, options.$province, options.$zipcode, options.$search].map(function ($$) {
+            if ($$) {
+                $$
+                    .bind('typeahead:select typeahead:autocomplete', autocomplete_handler)
+                    .blur(function () {
+                        if (!this.value) {
+                            $(this).parent().find('.tt-dataset').html('');
+                        }
+                    });
+            }
+        });
+
+        // callback
+        if (typeof options.onLoad === 'function') {
+            options.onLoad();
+        }
+
+        // callback, fallback to version 1.2.
+        if (typeof options.onComplete === 'function') {
+            options.onComplete();
+        }
+
     });
 };
