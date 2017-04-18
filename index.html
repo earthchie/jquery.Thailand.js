@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    
     <title>jquery.Thailand.js</title>
-
+    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/css/uikit.css">
     <link rel="stylesheet" href="./jquery.Thailand.js/dist/jquery.Thailand.min.css">
-
+    
     <style>
         a, h1, h2, .h2{
             font-family: 'Kanit', sans-serif !important;
@@ -73,7 +73,7 @@
             <div id="demo2-output" class="uk-margin"></div>
         </form>
         <!-- END DEMO 2 -->
-
+    
         <div uk-grid>
             <div class="uk-width-1-2@m">
                 <a href="https://medium.com/@earthchie/ระบบ-auto-complete-ที่อยู่ไทย-อย่างที่มันควรเป็น-27360185d86a" target="_blank">
@@ -97,23 +97,30 @@
                 </a>
             </div>
         </div>
-
     </div>
-
+    
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/js/uikit.min.js"></script>
+    
+    <!-- dependencies for zip mode -->
+    <script type="text/javascript" src="./jquery.Thailand.js/dependencies/jszip.min.js"></script>
+    <script type="text/javascript" src="./jquery.Thailand.js/dependencies/jszip-utils.min.js"></script>
+    <!-- / dependencies for zip mode -->
+
     <script type="text/javascript" src="./jquery.Thailand.js/dependencies/JQL.min.js"></script>
     <script type="text/javascript" src="./jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
-
+    
     <script type="text/javascript" src="./jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
-
+    
     <script type="text/javascript">
-
         /******************\
          *     DEMO 1     *
         \******************/ 
+        // demo 1: load database from json. if your server is support gzip. we recommended to use this rather than zip.
+        // for more info check README.md
         $.Thailand({
-            database: './jquery.Thailand.js/dist/db.json',
+            database: './jquery.Thailand.js/database/db.json', 
 
             $district: $('#demo1 [name="district"]'),
             $amphoe: $('#demo1 [name="amphoe"]'),
@@ -145,13 +152,13 @@
             console.log('รหัสไปรษณีย์', this.value);
         });
 
-
         /******************\
          *     DEMO 2     *
         \******************/ 
-
+        // demo 2: load database from zip. for those who doesn't have server that supported gzip.
+        // for more info check README.md
         $.Thailand({
-            database: './jquery.Thailand.js/dist/db.json',
+            database: './jquery.Thailand.js/database/db.zip', 
             $search: $('#demo2 [name="search"]'),
 
             onDataFill: function(data){
@@ -160,8 +167,7 @@
             }
 
         });
-
     </script>
-
+    
 </body>
 </html>

@@ -1,6 +1,6 @@
 /**
  * @name jquery.Thailand.js
- * @version 1.3.7
+ * @version 1.4.0
  * @update Apr 18, 2017
  * @website https://github.com/earthchie/jquery.Thailand.js
  * @license WTFPL v.2 - http://www.wtfpl.net/
@@ -15,7 +15,8 @@ $.Thailand = function (options) {
 
     options = $.extend({
 
-        database: './db.json',
+        database: '../database/db.json',
+        database_type: 'auto', // json or zip; any other value will be ignored and script will attempt to evaluate the type from file extension instead.
         autocomplete_size: 20,
 
         onLoad: function () {},
@@ -64,16 +65,16 @@ $.Thailand = function (options) {
             }
             // decompacted database in hierarchical form of:
             // [["province",[["amphur",[["district",["zip"...]]...]]...]]...]
-            data.map(function (provinceEntry) {
-                provinceEntry[1].map(function (amphurEntry) {
-                    amphurEntry[1].map(function (districtEntry) {
-                        districtEntry[1] = districtEntry[1] instanceof Array ? districtEntry[1] : [districtEntry[1]];
-                        districtEntry[1].map(function (zipCode) {
+            data.map(function (provinces) {
+                provinces[1].map(function (amphoes) {
+                    amphoes[1].map(function (districts) {
+                        districts[1] = districts[1] instanceof Array ? districts[1] : [districts[1]];
+                        districts[1].map(function (zipcode) {
                             expanded.push({
-                                d: t(districtEntry[0]),
-                                a: t(amphurEntry[0]),
-                                p: t(provinceEntry[0]),
-                                z: zipCode
+                                d: t(districts[0]),
+                                a: t(amphoes[0]),
+                                p: t(provinces[0]),
+                                z: zipcode
                             });
                         });
                     });
@@ -135,12 +136,52 @@ $.Thailand = function (options) {
                     }
                 }
             }
+        },
+        loadDB = function(callback){
+            var type = options.database_type.toLowerCase();
+
+            if (type !== 'json' && type !== 'zip') {
+                type = options.database.split('.').pop(); // attempt to use file extension instead
+            }
+
+            switch (type) {
+
+                case 'json': 
+
+                    $.getJSON(options.database, function (json) {
+                        callback(new JQL(preprocess(json)));
+                    }).fail(function (err) {
+                        throw new Error('File "' + options.database + '" is not exists.');
+                    });
+                    break;
+
+                case 'zip': 
+
+                    options.database_type = 'zip'; 
+                    JSZipUtils.getBinaryContent(options.database, function (err, data) {
+                        if (err) {
+                            throw new Error('File "' + options.database + '" is not exists.');
+                        } else {
+                            // read zip
+                            JSZip.loadAsync(data).then(function (zip) {
+                                // unzip db.json then parse into string
+                                zip.file('db.json').async('string').then(function (json) {
+                                    callback(new JQL(preprocess(JSON.parse(json))))
+                                });
+                            });
+                        }
+                    });
+                    break;
+
+                default: 
+                    throw new Error('Unknown database type: "' + options.database_type + '". Please define database_type explicitly (json or zip)');
+            }
+
         };
 
     // get database
-    $.getJSON(options.database, function (json) {
-        var DB = new JQL(preprocess(json)), // make json query-able
-            typehead_options = {
+    loadDB(function (DB) {
+        var typehead_options = {
                 hint: true,
                 highlight: true,
                 minLength: 1
@@ -319,8 +360,5 @@ $.Thailand = function (options) {
             options.onComplete();
         }
 
-    })
-        .fail(function (err) {
-            throw new Error('File "' + options.database + '" is not exists.');
-        });
+    });
 };
