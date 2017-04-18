@@ -41,8 +41,8 @@
 2. ติดตั้ง jquery.Thailand.js
 
 ```html
-<link rel="stylesheet" href="./jquery.Thailand.js/jquery.Thailand.min.css">
-<script type="text/javascript" src="./jquery.Thailand.js/jquery.Thailand.min.js"></script>
+<link rel="stylesheet" href="./jquery.Thailand.js/dist/jquery.Thailand.min.css">
+<script type="text/javascript" src="./jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
 ```
 
 3. สร้าง input สำหรับกรอก ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์
@@ -113,15 +113,15 @@ $.Thailand({
 
 ```html
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="jquery.Thailand.js/dependencies/JQL.min.js"></script>
-<script type="text/javascript" src="jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
+<script type="text/javascript" src="./jquery.Thailand.js/dependencies/JQL.min.js"></script>
+<script type="text/javascript" src="./jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
 ```
 
 2. ติดตั้ง jquery.Thailand.js
 
 ```html
-<link rel="stylesheet" href="jquery.Thailand.js/jquery.Thailand.min.css">
-<script type="text/javascript" src="jquery.Thailand.js/jquery.Thailand.min.js"></script>
+<link rel="stylesheet" href="./jquery.Thailand.js/dist/jquery.Thailand.min.css">
+<script type="text/javascript" src="./jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
 ```
 
 3. สร้าง input สำหรับกรอก ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์
@@ -154,17 +154,17 @@ $.Thailand({
 
 ```html
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="jquery.Thailand.js/dependencies/jszip.min.js"></script>
-<script type="text/javascript" src="jquery.Thailand.js/dependencies/jszip-utils.min.js"></script>
-<script type="text/javascript" src="jquery.Thailand.js/dependencies/JQL.min.js"></script>
-<script type="text/javascript" src="jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
+<script type="text/javascript" src="./jquery.Thailand.js/dependencies/jszip.min.js"></script>
+<script type="text/javascript" src="./jquery.Thailand.js/dependencies/jszip-utils.min.js"></script>
+<script type="text/javascript" src="./jquery.Thailand.js/dependencies/JQL.min.js"></script>
+<script type="text/javascript" src="./jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
 ```
 
 2. ติดตั้ง jquery.Thailand.js
 
 ```html
-<link rel="stylesheet" href="jquery.Thailand.js/jquery.Thailand.min.css">
-<script type="text/javascript" src="jquery.Thailand.js/jquery.Thailand.min.js"></script>
+<link rel="stylesheet" href="./jquery.Thailand.js/dist/jquery.Thailand.min.css">
+<script type="text/javascript" src="./jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
 ```
 
 3. สร้าง input สำหรับกรอก ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์
