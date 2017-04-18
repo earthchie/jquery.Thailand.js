@@ -6,6 +6,9 @@
 
 อ่านแนวคิด และที่มาที่ไปได้ที่นี่ [ระบบ Auto Complete ที่อยู่ไทย อย่างที่มันควรเป็น](https://medium.com/@earthchie/ระบบ-auto-complete-ที่อยู่ไทย-อย่างที่มันควรเป็น-27360185d86a)
 
+### Server ไม่มี gzip?
+ใช้เวอร์ชันนี้แทนจะเหมาะกว่าครับ [zipped_version](https://github.com/earthchie/jquery.Thailand.js/tree/zipped_version)
+
 ## Changelogs 1.3.x
 - เพิ่ม callback onDataFill() ตาม [request](https://github.com/earthchie/jquery.Thailand.js/issues/9)
 - แก้บัค ฟิลด์ข้อมูลไม่ยิง event change เมื่อเกิด autocomplete แล้ว (สำหรับตัวอย่างเพิ่มเติม ดูโค้ดใน [Demo](https://earthchie.github.io/jquery.Thailand.js/))
