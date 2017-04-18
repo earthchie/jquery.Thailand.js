@@ -28,12 +28,12 @@
 
 # วิธีใช้
 
+ในส่วนนี้จะเป็นวิธีใช้อย่างคร่าวๆ หากต้องการรายละเอียดเพิ่มเติม กรุณาอ่านหัวข้อถัดไป
+
 1. ติดตั้ง Dependencies ให้ครบ
 
 ```html
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="./jquery.Thailand.js/dependencies/jszip.min.js"></script>
-<script type="text/javascript" src="./jquery.Thailand.js/dependencies/jszip-utils.min.js"></script>
 <script type="text/javascript" src="./jquery.Thailand.js/dependencies/JQL.min.js"></script>
 <script type="text/javascript" src="./jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
 ```
@@ -69,18 +69,15 @@ $.Thailand({
 
 ```
 
-## Documents
+# วิธีใช้อย่างละเอียด
 
-เรามีทางเลือกของฐานข้อมูลให้อยู่ 2 ประเภท คือฐานข้อมูลแบบ json และแบบ zip 
-ในกรณีที่ Server ของคุณรองรับ gzip เราแนะนำเป็นอย่างยิ่งให้คุณใช้ฐานข้อมูลชนิด json
+เรามีทางเลือกของฐานข้อมูลให้อยู่ 2 ประเภท คือฐานข้อมูลแบบ json และแบบ zip ในกรณีที่ Server ของคุณรองรับ gzip เราแนะนำเป็นอย่างยิ่งให้คุณใช้ฐานข้อมูลชนิด json
 
 แต่หากคุณไม่สามารถพิจารณาเปิดใช้งาน gzip บนเซิร์ฟเวอร์ได้ เราแนะนำให้คุณใช้ฐานข้อมูลแบบ zip แทนเนื่องจากมีขนาดที่เล็กกว่า
 
 ### ขนาดของฐานข้อมูล
 
-ใน [v1.1.0](https://github.com/earthchie/jquery.Thailand.js/tree/fe302996ca72f156e1542048419399484431c391) เป็นต้นมามีการปรับเปลี่ยนโครงสร้างข้อมูล ภายใต้สมมุติฐานว่า Server รองรับ gzip รายละเอียดดังนี้
-
-| ไฟล์ | server ที่**ไม่**รองรับ gzip | server ที่รองรับ gzip |
+| ไฟล์ | ไม่มี gzip | เปิดใช้ gzip |
 | --- | ---:| ---:|
 | data.json | 186.00 KB | **68.90 KB** |
 
