@@ -10,7 +10,7 @@
 - รวม 2 branches เข้าด้วยกัน เพื่อความสะดวกในการ maintainance repo
 - ระบุ database เป็นไฟล์ json หรือ zip ก็ได้ ระบบจะแยกแยะจากนามสกุลไฟล์ให้เอง
 - ในกรณีที่ url ไปยัง database ไม่มีนามสกุลไฟล์ (ใช้ mod_rewrite) ให้ระบุประเภทไฟล์ผ่าน option ``database_type`` ว่าเป็น ``json`` หรือ ``zip`` แทน
-- สามารถอัพเดตจากเวอร์ชัน 1.3.x ได้ทันที ไม่ต้องแก้ใดๆ เพิ่มเติม
+- สามารถอัพเดตจากเวอร์ชัน 1.3.x ได้ทันที ไม่กระทบโค้ดเดิมที่คุณใช้งาน
 
 ## Changelogs 1.3.x
 - เพิ่ม callback ``onDataFill()`` ตาม [request](https://github.com/earthchie/jquery.Thailand.js/issues/9)
@@ -171,7 +171,7 @@ $.Thailand({
 ```javascript
 
 $.Thailand({ 
-    database: './jquery.Thailand.js/database/db.zip', // path หรือ url ไปยัง database
+    database: './jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
     $district: $('#district'), // input ของตำบล
     $amphoe: $('#amphoe'), // input ของอำเภอ
     $province: $('#province'), // input ของจังหวัด
