@@ -4,11 +4,13 @@
 อ่านแนวคิด และที่มาที่ไปได้ที่นี่ [ระบบ Auto Complete ที่อยู่ไทย อย่างที่มันควรเป็น](https://medium.com/@earthchie/ระบบ-auto-complete-ที่อยู่ไทย-อย่างที่มันควรเป็น-27360185d86a)
 
 ## Changelogs 1.3.x
-- เพิ่ม callback onDataFill() ตาม [request](https://github.com/earthchie/jquery.Thailand.js/issues/9)
+- เพิ่ม callback ``onDataFill()`` ตาม [request](https://github.com/earthchie/jquery.Thailand.js/issues/9)
 - แก้บัค ฟิลด์ข้อมูลไม่ยิง event change เมื่อเกิด autocomplete แล้ว (สำหรับตัวอย่างเพิ่มเติม ดูโค้ดใน [Demo](https://earthchie.github.io/jquery.Thailand.js/))
-- จัดระเบียบโครงสร้างโปรเจค และลบไฟล์ที่ไม่จำเป็นทิ้ง
+- ฟิลด์ใหม่ ``$search`` ใช้สำหรับค้นหา ดูตัวอย่างได้จากโค้ดใน [Demo](https://earthchie.github.io/jquery.Thailand.js/) (ใช้งานคู่กับ callback ``onDataFill()``)
 - เพิ่มฐานข้อมูลต้นฉบับ เป็นไฟล์ .xls อัพเดตข้อมูลล่าสุด เดือนตุลา 2559
-- ฟิลด์ใหม่ ``$search`` ใช้สำหรับค้นหา ดูตัวอย่างได้จากโค้ดใน [Demo](https://earthchie.github.io/jquery.Thailand.js/)
+- แก้บัคเล็กๆ น้อยๆ
+- refactor และ validate ด้วย jslint
+- จัดระเบียบโครงสร้างโปรเจค และลบไฟล์ที่ไม่จำเป็นทิ้ง
 
 ## Todo
 - [x] Clean up repo
@@ -19,7 +21,7 @@
 
 ## วิธีใช้
 
-1. ติดตั้ง Dependency ให้ครบ
+1. ติดตั้ง Dependencies ให้ครบ
 
 ```html
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
