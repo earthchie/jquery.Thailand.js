@@ -1,7 +1,13 @@
+# Demo
+[https://earthchie.github.io/jquery.Thailand.js/](https://earthchie.github.io/jquery.Thailand.js/)
+
 # jquery.Thailand.js
 ตัวช่วยกรอกที่อยู่ที่ดีที่สุดในไทย ไม่ต้องใช้ Server Side!
 
 อ่านแนวคิด และที่มาที่ไปได้ที่นี่ [ระบบ Auto Complete ที่อยู่ไทย อย่างที่มันควรเป็น](https://medium.com/@earthchie/ระบบ-auto-complete-ที่อยู่ไทย-อย่างที่มันควรเป็น-27360185d86a)
+
+### Server ไม่มี gzip?
+ใช้เวอร์ชันนี้แทนจะเหมาะกว่าครับ [zipped_version](https://github.com/earthchie/jquery.Thailand.js/tree/zipped_version)
 
 ## Changelogs 1.3.x
 - เพิ่ม callback ``onDataFill()`` ตาม [request](https://github.com/earthchie/jquery.Thailand.js/issues/9)
@@ -15,9 +21,6 @@
 ## Todo
 - [x] Clean up repo
 - [ ] Need help! with database https://github.com/earthchie/jquery.Thailand.js/issues/4
-
-# Demo
-[https://earthchie.github.io/jquery.Thailand.js/](https://earthchie.github.io/jquery.Thailand.js/)
 
 ## วิธีใช้
 
@@ -72,12 +75,14 @@ $.Thailand({
 
 ## ขนาดของข้อมูล
 
-ใน [v1.1.0](https://github.com/earthchie/jquery.Thailand.js/tree/fe302996ca72f156e1542048419399484431c391) เป็นต้นมามีการปรับเปลี่ยนโครงสร้างข้อมูล ภายใต้สมมุติฐานว่า Server รองรับ gzip รายละเอียดดังนี้
+ใน [v1.1.0](https://github.com/earthchie/jquery.Thailand.js/tree/fe302996ca72f156e1542048419399484431c391) เป็นต้นมามีการปรับเปลี่ยนโครงสร้างข้อมูล ภายใต้สมมุติฐานว่า Server รองรับ gzip รายละเอียดดังนี้ 
 
-| ไฟล์ | ขนาดเมื่อถูก Gzip |
+| ไฟล์ | ขนาดเมื่อถูก gzip |
 | --- | ---:|
 | data.json | 68.9 KB |
 | **รวม** | **68.9 KB** |
+
+*ผลลัพธ์อ้างอิงจากระบบ gzip ของ github page*
 
 แต่หากท่านใดที่ Server ไม่รองรับ gzip สามารถใช้ [zipped version](https://github.com/earthchie/jquery.Thailand.js/tree/zipped_version) แทนได้ โดยมีรายละเอียดดังนี้
 
