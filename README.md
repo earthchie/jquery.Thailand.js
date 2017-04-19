@@ -224,7 +224,7 @@ $.Thailand({
     database: './jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
     database_type: 'auto', // auto, zip หรือ json; การใส่ auto ลงไป ระบบจะแยกแยะเอาเองตามนามสกุลของ database, ไม่ระบุก็ได้ ค่า default คือ auto
 
-    zip_worker_path: false, // 
+    zip_worker_path: false, // อ่านหัวข้อถัดไป
     autocomplete_size: 20, // ขนาดของตัวเลือก ไม่ระบุก็ได้ ค่า default คือ 20
 
     $district: $('#district'), // input ของตำบล
