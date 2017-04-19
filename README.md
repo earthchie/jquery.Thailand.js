@@ -149,14 +149,13 @@ $.Thailand({
 ```
 
 ## หากคุณเลือกใช้ฐานข้อมูลชนิด ZIP
-ใช้งานแทบจะเหมือนกับแบบ ``json`` ทุกประการ เว้นแต่ว่าต้องติดตั้ง dependencies เพิ่ม 2 ตัว ``jszip.min.js`` และ ``jszip-utils.min.js``
+ใช้งานแทบจะเหมือนกับแบบ ``json`` ทุกประการ เว้นแต่ว่าต้องติดตั้ง dependencies เพิ่ม คือ ``zip.js``
 
 1. ติดตั้ง Dependencies ให้ครบ
 
 ```html
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="./jquery.Thailand.js/dependencies/jszip.min.js"></script>
-<script type="text/javascript" src="./jquery.Thailand.js/dependencies/jszip-utils.min.js"></script>
+<script type="text/javascript" src="./jquery.Thailand.js/dependencies/zip.js/zip.js"></script>
 <script type="text/javascript" src="./jquery.Thailand.js/dependencies/JQL.min.js"></script>
 <script type="text/javascript" src="./jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
 ```
