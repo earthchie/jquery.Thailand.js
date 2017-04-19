@@ -12,6 +12,7 @@
 - ในกรณีที่ url ไปยัง database ไม่มีนามสกุลไฟล์ (ใช้ mod_rewrite) ให้ระบุประเภทไฟล์ผ่าน option ``database_type`` ว่าเป็น ``json`` หรือ ``zip`` แทน
 - สามารถอัพเดตจากเวอร์ชัน 1.3.x ได้ทันที ไม่กระทบโค้ดเดิมที่คุณใช้งาน
 - ย้ายไฟล์ database ออกมาจากโฟลเดอร์ source code เพื่อความง่ายในการ maintainance ในอนาคต
+- เปลี่ยนตัวแกะ zip ไปใช้ [zip.js](https://gildas-lormeau.github.io/zip.js/) (แทนที่ [JSZip](https://stuk.github.io/jszip/)) เนื่องจากมีขนาดเล็กกว่ามาก
 
 ## Changelogs 1.3.x
 - เพิ่ม callback ``onDataFill()`` ตาม [request](https://github.com/earthchie/jquery.Thailand.js/issues/9)
@@ -75,6 +76,8 @@ $.Thailand({
 
 ทั้งสองแบบมีความแตกต่างกันเพียงแค่ขนาดไฟล์ ไฟล์ฐานข้อมูลที่เล็กกว่า ย่อมทำให้ user ใช้เวลารอน้อยลง
 
+**การทดสอบในเบื้องต้นพบว่า การแกะอ่าน zip ไม่มีผลกระทบด้าน performance ที่สัมผัสได้เลย*
+
 ลองพิจารณาขนาดของฐานข้อมูลแบบ ``json`` ดูครับ 
 
 ### ขนาดของฐานข้อมูล
@@ -90,22 +93,20 @@ $.Thailand({
 
 | ไฟล์ | ขนาดไฟล์ |
 | --- | ---:|
-| ``jszip.min.js`` | 99.90 KB |
-| ``jszip-utils.min.js`` | 2.10 KB |
+| ``zip.js`` | 12.00 KB |
+| ``z-worker.js`` | 1.69 KB |
+| ``inflate.js`` | 21.60 KB |
 | ``db.zip`` | 51.10 KB |
-| **รวม** | **153.10 KB** |
-
-ซึ่งจะเล็กกว่าแบบ ``json`` ไม่มี gzip อยู่เพียง 32.90 KB แม้ไม่มากแต่ก็ถือว่าเล็กกว่าอยู่ดี
+| **รวม** | **86.39 KB** |
 
 สรุปขนาดข้องมูล ตามประเภทของ Server
 
 | Server | ประเภทฐานข้อมูลที่แนะนำ | ขนาดฐานข้อมูล |
 | --- | ---:| ---:|
 | รองรับ gzip | ``json`` | 68.90 KB |
-| *ไม่*รองรับ gzip | ``zip`` | 153.10 KB |
+| *ไม่*รองรับ gzip | ``zip`` | 86.39 KB |
 
 ตอนนี้คุณน่าจะตอบคำถามตัวเองได้แล้วว่าจะใช้ฐานข้อมูลประเภทไหน ``json`` หรือ ``zip`` เรามาดูวิธีใช้งานทั้งสองแบบกัน
-
 
 ## หากคุณเลือกใช้ฐานข้อมูลชนิด JSON
 
@@ -217,6 +218,7 @@ $.Thailand({
     database: './jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
     database_type: 'auto', // auto, zip หรือ json; การใส่ auto ลงไป ระบบจะแยกแยะเอาเองตามนามสกุลของ database, ไม่ระบุก็ได้ ค่า default คือ auto
 
+    zip_worker_path: false, // 
     autocomplete_size: 20, // ขนาดของตัวเลือก ไม่ระบุก็ได้ ค่า default คือ 20
 
     $district: $('#district'), // input ของตำบล
@@ -234,6 +236,11 @@ $.Thailand({
     }
 });
 ```
+#### zip_worker_path?
+
+คือ path ที่เก็บไฟล์ ``z-worker.js`` และ ``inflate.js`` โดยปกติไม่จำเป็นต้องยุ่งกับค่านี้เลย ระบบจะ detect เอาเอง
+เว้นแต่ว่าจะพบ error แจ้งว่าหาไฟล์ ``z-worker.js`` และ ``inflate.js` ไม่เจอ (ซึ่งไม่น่าเกิดขึ้นได้ เว้นแต่จะแยกไฟล์ zip.js ออกไปไว้คนละที่กัน)
+ถ้ามันแจ้ง error ว่าหาไฟล์ไม่เจอ ก็ค่อยให้ระบุค่าลงไป เช่น ``zip_worker_path: "./jquery.Thailand.js/dependencies/zip.js/",``
 
 ## Contributers
 [earthchie](https://github.com/earthchie/) - Project Owner

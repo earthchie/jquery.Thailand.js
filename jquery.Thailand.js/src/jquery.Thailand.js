@@ -1,12 +1,12 @@
 /**
  * @name jquery.Thailand.js
- * @version 1.4.0
- * @update Apr 18, 2017
+ * @version 1.4.1
+ * @update Apr 20, 2017
  * @website https://github.com/earthchie/jquery.Thailand.js
  * @license WTFPL v.2 - http://www.wtfpl.net/
  *
  * @dependencies: jQuery <https://jquery.com/>
- *              JSZIP <https://stuk.github.io/jszip/> (optional: for zip database_type only)
+ *              zip.js <https://github.com/gildas-lormeau/zip.js> (optional: for zip database_type only)
  *              typeahead.js <https://twitter.github.io/typeahead.js/>
  *              JQL.js <https://github.com/earthchie/JQL.js>
  **/
@@ -18,6 +18,7 @@ $.Thailand = function (options) {
 
         database: '../database/db.json',
         database_type: 'auto', // json or zip; any other value will be ignored and script will attempt to evaluate the type from file extension instead.
+        zip_worker_path: false, // path to zip worker folder e.g. './jquery.Thailand.js/dependencies/zip.js/'; Leave it to false unless you found any error.
         autocomplete_size: 20,
 
         onLoad: function () {},
@@ -138,8 +139,9 @@ $.Thailand = function (options) {
                 }
             }
         },
-        loadDB = function(callback){
-            var type = options.database_type.toLowerCase();
+        loadDB = function (callback) {
+            var type = options.database_type.toLowerCase(),
+                xhr;
 
             if (type !== 'json' && type !== 'zip') {
                 type = options.database.split('.').pop(); // attempt to use file extension instead
@@ -147,35 +149,56 @@ $.Thailand = function (options) {
 
             switch (type) {
 
-                case 'json': 
+            case 'json':
 
-                    $.getJSON(options.database, function (json) {
-                        callback(new JQL(preprocess(json)));
-                    }).fail(function (err) {
-                        throw new Error('File "' + options.database + '" is not exists.');
-                    });
-                    break;
+                $.getJSON(options.database, function (json) {
+                    callback(new JQL(preprocess(json)));
+                }).fail(function (err) {
+                    throw new Error('File "' + options.database + '" is not exists.');
+                });
+                break;
 
-                case 'zip': 
+            case 'zip':
 
-                    options.database_type = 'zip'; 
-                    JSZipUtils.getBinaryContent(options.database, function (err, data) {
-                        if (err) {
-                            throw new Error('File "' + options.database + '" is not exists.');
-                        } else {
-                            // read zip
-                            JSZip.loadAsync(data).then(function (zip) {
-                                // unzip db.json then parse into string
-                                zip.file('db.json').async('string').then(function (json) {
-                                    callback(new JQL(preprocess(JSON.parse(json))))
-                                });
-                            });
+                if (!options.zip_worker_path) {
+                    $('script').each(function () {
+                        var fragments = this.src.split('/'),
+                            filename = fragments.pop();
+                        if (filename === 'zip.js') {
+                            zip.workerScriptsPath = fragments.join('/') + '/';
                         }
                     });
-                    break;
+                }
 
-                default: 
-                    throw new Error('Unknown database type: "' + options.database_type + '". Please define database_type explicitly (json or zip)');
+                xhr = new XMLHttpRequest();
+                xhr.responseType = 'blob';
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            zip.createReader(new zip.BlobReader(xhr.response), function (zipReader) {
+                                zipReader.getEntries(function (r) {
+                                    r[0].getData(new zip.BlobWriter(), function (blob) {
+                                        var reader = new FileReader();
+                                        reader.onload = function () {
+                                            callback(new JQL(preprocess(JSON.parse(reader.result))));
+                                        };
+                                        reader.readAsText(blob);
+                                    });
+                                });
+                            });
+                        } else {
+                            throw new Error('File "' + options.database + '" is not exists.');
+                        }
+                    }
+                };
+                xhr.open('GET', options.database);
+                xhr.send();
+
+                break;
+
+            default:
+                throw new Error('Unknown database type: "' + options.database_type + '". Please define database_type explicitly (json or zip)');
             }
 
         };
