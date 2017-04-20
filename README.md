@@ -272,48 +272,62 @@ $.Thailand({
 
 $.Thailand({ 
     
-    // path หรือ url ไปยัง database เลือกได้ 4 แบบตามความเหมาะสม db.json, db.zip, geodb.json, geodb.zip
+    // path หรือ url ไปยัง database เลือกได้ 4 แบบตามความเหมาะสม 
+    // db.json, db.zip, geodb.json, geodb.zip
     database: './jquery.Thailand.js/database/db.json', 
     
-    // auto, zip หรือ json; การใส่ auto ลงไป ระบบจะแยกแยะเอาเองตามนามสกุลของ database, ไม่ระบุก็ได้ ค่า default คือ auto
+    // auto, zip หรือ json; การใส่ auto ลงไป ระบบจะแยกแยะเอาเองตามนามสกุลของ database
+    // (ไม่ระบุก็ได้ ค่า default คือ auto)
     database_type: 'auto', 
     
     // อ่านหัวข้อถัดไป
+    // (ปกติไม่ต้องระบุ)
     zip_worker_path: false, 
     
-    // ขนาดของตัวเลือกใน Dropdown ไม่ระบุก็ได้ ค่า default คือ 20
+    // ขนาดของตัวเลือกใน Dropdown 
+    // (ไม่ระบุก็ได้ ค่า default คือ 20)
     autocomplete_size: 20, 
     
     // input ของตำบล
+    // (ไม่ระบุก็ได้หากไม่จำเป็นต้องใช้)
     $district: $('#district'), 
     
     // input area code ของตำบล
+    // (ไม่ระบุก็ได้หากไม่จำเป็นต้องใช้)
     $district_code: $('#district_code'), 
     
     // input ของอำเภอ
+    // (ไม่ระบุก็ได้หากไม่จำเป็นต้องใช้)
     $amphoe: $('#amphoe'), 
     
     // input area code ของอำเภอ
+    // (ไม่ระบุก็ได้หากไม่จำเป็นต้องใช้)
     $amphoe_code: $('#amphoe_code'), 
     
     // input ของจังหวัด
+    // (ไม่ระบุก็ได้หากไม่จำเป็นต้องใช้)
     $province: $('#province'), 
     
     // input area code ของจังหวัด
+    // (ไม่ระบุก็ได้หากไม่จำเป็นต้องใช้)
     $province_code: $('#province_code'), 
     
     // input ของรหัสไปรษณีย์
+    // (ไม่ระบุก็ได้หากไม่จำเป็นต้องใช้)
     $zipcode: $('#zipcode'), 
     
     // input ของช่องค้นหา 
+    // (ไม่ระบุก็ได้หากไม่จำเป็นต้องใช้)
     $search: $('#search'), 
     
     // callback เมื่อเกิดการ auto complete ขึ้น
+    // (ไม่ระบุก็ได้หากไม่จำเป็นต้องใช้)
     onDataFill: function(data){ 
         console.log('Data Filled', data);
     },
     
     // callback เมื่อโหลดฐานข้อมูลเสร็จและระบบ Auto Complete พร้อมที่จะทำงาน
+    // (ไม่ระบุก็ได้หากไม่จำเป็นต้องใช้)
     onLoad: function(){ 
         console.info('Autocomplete is ready!');
     }
