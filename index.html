@@ -161,6 +161,7 @@
             $search: $('#demo2 [name="search"]'),
 
             onDataFill: function(data){
+                console.log(data)
                 var html = '<b>ที่อยู่:</b> ตำบล' + data.district + ' อำเภอ' + data.amphoe + ' จังหวัด' + data.province + ' ' + data.zipcode;
                 $('#demo2-output').prepend('<div class="uk-alert-warning" uk-alert><a class="uk-alert-close" uk-close></a>' + html + '</div>');
             }

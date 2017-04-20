@@ -1,6 +1,6 @@
 /**
  * @name jquery.Thailand.js
- * @version 1.4.1
+ * @version 1.5.0
  * @update Apr 20, 2017
  * @website https://github.com/earthchie/jquery.Thailand.js
  * @license WTFPL v.2 - http://www.wtfpl.net/
@@ -25,8 +25,11 @@ $.Thailand = function (options) {
         onDataFill: function () {},
 
         $district: false,
+        $district_code: false, // geodb only
         $amphoe: false,
+        $amphoe_code: false, // geodb only
         $province: false,
+        $province_code: false, // geodb only
         $zipcode: false,
         $search: false
 
@@ -68,16 +71,27 @@ $.Thailand = function (options) {
             // decompacted database in hierarchical form of:
             // [["province",[["amphur",[["district",["zip"...]]...]]...]]...]
             data.map(function (provinces) {
-                provinces[1].map(function (amphoes) {
-                    amphoes[1].map(function (districts) {
-                        districts[1] = districts[1] instanceof Array ? districts[1] : [districts[1]];
-                        districts[1].map(function (zipcode) {
-                            expanded.push({
-                                d: t(districts[0]),
-                                a: t(amphoes[0]),
-                                p: t(provinces[0]),
-                                z: zipcode
-                            });
+                var i = 1;
+                if(provinces.length === 3){ // geographic database
+                    i = 2;
+                }
+
+                provinces[i].map(function (amphoes) {
+                    amphoes[i].map(function (districts) {
+                        districts[i] = districts[i] instanceof Array ? districts[i] : [districts[i]];
+                        districts[i].map(function (zipcode) {
+                            var entry = {
+                                district: t(districts[0]),
+                                amphoe: t(amphoes[0]),
+                                province: t(provinces[0]),
+                                zipcode: zipcode
+                            };
+                            if(i === 2){ // geographic database
+                                entry.district_code = districts[1] || false;
+                                entry.amphoe_code = amphoes[1] || false;
+                                entry.province_code = provinces[1] || false;
+                            }
+                            expanded.push(entry);
                         });
                     });
                 });
@@ -205,114 +219,57 @@ $.Thailand = function (options) {
 
     // get database
     loadDB(function (DB) {
-        var typehead_options = {
-                hint: true,
-                highlight: true,
-                minLength: 1
-            },
+        var i,
+            key,
             templates = { // template of autocomplete choices
                 empty: ' ',
                 suggestion: function (data) {
-                    return '<div>' + data.d + ' » ' + data.a + ' » ' + data.p + ' » ' + (data.z || '<i>ไม่มีรหัสไปรษณีย์</i>') + '</div>';
+                    if (data.zipcode) {
+                        data.zipcode = ' » ' + data.zipcode;
+                    }
+                    return '<div>' + data.district + ' » ' + data.amphoe + ' » ' + data.province + data.zipcode + '</div>';
                 }
             },
             autocomplete_handler = function (e, v) { // set value when user selected autocomplete choice
-
-                if (options.$district) {
-                    options.$district.typeahead('val', v.d).trigger('change');
-                }
-                if (options.$amphoe) {
-                    options.$amphoe.typeahead('val', v.a).trigger('change');
-                }
-                if (options.$province) {
-                    options.$province.typeahead('val', v.p).trigger('change');
-                }
-                if (options.$zipcode) {
-                    options.$zipcode.typeahead('val', v.z).trigger('change');
+                
+                for (i in options) {
+                    key = i.replace('$','');
+                    if (i.indexOf('$') > -1 && options.hasOwnProperty(i) && options[i] && v[key]) {
+                        options[i].typeahead('val', v[key]).trigger('change');
+                    }
                 }
 
                 if (typeof options.onDataFill === 'function') {
-                    options.onDataFill({
-                        district: v.d,
-                        amphoe: v.a,
-                        province: v.p,
-                        zipcode: v.z
-                    });
+                    delete v.likely;
+                    options.onDataFill(v);
                 }
 
             };
 
-        // init auto complete for district
-        if (options.$district) {
-            options.$district.typeahead(typehead_options, {
-                limit: options.autocomplete_size,
-                templates: templates,
-                source: function (str, callback) {
-                    var possibles = [];
-                    try {
-                        possibles = DB.select('*').where('d').match('^' + str).orderBy('d').fetch();
-                    } catch (e) {}
-                    callback(possibles);
-                },
-                display: function (data) {
-                    return data.d;
-                }
-            });
-        }
+        for (i in options) {
+            if (i.indexOf('$') > -1 && i !== '$search' && options.hasOwnProperty(i) && options[i]) {
+                
+                options[i].typeahead({
+                    hint: true,
+                    highlight: true,
+                    minLength: 1
+                }, {
+                    limit: options.autocomplete_size,
+                    templates: templates,
+                    source: function (str, callback) {
+                        var possibles = [],
+                            field = this.$el.data('field');
+                        try {
+                            possibles = DB.select('*').where(field).match('^' + str).orderBy(field).fetch();
+                        } catch (e) {}
+                        callback(possibles);
+                    },
+                    display: function (data) {
+                        return data[this.$el.data('field')];
+                    }
+                }).parent().find('.tt-dataset').data('field', i.replace('$',''));
 
-        // init auto complete for amphoe
-        if (options.$amphoe) {
-            options.$amphoe.typeahead(typehead_options, {
-                limit: options.autocomplete_size,
-                templates: templates,
-                source: function (str, callback) {
-                    var possibles = [];
-                    try {
-                        possibles = DB.select('*').where('a').match('^' + str).orderBy('a').fetch();
-                    } catch (e) {}
-                    callback(possibles);
-                },
-                display: function (data) {
-                    return data.a;
-                }
-            });
-        }
-
-        // init auto complete for province
-        if (options.$province) {
-            options.$province.typeahead(typehead_options, {
-                limit: options.autocomplete_size,
-                templates: templates,
-                source: function (str, callback) {
-                    var possibles = [];
-                    try {
-                        possibles = DB.select('*').where('p').match('^' + str).orderBy('p').fetch();
-                    } catch (e) {}
-                    callback(possibles);
-                },
-                display: function (data) {
-                    return data.p;
-                }
-            });
-        }
-
-
-        // init auto complete for zipcode
-        if (options.$zipcode) {
-            options.$zipcode.typeahead(typehead_options, {
-                limit: options.autocomplete_size,
-                templates: templates,
-                source: function (str, callback) {
-                    var possibles = [];
-                    try {
-                        possibles = DB.select('*').where('z').match('^' + str).orderBy('z').fetch();
-                    } catch (e) {}
-                    callback(possibles);
-                },
-                display: function (data) {
-                    return data.z;
-                }
-            });
+            }
         }
 
         if (options.$search) {
@@ -328,23 +285,23 @@ $.Thailand = function (options) {
                         i;
                     try {
                         possibles = new JQL(possibles
-                            .concat(DB.select('*').where('d').match(str).fetch())
-                            .concat(DB.select('*').where('a').match(str).fetch())
-                            .concat(DB.select('*').where('p').match(str).fetch())
-                            .concat(DB.select('*').where('z').match(str).fetch())
+                            .concat(DB.select('*').where('district').match(str).fetch())
+                            .concat(DB.select('*').where('amphoe').match(str).fetch())
+                            .concat(DB.select('*').where('province').match(str).fetch())
+                            .concat(DB.select('*').where('zipcode').match(str).fetch())
                             .filter(function (self, index, parent) { // remove duplicated data
                                 for (i = 0; i < parent.length; i = i + 1) {
-                                    if (index !== i && parent[i].a === self.d && parent[i].d === self.d) {
+                                    if (index !== i && parent[i].amphoe === self.amphoe && parent[i].district === self.district) {
                                         return false;
                                     }
                                 }
                                 return true;
                             }).map(function (self) { // give a likely score, will use to sort data later
                                 self.likely = [
-                                    similar_text(str, self.d) * 5,
-                                    similar_text(str, self.a.replace(/^เมือง/, '')) * 3,
-                                    similar_text(str, self.p),
-                                    similar_text(str, self.z)
+                                    similar_text(str, self.district) * 5,
+                                    similar_text(str, self.amphoe.replace(/^เมือง/, '')) * 3,
+                                    similar_text(str, self.province),
+                                    similar_text(str, self.zipcode)
                                 ].reduce(function (a, b) {
                                     return Math.max(a, b);
                                 });
@@ -360,11 +317,11 @@ $.Thailand = function (options) {
                 }
             });
         }
-
+        
         // on autocomplete
-        [options.$district, options.$amphoe, options.$province, options.$zipcode, options.$search].map(function ($$) {
-            if ($$) {
-                $$
+        for (i in options) {
+            if (i.indexOf('$') > -1 && options.hasOwnProperty(i) && options[i]) {
+                options[i]
                     .bind('typeahead:select typeahead:autocomplete', autocomplete_handler)
                     .blur(function () {
                         if (!this.value) {
@@ -372,7 +329,7 @@ $.Thailand = function (options) {
                         }
                     });
             }
-        });
+        }
 
         // callback
         if (typeof options.onLoad === 'function') {
