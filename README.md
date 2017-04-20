@@ -272,23 +272,49 @@ $.Thailand({
 
 $.Thailand({ 
     
-    database: './jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
-    database_type: 'auto', // auto, zip หรือ json; การใส่ auto ลงไป ระบบจะแยกแยะเอาเองตามนามสกุลของ database, ไม่ระบุก็ได้ ค่า default คือ auto
-
-    zip_worker_path: false, // อ่านหัวข้อถัดไป
-    autocomplete_size: 20, // ขนาดของตัวเลือก ไม่ระบุก็ได้ ค่า default คือ 20
-
-    $district: $('#district'), // input ของตำบล
-    $amphoe: $('#amphoe'), // input ของอำเภอ
-    $province: $('#province'), // input ของจังหวัด
-    $zipcode: $('#zipcode'), // input ของรหัสไปรษณีย์
-    $search: $('#search'), // input ของช่องค้นหา 
-
-    onDataFill: function(data){ // callback เมื่อเกิดการ auto complete ขึ้น
+    // path หรือ url ไปยัง database เลือกได้ 4 แบบตามความเหมาะสม db.json, db.zip, geodb.json, geodb.zip
+    database: './jquery.Thailand.js/database/db.json', 
+    
+    // auto, zip หรือ json; การใส่ auto ลงไป ระบบจะแยกแยะเอาเองตามนามสกุลของ database, ไม่ระบุก็ได้ ค่า default คือ auto
+    database_type: 'auto', 
+    
+    // อ่านหัวข้อถัดไป
+    zip_worker_path: false, 
+    
+    // ขนาดของตัวเลือกใน Dropdown ไม่ระบุก็ได้ ค่า default คือ 20
+    autocomplete_size: 20, 
+    
+    // input ของตำบล
+    $district: $('#district'), 
+    
+    // input area code ของตำบล
+    $district_code: $('#district_code'), 
+    
+    // input ของอำเภอ
+    $amphoe: $('#amphoe'), 
+    
+    // input area code ของอำเภอ
+    $amphoe_code: $('#amphoe_code'), 
+    
+    // input ของจังหวัด
+    $province: $('#province'), 
+    
+    // input area code ของจังหวัด
+    $province_code: $('#province_code'), 
+    
+    // input ของรหัสไปรษณีย์
+    $zipcode: $('#zipcode'), 
+    
+    // input ของช่องค้นหา 
+    $search: $('#search'), 
+    
+    // callback เมื่อเกิดการ auto complete ขึ้น
+    onDataFill: function(data){ 
         console.log('Data Filled', data);
     },
-
-    onLoad: function(){ // callback เมื่อโหลดฐานข้อมูลเสร็จและระบบ Auto Complete พร้อมที่จะทำงาน
+    
+    // callback เมื่อโหลดฐานข้อมูลเสร็จและระบบ Auto Complete พร้อมที่จะทำงาน
+    onLoad: function(){ 
         console.info('Autocomplete is ready!');
     }
 });
