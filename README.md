@@ -6,26 +6,16 @@
 
 อ่านแนวคิด และที่มาที่ไปได้ที่นี่ [ระบบ Auto Complete ที่อยู่ไทย อย่างที่มันควรเป็น](https://medium.com/@earthchie/ระบบ-auto-complete-ที่อยู่ไทย-อย่างที่มันควรเป็น-27360185d86a)
 
-## Changelogs 1.4.x
-- รวม 2 branches เข้าด้วยกัน เพื่อความสะดวกในการ maintainance repo
-- ระบุ database เป็นไฟล์ json หรือ zip ก็ได้ ระบบจะแยกแยะจากนามสกุลไฟล์ให้เอง
-- ในกรณีที่ url ไปยัง database ไม่มีนามสกุลไฟล์ (ใช้ mod_rewrite) ให้ระบุประเภทไฟล์ผ่าน option ``database_type`` ว่าเป็น ``json`` หรือ ``zip`` แทน
-- สามารถอัพเดตจากเวอร์ชัน 1.3.x ได้ทันที ไม่กระทบโค้ดเดิมที่คุณใช้งาน
-- ย้ายไฟล์ database ออกมาจากโฟลเดอร์ source code เพื่อความง่ายในการ maintainance ในอนาคต
-- เปลี่ยนตัวแกะ zip ไปใช้ [zip.js](https://gildas-lormeau.github.io/zip.js/) (แทนที่ [JSZip](https://stuk.github.io/jszip/)) เนื่องจากมีขนาดเล็กกว่ามาก
+## Changelogs 1.5.0
 
-## Changelogs 1.3.x
-- เพิ่ม callback ``onDataFill()`` ตาม [request](https://github.com/earthchie/jquery.Thailand.js/issues/9)
-- แก้บัค ฟิลด์ข้อมูลไม่ยิง event change เมื่อเกิด autocomplete แล้ว (สำหรับตัวอย่างเพิ่มเติม ดูโค้ดใน [Demo](https://earthchie.github.io/jquery.Thailand.js/))
-- ฟิลด์ใหม่ ``$search`` ใช้สำหรับค้นหา ดูตัวอย่างได้จากโค้ดใน [Demo](https://earthchie.github.io/jquery.Thailand.js/) (ใช้งานคู่กับ callback ``onDataFill()``)
-- เพิ่มฐานข้อมูลต้นฉบับ เป็นไฟล์ .xls อัพเดตข้อมูลล่าสุด เดือนตุลา 2559
-- แก้บัคเล็กๆ น้อยๆ
-- refactor และ validate ด้วย jslint
-- จัดระเบียบโครงสร้างโปรเจค และลบไฟล์ที่ไม่จำเป็นทิ้ง
+- รองรับฐานข้อมูลชนิดใหม่ geodb โดย geodb คือฐานข้อมูลที่เพิ่มข้อมูล area code เข้ามา สำหรับงานที่จำเป็นต้องใช้งานด้านแผนที่ [#4](https://github.com/earthchie/jquery.Thailand.js/issues/4)
+
+อ่านทั้งหมดได้ที่ [CHANGELOG.md](https://github.com/earthchie/jquery.Thailand.js/blob/master/CHANGLOG.md)
 
 ## Todo
 - [x] Clean up repo
-- [ ] Need help! with database https://github.com/earthchie/jquery.Thailand.js/issues/4
+- [x] Need help! with database [#4](https://github.com/earthchie/jquery.Thailand.js/issues/4)
+- [ ] Need Tester on geodb data [#4](https://github.com/earthchie/jquery.Thailand.js/issues/4)
 
 # วิธีใช้
 
@@ -91,7 +81,7 @@ $.Thailand({
 
 | ไฟล์ | ไม่มี gzip | เปิดใช้ gzip |
 | --- | ---:| ---:|
-| ``data.json`` | 186.00 KB | **68.90 KB** |
+| ``db.json`` | 186.00 KB | **68.90 KB** |
 
 *ผลลัพธ์อ้างอิงจากระบบ gzip ของ github page*
 
@@ -212,6 +202,67 @@ $.Thailand({
     onDataFill: function(data){ // callback เมื่อเกิดการ auto complete ขึ้น
         console.log(data);
     }
+});
+```
+
+## geodb
+
+geodb คือฐานข้อมูลชนิดใหม่ โดยที่มีการเพิ่มข้อมูล Area Code เข้ามา สำหรับงานที่จำเป็นต้องใช้งานด้านแผนที่ [#4](https://github.com/earthchie/jquery.Thailand.js/issues/4) มีขนาดใหญ่กว่าฐานข้อมูลปกติเล็กน้อย สามารถสลับสับเปลี่ยนกับฐานข้อมูลปกติได้ทันที
+
+เปรียบเทียบขนาดของฐานข้อมูล
+
+## ชนิด ``json``
+
+| ไฟล์ | ไม่มี gzip | เปิดใช้ gzip |
+| --- | ---:| ---:|
+| ``db.json`` | 186.00 KB | 68.90 KB |
+| ``geodb.json`` | 242.00 KB | 91.20 KB |
+| ใหญ่ขึ้น | 56.00 KB | 22.30 KB |
+
+## ชนิด ``zip``
+| ไฟล์ | ไม่มี gzip |
+| --- | ---:|
+| ``db.zip`` | 51.10 KB |
+| ``geodb.zip`` | 68.50 KB |
+| ใหญ่ขึ้น | 17.40 KB |
+
+วิธีการใช้งาน สามารถทำได้ง่ายมาก เพียงเปลี่ยน url ของฐานข้อมูลไปเป็นแบบ geodb ก็เป็นอันเรียบร้อย
+
+ตัวอย่าง
+
+```html
+<input type="text" id="search">
+
+<input type="text" id="district_code">
+<input type="text" id="amphoe_code">
+<input type="text" id="province_code">
+```
+
+```javascript
+$.Thailand({
+            database: './jquery.Thailand.js/database/geodb.json', // เปลี่ยนไปใช้ geodb แทน จะเป็น geodb.json หรือ geodb.zip ก็ได้
+
+            $search: $('#search'),
+            
+            $district_code: $('#district_code'),
+            $amphoe_code: $('#amphoe_code'),
+            $province_code: $('#province_code'),
+
+            onDataFill: function(data){
+                console.log(data);
+                /*
+                ผลลัพธ์ที่ได้
+                {
+                    district: '',
+                    district_code: '',
+                    amphoe: '',
+                    amphoe_code: '',
+                    province: '',
+                    province_code: '',
+                    zipcode: ''
+                }
+                */
+            }
 });
 ```
 
