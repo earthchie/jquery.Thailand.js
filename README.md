@@ -350,3 +350,7 @@ $.Thailand({
 ## License
 WTFPL 2.0 http://www.wtfpl.net/
 
+## Forks
+* [React](https://github.com/zapkub/react-thailand-address-typeahead)
+* [WooCommerce Plugin](https://www.designilcode.com/woo-thai-address/) (ไม่ฟรี)
+
