@@ -10,7 +10,7 @@
 
 - รองรับฐานข้อมูลชนิดใหม่ geodb โดย geodb คือฐานข้อมูลที่เพิ่มข้อมูล area code เข้ามา สำหรับงานที่จำเป็นต้องใช้งานด้านแผนที่ [#4](https://github.com/earthchie/jquery.Thailand.js/issues/4)
 
-อ่านทั้งหมดได้ที่ [CHANGELOG.md](https://github.com/earthchie/jquery.Thailand.js/blob/master/CHANGLOG.md)
+อ่านทั้งหมดได้ที่ [CHANGELOG.md](https://github.com/earthchie/jquery.Thailand.js/blob/master/CHANGELOG.md)
 
 ## Todo
 - [x] Clean up repo
