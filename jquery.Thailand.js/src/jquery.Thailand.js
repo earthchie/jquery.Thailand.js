@@ -1,7 +1,7 @@
 /**
  * @name jquery.Thailand.js
- * @version 1.5.0
- * @update Apr 20, 2017
+ * @version 1.5.1
+ * @update Jul 14, 2017
  * @website https://github.com/earthchie/jquery.Thailand.js
  * @license WTFPL v.2 - http://www.wtfpl.net/
  *
@@ -285,18 +285,17 @@ $.Thailand = function (options) {
                         i;
                     try {
                         possibles = new JQL(possibles
-                            .concat(DB.select('*').where('district').match(str).fetch())
-                            .concat(DB.select('*').where('amphoe').match(str).fetch())
-                            .concat(DB.select('*').where('province').match(str).fetch())
                             .concat(DB.select('*').where('zipcode').match(str).fetch())
-                            .filter(function (self, index, parent) { // remove duplicated data
-                                for (i = 0; i < parent.length; i = i + 1) {
-                                    if (index !== i && parent[i].amphoe === self.amphoe && parent[i].district === self.district) {
-                                        return false;
-                                    }
-                                }
-                                return true;
+                            .concat(DB.select('*').where('province').match(str).fetch())
+                            .concat(DB.select('*').where('amphoe').match(str).fetch())
+                            .concat(DB.select('*').where('district').match(str).fetch())
+                            .map(function(item){
+                                return JSON.stringify(item);
+                            }).filter(function(item, pos, self){
+                                return self.indexOf(item) == pos;
                             }).map(function (self) { // give a likely score, will use to sort data later
+
+                                self = JSON.parse(self);
                                 self.likely = [
                                     similar_text(str, self.district) * 5,
                                     similar_text(str, self.amphoe.replace(/^เมือง/, '')) * 3,
@@ -305,7 +304,9 @@ $.Thailand = function (options) {
                                 ].reduce(function (a, b) {
                                     return Math.max(a, b);
                                 });
+
                                 return self;
+
                             })).select('*').orderBy('likely desc').fetch();
                     } catch (e) {}
 
