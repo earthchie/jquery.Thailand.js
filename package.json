@@ -1,6 +1,6 @@
 {
   "name": "thai-address-database",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "",
   "main": "src/thai-address-database.js",
   "engines": {
