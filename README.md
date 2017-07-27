@@ -12,6 +12,7 @@
 * ยังไม่รองรับ geodb
 
 ## Todos
+- [x] Add Standard style(ESLint)
 - [ ] คิดชื่อ npm package
 - [ ] Unit test
 - [ ] Add code coverage report
@@ -19,4 +20,3 @@
 - [ ] เพิ่มวิธีการใช้งานใน README.md
 - [ ] โหมดค้นหา
 - [ ] Deploy to npmjs.com
-- [ ] Add Standard style(ESLint)
