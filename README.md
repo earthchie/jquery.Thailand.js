@@ -24,7 +24,7 @@ yarn add thai-address-database
 </template>
 
 <script>
-import { searchAddressByProvince } from 'thai-address-database'
+import { searchAddressByDistrict } from 'thai-address-database'
 
 export default {
   name: 'app',
@@ -34,7 +34,7 @@ export default {
     }
   },
   mounted () {
-    this.result = searchAddressByProvince('บาง')
+    this.result = searchAddressByDistrict('บาง')
   }
 }
 </script>
