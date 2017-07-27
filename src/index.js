@@ -6,7 +6,7 @@
  * @param {string} locale
  * @return {string}
  */
-const numFormatter = function(number, locale) {
+exports.toLocaleString = function(number, locale) {
   let x = [1, 2, 3]
   let y = [...x, 4]
   console.log(y.reduce((previous, current) => {
@@ -15,6 +15,6 @@ const numFormatter = function(number, locale) {
   return number.toLocaleString(locale)
 }
 
-module.exports = {
-  numFormatter
-}
+// module.exports = {
+//   numFormatter
+// }

@@ -13,7 +13,7 @@
   },
   "scripts": {
     "test": "mocha --reporter spec",
-    "prepublish": "node_modules/babel-cli/bin/babel.js src --out-dir lib"
+    "prepublish": "node_modules/babel-cli/bin/babel.js src --out-dir ."
   },
   "repository": {
     "type": "git",
