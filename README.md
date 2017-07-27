@@ -23,6 +23,5 @@
 
 ## Publish to npmjs
 ```
-npm version patch
-npm publish
+npm run deploy
 ```
