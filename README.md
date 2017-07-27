@@ -49,8 +49,8 @@ export default {
 
 ## Todos
 - [x] Add Standard style(ESLint)
+- [x] Unit test
 - [ ] คิดชื่อ npm package
-- [ ] Unit test
 - [ ] Add code coverage report
 - [ ] Refactoring
 - [ ] เพิ่มวิธีการใช้งานใน README.md
