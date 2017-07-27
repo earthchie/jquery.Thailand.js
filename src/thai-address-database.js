@@ -17,7 +17,7 @@ const preprocess = function (data) {
 
   t = function (text) {
     function repl (m) {
-      var ch = m.charCodeAt(0)
+      let ch = m.charCodeAt(0)
       return words[ch < 97 ? ch - 65 : 26 + ch - 97]
     }
     if (!useLookup) {
@@ -36,7 +36,7 @@ const preprocess = function (data) {
   // decompacted database in hierarchical form of:
   // [["province",[["amphur",[["district",["zip"...]]...]]...]]...]
   data.map(function (provinces) {
-    var i = 1
+    let i = 1
     if (provinces.length === 3) { // geographic database
       i = 2
     }
@@ -45,7 +45,7 @@ const preprocess = function (data) {
       amphoes[i].map(function (districts) {
         districts[i] = districts[i] instanceof Array ? districts[i] : [districts[i]]
         districts[i].map(function (zipcode) {
-          var entry = {
+          let entry = {
             district: t(districts[0]),
             amphoe: t(amphoes[0]),
             province: t(provinces[0]),
@@ -76,7 +76,7 @@ const resolveResultbyField = (type, searchStr, maxResult) => {
   let possibles = []
   try {
     possibles = db.filter(item => {
-      var regex = new RegExp(searchStr, 'g')
+      let regex = new RegExp(searchStr, 'g')
       return item[type].match(regex)
     }).slice(0, maxResult)
   } catch (e) {
