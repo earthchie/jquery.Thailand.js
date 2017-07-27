@@ -85,15 +85,15 @@ const resolveResultbyField = (type, searchStr, maxResult) => {
   return possibles
 }
 
-exports.findAddressByDistrict = function (searchStr, maxResult) {
+exports.searchAddressByDistrict = function (searchStr, maxResult) {
   return resolveResultbyField('district', searchStr, maxResult)
 }
-exports.findAddressByAmphoe = function (searchStr, maxResult) {
+exports.searchAddressByAmphoe = function (searchStr, maxResult) {
   return resolveResultbyField('amphoe', searchStr, maxResult)
 }
-exports.findAddressByProvince = function (searchStr, maxResult) {
+exports.searchAddressByProvince = function (searchStr, maxResult) {
   return resolveResultbyField('province', searchStr, maxResult)
 }
-exports.findAddressByZipcode = function (searchStr, maxResult) {
+exports.searchAddressByZipcode = function (searchStr, maxResult) {
   return resolveResultbyField('zipcode', searchStr, maxResult)
 }

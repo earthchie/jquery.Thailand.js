@@ -6,24 +6,24 @@ var it = mocha.it
 var expect = require('chai').expect
 var db = require('../src/thai-address-database')
 
-describe('#find', function () {
-  it('findAddressByDistrict', function () {
-    var result = db.findAddressByDistrict('อรัญประเทศ')
+describe('#search', function () {
+  it('searchAddressByDistrict', function () {
+    var result = db.searchAddressByDistrict('อรัญประเทศ')
     expect(result.length).to.equal(1)
   })
 
-  it('findAddressByAmphoe', function () {
-    var result = db.findAddressByAmphoe('อรัญประเทศ')
+  it('searchAddressByAmphoe', function () {
+    var result = db.searchAddressByAmphoe('อรัญประเทศ')
     expect(result.length).to.equal(13)
   })
 
-  it('findAddressByProvince', function () {
-    var result = db.findAddressByProvince('อรัญประเทศ')
+  it('searchAddressByProvince', function () {
+    var result = db.searchAddressByProvince('อรัญประเทศ')
     expect(result.length).to.equal(0)
   })
 
-  it('findAddressByProvince', function () {
-    var result = db.findAddressByProvince('สระแก้ว')
+  it('searchAddressByProvince', function () {
+    var result = db.searchAddressByProvince('สระแก้ว')
     expect(result.length).to.equal(20)
   })
 })
