@@ -14,8 +14,7 @@
   "scripts": {
     "test": "mocha --reporter spec",
     "prepublish": "node_modules/babel-cli/bin/babel.js src --out-dir .",
-    "lint": "eslint --ext .js src test",
-    "deploy": "git add -A && git commit -m prepare_deploy && npm version patch && npm publish"
+    "lint": "eslint --ext .js src test"
   },
   "repository": {
     "type": "git",
