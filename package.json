@@ -2,7 +2,7 @@
   "name": "thai-address-database",
   "version": "0.0.7",
   "description": "",
-  "main": "src/thai-address-database.js",
+  "main": "lib/index.js",
   "engines": {
     "node": ">=4.2.4"
   },
