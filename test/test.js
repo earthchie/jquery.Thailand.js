@@ -6,6 +6,38 @@ let it = mocha.it
 let expect = require('chai').expect
 let db = require('../src/thai-address-database')
 
+describe('More then 1 zipcode District', function () {
+  it('District ปราณบุรี have 2 result', function () {
+    let result = db.searchAddressByDistrict('ปราณบุรี')
+    expect(result.length).to.equal(2)
+    expect(result.filter((item) => item.province === 'ประจวบคีรีขันธ์').length).to.equal(2)
+  })
+  it('District วังก์พง have 2 result', function () {
+    let result = db.searchAddressByDistrict('วังก์พง')
+    expect(result.length).to.equal(2)
+    expect(result.filter((item) => item.province === 'ประจวบคีรีขันธ์').length).to.equal(2)
+  })
+  it('District หนองตาแต้ม have 2 result', function () {
+    let result = db.searchAddressByDistrict('หนองตาแต้ม')
+    expect(result.length).to.equal(2)
+    expect(result.filter((item) => item.province === 'ประจวบคีรีขันธ์').length).to.equal(2)
+  })
+  it('District เขาจ้าว have 2 result', function () {
+    let result = db.searchAddressByDistrict('เขาจ้าว')
+    expect(result.length).to.equal(2)
+    expect(result.filter((item) => item.province === 'ประจวบคีรีขันธ์').length).to.equal(2)
+  })
+  it('District สามร้อยยอด have 2 result', function () {
+    let result = db.searchAddressByDistrict('สามร้อยยอด')
+    expect(result.length).to.equal(2)
+    expect(result.filter((item) => item.province === 'ประจวบคีรีขันธ์').length).to.equal(2)
+  })
+  it('District เขาน้อย have 2 result', function () {
+    let result = db.searchAddressByDistrict('เขาน้อย')
+    expect(result.filter((item) => item.province === 'ประจวบคีรีขันธ์').length).to.equal(2)
+  })
+})
+
 describe('#search', function () {
   it('searchAddressByDistrict', function () {
     let result = db.searchAddressByDistrict('อรัญประเทศ')
@@ -19,9 +51,6 @@ describe('#search', function () {
 
     result = db.searchAddressByDistrict('  อรัญประเทศ  ')
     expect(result.length).to.equal(1)
-
-    result = db.searchAddressByDistrict('ปราณบุรี')
-    expect(result.length).to.equal(2)
 
     result = db.searchAddressByDistrict('')
     expect(result.length).to.equal(0)
