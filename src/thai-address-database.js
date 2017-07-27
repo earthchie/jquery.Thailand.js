@@ -1,5 +1,8 @@
 'use strict'
 
+/**
+ * From jquery.Thailand.js line 38 - 100
+ */
 const preprocess = function (data) {
   let lookup = []
   let words = []
