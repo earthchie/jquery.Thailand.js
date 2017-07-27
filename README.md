@@ -19,7 +19,12 @@ yarn add thai-address-database
 ```
 <template>
   <div id="app">
-    {{ result }}
+    <input v-model="q">
+    <ul>
+      <li v-for="item in result">
+        {{item.district}} » {{item.amphoe}} » {{item.province}} » {{item.zipcode}}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -30,11 +35,13 @@ export default {
   name: 'app',
   data () {
     return {
-      result: []
+      q: ''
     }
   },
-  mounted () {
-    this.result = searchAddressByDistrict('บาง')
+  computed: {
+    result () {
+      return searchAddressByDistrict(this.q)
+    }
   }
 }
 </script>
