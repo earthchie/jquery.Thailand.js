@@ -12,6 +12,7 @@
 * ยังไม่รองรับ geodb
 
 ## Todos
+- [ ] คิดชื่อ npm package
 - [ ] Unit test
 - [ ] Add code coverage report
 - [ ] Refactoring
