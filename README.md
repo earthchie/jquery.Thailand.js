@@ -10,10 +10,10 @@ database และ function preprocess จาก ตั้นฉบับ versio
 * ยังไม่รองรับ geodb
 
 ## Todos
-* Unit test
-* Add code coverage report
-* Refactoring
-* เพิ่มวิธีการใช้งานใน README.md
-* โหมดค้นหา
-* Deploy to npmjs.com
-* Add Standard style(ESLint)
+- [ ] Unit test
+- [ ] Add code coverage report
+- [ ] Refactoring
+- [ ] เพิ่มวิธีการใช้งานใน README.md
+- [ ] โหมดค้นหา
+- [ ] Deploy to npmjs.com
+- [ ] Add Standard style(ESLint)
