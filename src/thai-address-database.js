@@ -70,7 +70,8 @@ const preprocess = function (data) {
 const db = preprocess(require('./database/db.json'))
 
 const resolveResultbyField = (type, searchStr, maxResult) => {
-  if (searchStr.toString().trim() === '') {
+  searchStr = searchStr.toString().trim()
+  if (searchStr === '') {
     return []
   }
   if (!maxResult) {
@@ -80,7 +81,7 @@ const resolveResultbyField = (type, searchStr, maxResult) => {
   try {
     possibles = db.filter(item => {
       let regex = new RegExp(searchStr, 'g')
-      return item[type].match(regex)
+      return item[type].toString().match(regex)
     }).slice(0, maxResult)
   } catch (e) {
     return []
