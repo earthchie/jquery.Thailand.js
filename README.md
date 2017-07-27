@@ -13,10 +13,10 @@
 
 ## Example
 ```
-yarn add thai-address-database
+$ yarn add thai-address-database
 ```
 
-```
+```vue
 <template>
   <div id="app">
     <input v-model="q">
