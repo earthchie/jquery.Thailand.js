@@ -50,12 +50,12 @@ export default {
 ## Todos
 - [x] Add Standard style(ESLint)
 - [x] Unit test
-- [ ] คิดชื่อ npm package
+- [x] คิดชื่อ npm package
+- [x] Deploy to npmjs.com
 - [ ] Add code coverage report
 - [ ] Refactoring
 - [ ] เพิ่มวิธีการใช้งานใน README.md
 - [ ] โหมดค้นหา
-- [ ] Deploy to npmjs.com
 
 ## Publish to npmjs
 ```
