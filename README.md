@@ -11,6 +11,35 @@
 * ยังไม่รองรับ db.zip
 * ยังไม่รองรับ geodb
 
+## Example
+```
+yarn add thai-address-database
+```
+
+```
+<template>
+  <div id="app">
+    {{ result }}
+  </div>
+</template>
+
+<script>
+import { searchAddressByProvince } from 'thai-address-database'
+
+export default {
+  name: 'app',
+  data () {
+    return {
+      result: []
+    }
+  },
+  mounted () {
+    this.result = searchAddressByProvince('บาง')
+  }
+}
+</script>
+```
+
 ## Todos
 - [x] Add Standard style(ESLint)
 - [ ] คิดชื่อ npm package
