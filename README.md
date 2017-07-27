@@ -20,3 +20,9 @@
 - [ ] เพิ่มวิธีการใช้งานใน README.md
 - [ ] โหมดค้นหา
 - [ ] Deploy to npmjs.com
+
+## Publish to npmjs
+```
+npm version patch
+npm publish
+```
