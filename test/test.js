@@ -1,46 +1,26 @@
-'use strict';
+'use strict'
 
-var expect = require('chai').expect;
-var numFormatter = require('../src/index').numFormatter;
+var expect = require('chai').expect
+var db = require('../src/thai-address-database')
 
-describe('#numFormatter', function() {
-    it('should convert single digits', function() {
-        var result = numFormatter(1);
-        expect(result).to.equal('1');
-    });
+describe('#find', function() {
+  it('findAddressByDistrict', function() {
+    var result = db.findAddressByDistrict('อรัญประเทศ')
+    expect(result.length).to.equal(1)
+  })
 
-    it('should convert double digits', function() {
-        var result = numFormatter(12);
-        expect(result).to.equal('12');
-    });
+  it('findAddressByAmphoe', function() {
+    var result = db.findAddressByAmphoe('อรัญประเทศ')
+    expect(result.length).to.equal(13)
+  })
 
-    it('should convert triple digits', function() {
-        var result = numFormatter(123);
-        expect(result).to.equal('123');
-    });
+  it('findAddressByProvince', function() {
+    var result = db.findAddressByProvince('อรัญประเทศ')
+    expect(result.length).to.equal(0)
+  })
 
-    it('should convert 4 digits', function() {
-        var result = numFormatter(1234);
-        expect(result).to.equal('1,234');
-    });
-
-    it('should convert 5 digits', function() {
-        var result = numFormatter(12345);
-        expect(result).to.equal('12,345');
-    });
-
-    it('should convert 6 digits', function() {
-        var result = numFormatter(123456);
-        expect(result).to.equal('123,456');
-    });
-
-    it('should convert 7 digits', function() {
-        var result = numFormatter(1234567);
-        expect(result).to.equal('1,234,567');
-    });
-
-    it('should convert 8 digits', function() {
-        var result = numFormatter(12345678);
-        expect(result).to.equal('12,345,678');
-    });
-});
+  it('findAddressByProvince', function() {
+    var result = db.findAddressByProvince('สระแก้ว')
+    expect(result.length).to.equal(20)
+  })
+})
