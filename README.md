@@ -175,7 +175,7 @@ $.Thailand({
 ```
 
 หรือใช้งาน ``$.Thailand.setup()`` เพื่อกำหนดค่า default จะได้ไม่ต้องกำหนดค่าเดิมใหม่ซ้ำๆ ทุกครั้ง เช่น
-```
+```javascript
     $.Thailand.setup({
         database: './jquery.Thailand.js/database/db.json'
     });
