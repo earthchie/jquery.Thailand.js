@@ -30,7 +30,7 @@
     });
 ```
 
-[1.5.2]: https://github.com/earthchie/jquery.Thailand.js/commit/ef3114e1badedf02dd08b4c6bf6b97a7a258494a
+[1.5.2]: https://github.com/earthchie/jquery.Thailand.js/commit/b304c12fe1714c912ad0b2af36b342e58be0c8fc
 
 ## [1.5.1]
 > 14 กรกฎาคม 2017
