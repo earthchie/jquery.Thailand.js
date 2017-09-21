@@ -1,7 +1,7 @@
 /**
  * @name jquery.Thailand.js
- * @version 1.5.1
- * @update Jul 14, 2017
+ * @version 1.5.2
+ * @update Sep 21, 2017
  * @website https://github.com/earthchie/jquery.Thailand.js
  * @license WTFPL v.2 - http://www.wtfpl.net/
  *
@@ -14,26 +14,7 @@
 $.Thailand = function (options) {
     'use strict';
 
-    options = $.extend({
-
-        database: '../database/db.json',
-        database_type: 'auto', // json or zip; any other value will be ignored and script will attempt to evaluate the type from file extension instead.
-        zip_worker_path: false, // path to zip worker folder e.g. './jquery.Thailand.js/dependencies/zip.js/'; Leave it to false unless you found any error.
-        autocomplete_size: 20,
-
-        onLoad: function () {},
-        onDataFill: function () {},
-
-        $district: false,
-        $district_code: false, // geodb only
-        $amphoe: false,
-        $amphoe_code: false, // geodb only
-        $province: false,
-        $province_code: false, // geodb only
-        $zipcode: false,
-        $search: false
-
-    }, options);
+    options = $.extend({}, $.Thailand.defaults, options);
 
     var preprocess = function (data) {
             var lookup = [],
@@ -219,6 +200,7 @@ $.Thailand = function (options) {
 
     // get database
     loadDB(function (DB) {
+        $.Thailand.DB = DB;
         var i,
             key,
             templates = { // template of autocomplete choices
@@ -343,4 +325,26 @@ $.Thailand = function (options) {
         }
 
     });
+};
+$.Thailand.defaults = {
+    database: '../database/db.json',
+    database_type: 'auto', // json or zip; any other value will be ignored and script will attempt to evaluate the type from file extension instead.
+    zip_worker_path: false, // path to zip worker folder e.g. './jquery.Thailand.js/dependencies/zip.js/'; Leave it to false unless you found any error.
+    autocomplete_size: 20,
+
+    onLoad: function () {},
+    onDataFill: function () {},
+
+    $district: false,
+    $district_code: false, // geodb only
+    $amphoe: false,
+    $amphoe_code: false, // geodb only
+    $province: false,
+    $province_code: false, // geodb only
+    $zipcode: false,
+    $search: false
+};
+
+$.Thailand.setup = function(options){
+    $.extend($.Thailand.defaults, options);
 };

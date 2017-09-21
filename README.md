@@ -6,9 +6,40 @@
 
 อ่านแนวคิด และที่มาที่ไปได้ที่นี่ [ระบบ Auto Complete ที่อยู่ไทย อย่างที่มันควรเป็น](https://medium.com/@earthchie/ระบบ-auto-complete-ที่อยู่ไทย-อย่างที่มันควรเป็น-27360185d86a)
 
-## Changelogs 1.5.0
+## Changelogs 1.5.2
 
-- รองรับฐานข้อมูลชนิดใหม่ geodb โดย geodb คือฐานข้อมูลที่เพิ่มข้อมูล area code เข้ามา สำหรับงานที่จำเป็นต้องใช้งานด้านแผนที่ [#4](https://github.com/earthchie/jquery.Thailand.js/issues/4)
+## [1.5.2]
+> 21 กันยายน 2017
+
+- **Add:** เพิ่มอำเภอเวียงเก่า จังหวัดขอนแก่น เข้าไปในฐานข้อมูล มีผลกับไฟล์ ``db.json`` ``db.zip`` ``geodb.json`` และ ``geodb.zip``
+- **Enhancement** แปลง JQL ให้กลับมาเป็น ECMA5 แล้ว เพื่อให้รองรับเบราเซอร์เก่าๆ มากขึ้น
+- **Add:** เพิ่ม ``$.Thailand.DB`` เป็น JQL Object ที่เรียกใช้ได้หลังจากโหลดฐานข้อมูลแล้วเรียบร้อย สามารถนำไปใช้ query ได้ 
+เช่น 
+```javascript
+    $.Thailand.DB.select('*').where('province').is('เชียงใหม่').fetch();
+```
+- **Add:** เพิ่ม ``$.Thailand.setup()`` สำหรับใช้กำหนดค่า default เพื่อที่จะได้ไม่ต้องกำหนดค่าเดิมใหม่ซ้ำๆ ทุกครั้ง เช่น
+```
+    $.Thailand.setup({
+        database: './jquery.Thailand.js/database/db.json'
+    });
+
+    // ไม่ต้องกำหนด path ของ database ซ้ำ
+    $.Thailand({
+        $search: $('#demo1 [name="search"]'),
+        onDataFill: function(data){
+            console.log(data)
+        }
+    });
+
+    // ไม่ต้องกำหนด path ของ database ซ้ำเช่นกัน
+    $.Thailand({
+        $search: $('#demo2 [name="search"]'),
+        onDataFill: function(data){
+            console.log(data)
+        }
+    });
+```
 
 อ่านทั้งหมดได้ที่ [CHANGELOG.md](https://github.com/earthchie/jquery.Thailand.js/blob/master/CHANGELOG.md)
 
@@ -143,6 +174,29 @@ $.Thailand({
     $zipcode: $('#zipcode'), // input ของรหัสไปรษณีย์
 });
 
+```
+
+หรือใช้งาน ``$.Thailand.setup()`` เพื่อกำหนดค่า default จะได้ไม่ต้องกำหนดค่าเดิมใหม่ซ้ำๆ ทุกครั้ง เช่น
+```
+    $.Thailand.setup({
+        database: './jquery.Thailand.js/database/db.json'
+    });
+
+    // ไม่ต้องกำหนด path ของ database ซ้ำ
+    $.Thailand({
+        $search: $('#demo1 [name="search"]'),
+        onDataFill: function(data){
+            console.log(data)
+        }
+    });
+
+    // ไม่ต้องกำหนด path ของ database ซ้ำเช่นกัน
+    $.Thailand({
+        $search: $('#demo2 [name="search"]'),
+        onDataFill: function(data){
+            console.log(data)
+        }
+    });
 ```
 
 ## หากคุณเลือกใช้ฐานข้อมูลชนิด ZIP
