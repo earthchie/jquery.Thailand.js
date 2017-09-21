@@ -19,7 +19,7 @@
     $.Thailand.DB.select('*').where('province').is('เชียงใหม่').fetch();
 ```
 - **Add:** เพิ่ม ``$.Thailand.setup()`` สำหรับใช้กำหนดค่า default เพื่อที่จะได้ไม่ต้องกำหนดค่าเดิมใหม่ซ้ำๆ ทุกครั้ง เช่น
-```
+```javascript
     $.Thailand.setup({
         database: './jquery.Thailand.js/database/db.json'
     });
