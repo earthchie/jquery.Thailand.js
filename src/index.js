@@ -67,7 +67,7 @@ const preprocess = function (data) {
   return expanded
 }
 
-const db = preprocess(require('../database/db.json'))
+const db = preprocess(require('../database/geodb.json'))
 
 const resolveResultbyField = (type, searchStr, maxResult) => {
   searchStr = searchStr.toString().trim()
@@ -101,3 +101,5 @@ exports.searchAddressByProvince = function (searchStr, maxResult) {
 exports.searchAddressByZipcode = function (searchStr, maxResult) {
   return resolveResultbyField('zipcode', searchStr, maxResult)
 }
+
+console.log(resolveResultbyField('province', 'กรุงเทพ', 100))
