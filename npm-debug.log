@@ -6,10 +6,10 @@
 2 info using npm@3.10.10
 3 info using node@v6.11.3
 4 info git [ 'status', '--porcelain' ]
-5 info lifecycle thai-address-database@0.0.11~preversion: thai-address-database@0.0.11
-6 silly lifecycle thai-address-database@0.0.11~preversion: no script for preversion, continuing
+5 info lifecycle thai-address-database@0.0.12~preversion: thai-address-database@0.0.12
+6 silly lifecycle thai-address-database@0.0.12~preversion: no script for preversion, continuing
 7 verbose version.write data { name: 'thai-address-database',
-7 verbose version.write   version: '0.0.11',
+7 verbose version.write   version: '0.0.12',
 7 verbose version.write   description: '',
 7 verbose version.write   main: 'lib/index.js',
 7 verbose version.write   engines: { node: '>=4.2.4' },
@@ -39,14 +39,14 @@
 7 verbose version.write   dependencies:
 7 verbose version.write    { 'eslint-plugin-promise': '^3.5.0',
 7 verbose version.write      'eslint-plugin-standard': '^3.0.1' } } to package.json
-8 info lifecycle thai-address-database@0.0.11~version: thai-address-database@0.0.11
-9 silly lifecycle thai-address-database@0.0.11~version: no script for version, continuing
+8 info lifecycle thai-address-database@0.0.12~version: thai-address-database@0.0.12
+9 silly lifecycle thai-address-database@0.0.12~version: no script for version, continuing
 10 info git [ 'add',
 10 info git   '/Users/n9ti/Working/thai-address-database/package.json' ]
-11 info git [ 'commit', '-m', '0.0.11' ]
-12 info git [ 'tag', 'v0.0.11', '-am', '0.0.11' ]
-13 verbose stack Error: Command failed: git tag v0.0.11 -am 0.0.11
-13 verbose stack fatal: tag 'v0.0.11' already exists
+11 info git [ 'commit', '-m', '0.0.12' ]
+12 info git [ 'tag', 'v0.0.12', '-am', '0.0.12' ]
+13 verbose stack Error: Command failed: git tag v0.0.12 -am 0.0.12
+13 verbose stack fatal: tag 'v0.0.12' already exists
 13 verbose stack
 13 verbose stack     at ChildProcess.exithandler (child_process.js:198:12)
 13 verbose stack     at emitTwo (events.js:106:13)
@@ -59,8 +59,8 @@
 17 error node v6.11.3
 18 error npm  v3.10.10
 19 error code 128
-20 error Command failed: git tag v0.0.11 -am 0.0.11
-20 error fatal: tag 'v0.0.11' already exists
+20 error Command failed: git tag v0.0.12 -am 0.0.12
+20 error fatal: tag 'v0.0.12' already exists
 21 error If you need help, you may report this error at:
 21 error     <https://github.com/npm/npm/issues>
 22 verbose exit [ 1, true ]
