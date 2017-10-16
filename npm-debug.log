@@ -1,108 +1,66 @@
 0 info it worked if it ends with ok
 1 verbose cli [ '/Users/n9ti/.nvm/versions/node/v6.11.3/bin/node',
 1 verbose cli   '/Users/n9ti/.nvm/versions/node/v6.11.3/bin/npm',
-1 verbose cli   'publish' ]
+1 verbose cli   'version',
+1 verbose cli   'patch' ]
 2 info using npm@3.10.10
 3 info using node@v6.11.3
-4 verbose publish [ '.' ]
-5 silly cache add args [ '.', null ]
-6 verbose cache add spec .
-7 silly cache add parsed spec Result {
-7 silly cache add   raw: '.',
-7 silly cache add   scope: null,
-7 silly cache add   escapedName: null,
-7 silly cache add   name: null,
-7 silly cache add   rawSpec: '.',
-7 silly cache add   spec: '/Users/n9ti/Working/thai-address-database',
-7 silly cache add   type: 'directory' }
-8 verbose addLocalDirectory /Users/n9ti/.npm/thai-address-database/0.0.12/package.tgz not in flight; packing
-9 verbose correctMkdir /Users/n9ti/.npm correctMkdir not in flight; initializing
-10 info lifecycle thai-address-database@0.0.12~prepublish: thai-address-database@0.0.12
-11 verbose lifecycle thai-address-database@0.0.12~prepublish: unsafe-perm in lifecycle true
-12 verbose lifecycle thai-address-database@0.0.12~prepublish: PATH: /Users/n9ti/.nvm/versions/node/v6.11.3/lib/node_modules/npm/bin/node-gyp-bin:/Users/n9ti/Working/thai-address-database/node_modules/.bin:/Users/n9ti/Working/thai-address-database/node_modules/.bin:/Users/n9ti/.config/yarn/link/node_modules/.bin:/Users/n9ti/Working/thai-address-database/node_modules/.bin:/Users/n9ti/.config/yarn/link/node_modules/.bin:/usr/local/lib/node_modules/yarn/bin/node-gyp-bin:/Users/n9ti/.nvm/versions/node/v6.11.3/bin:/usr/local/go/bin:/Users/n9ti/redis/src:/Users/n9ti/mongodb/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/Users/n9ti/go/bin:/Users/n9ti/go:/usr/local/go/bin
-13 verbose lifecycle thai-address-database@0.0.12~prepublish: CWD: /Users/n9ti/Working/thai-address-database
-14 silly lifecycle thai-address-database@0.0.12~prepublish: Args: [ '-c',
-14 silly lifecycle   'node_modules/babel-cli/bin/babel.js src --out-dir lib' ]
-15 silly lifecycle thai-address-database@0.0.12~prepublish: Returned: code: 0  signal: null
-16 verbose tar pack [ '/Users/n9ti/.npm/thai-address-database/0.0.12/package.tgz',
-16 verbose tar pack   '/Users/n9ti/Working/thai-address-database' ]
-17 verbose tarball /Users/n9ti/.npm/thai-address-database/0.0.12/package.tgz
-18 verbose folder /Users/n9ti/Working/thai-address-database
-19 verbose addLocalTarball adding from inside cache /Users/n9ti/.npm/thai-address-database/0.0.12/package.tgz
-20 verbose correctMkdir /Users/n9ti/.npm correctMkdir not in flight; initializing
-21 silly cache afterAdd thai-address-database@0.0.12
-22 verbose afterAdd /Users/n9ti/.npm/thai-address-database/0.0.12/package/package.json not in flight; writing
-23 verbose correctMkdir /Users/n9ti/.npm correctMkdir not in flight; initializing
-24 verbose afterAdd /Users/n9ti/.npm/thai-address-database/0.0.12/package/package.json written
-25 silly publish { name: 'thai-address-database',
-25 silly publish   version: '0.0.12',
-25 silly publish   description: 'ฐานข้อมูลที่อยู่ในไทย ไม่ต้องใช้ Server Side!',
-25 silly publish   main: 'lib/index.js',
-25 silly publish   engines: { node: '>=4.2.4' },
-25 silly publish   babel: { presets: [ 'es2015' ] },
-25 silly publish   scripts:
-25 silly publish    { test: 'mocha --reporter spec',
-25 silly publish      prepublish: 'node_modules/babel-cli/bin/babel.js src --out-dir lib',
-25 silly publish      lint: 'eslint --ext .js src test',
-25 silly publish      deploy: 'npm version patch && npm publish' },
-25 silly publish   repository:
-25 silly publish    { type: 'git',
-25 silly publish      url: 'git+https://github.com/Sellsuki/thai-address-database.git' },
-25 silly publish   author: '',
-25 silly publish   license: 'ISC',
-25 silly publish   bugs: { url: 'https://github.com/Sellsuki/thai-address-database/issues' },
-25 silly publish   homepage: 'https://github.com/Sellsuki/thai-address-database#readme',
-25 silly publish   devDependencies:
-25 silly publish    { 'babel-cli': '^6.24.1',
-25 silly publish      'babel-core': '^6.25.0',
-25 silly publish      'babel-eslint': '^7.1.1',
-25 silly publish      'babel-preset-es2015': '^6.24.1',
-25 silly publish      chai: '^4.1.0',
-25 silly publish      eslint: '^3.19.0',
-25 silly publish      'eslint-config-standard': '^6.2.1',
-25 silly publish      'eslint-friendly-formatter': '^3.0.0',
-25 silly publish      mocha: '^3.4.2' },
-25 silly publish   dependencies:
-25 silly publish    { 'eslint-plugin-promise': '^3.5.0',
-25 silly publish      'eslint-plugin-standard': '^3.0.1' },
-25 silly publish   readme: '# thai-address-database\n\nฐานข้อมูลที่อยู่ในไทย ไม่ต้องใช้ Server Side!\n\n## Original Version\n\n**database** และ function **preprocess()** จาก ตั้นฉบับ version **1.5.1**\n\n[[Commit: 4e5f496](https://github.com/earthchie/jquery.Thailand.js/commit/4e5f496f5db064bf56c163514167796816d9e357)]\n\n## ข้อจำกัด\n\n* ตอนนี้รองรับแค่ db.json\n* ยังไม่รองรับ db.zip\n* ยังไม่รองรับ geodb\n\n## Example\n\n```bash\nyarn add thai-address-database\n```\n\n```vue\n<template>\n  <div id="app">\n    <input v-model="q">\n    <ul>\n      <li v-for="item in result">\n        {{item.district}} » {{item.amphoe}} » {{item.province}} » {{item.zipcode}}\n      </li>\n    </ul>\n  </div>\n</template>\n\n<script>\nimport { searchAddressByDistrict } from \'thai-address-database\'\n\nexport default {\n  name: \'app\',\n  data () {\n    return {\n      q: \'\'\n    }\n  },\n  computed: {\n    result () {\n      return searchAddressByDistrict(this.q)\n    }\n  }\n}\n</script>\n```\n\n## Todos\n\n* [x] Add Standard style(ESLint)\n* [x] Unit test\n* [x] คิดชื่อ npm package\n* [x] Deploy to npmjs.com\n* [ ] Add code coverage report\n* [ ] Refactoring\n* [ ] เพิ่มวิธีการใช้งานใน README.md\n* [ ] โหมดค้นหา\n\n## Publish to npmjs\n\n```bash\nnpm run deploy\n```\n',
-25 silly publish   readmeFilename: 'README.md',
-25 silly publish   gitHead: 'eca9e6e5015a1a71a0bf8cb44d34a5df2f1abdce',
-25 silly publish   _id: 'thai-address-database@0.0.12',
-25 silly publish   _shasum: '4e661cb9913ec6a24ccfee4952e7d449961995ea',
-25 silly publish   _from: '.' }
-26 verbose getPublishConfig undefined
-27 silly mapToRegistry name thai-address-database
-28 silly mapToRegistry using default registry
-29 silly mapToRegistry registry https://registry.yarnpkg.com/
-30 silly mapToRegistry data Result {
-30 silly mapToRegistry   raw: 'thai-address-database',
-30 silly mapToRegistry   scope: null,
-30 silly mapToRegistry   escapedName: 'thai-address-database',
-30 silly mapToRegistry   name: 'thai-address-database',
-30 silly mapToRegistry   rawSpec: '',
-30 silly mapToRegistry   spec: 'latest',
-30 silly mapToRegistry   type: 'tag' }
-31 silly mapToRegistry uri https://registry.yarnpkg.com/thai-address-database
-32 verbose publish registryBase https://registry.yarnpkg.com/
-33 silly publish uploading /Users/n9ti/.npm/thai-address-database/0.0.12/package.tgz
-34 verbose stack Error: auth required for publishing
-34 verbose stack     at CachingRegistryClient.publish (/Users/n9ti/.nvm/versions/node/v6.11.3/lib/node_modules/npm/node_modules/npm-registry-client/lib/publish.js:30:14)
-34 verbose stack     at /Users/n9ti/.nvm/versions/node/v6.11.3/lib/node_modules/npm/lib/publish.js:138:14
-34 verbose stack     at mapToRegistry (/Users/n9ti/.nvm/versions/node/v6.11.3/lib/node_modules/npm/lib/utils/map-to-registry.js:62:3)
-34 verbose stack     at publish_ (/Users/n9ti/.nvm/versions/node/v6.11.3/lib/node_modules/npm/lib/publish.js:107:3)
-34 verbose stack     at Array.<anonymous> (/Users/n9ti/.nvm/versions/node/v6.11.3/lib/node_modules/npm/node_modules/slide/lib/bind-actor.js:15:8)
-34 verbose stack     at LOOP (/Users/n9ti/.nvm/versions/node/v6.11.3/lib/node_modules/npm/node_modules/slide/lib/chain.js:15:14)
-34 verbose stack     at LOOP (/Users/n9ti/.nvm/versions/node/v6.11.3/lib/node_modules/npm/node_modules/slide/lib/chain.js:14:28)
-34 verbose stack     at chain (/Users/n9ti/.nvm/versions/node/v6.11.3/lib/node_modules/npm/node_modules/slide/lib/chain.js:20:5)
-34 verbose stack     at /Users/n9ti/.nvm/versions/node/v6.11.3/lib/node_modules/npm/lib/publish.js:73:5
-34 verbose stack     at RES (/Users/n9ti/.nvm/versions/node/v6.11.3/lib/node_modules/npm/node_modules/inflight/inflight.js:23:14)
-35 verbose cwd /Users/n9ti/Working/thai-address-database
-36 error Darwin 16.7.0
-37 error argv "/Users/n9ti/.nvm/versions/node/v6.11.3/bin/node" "/Users/n9ti/.nvm/versions/node/v6.11.3/bin/npm" "publish"
-38 error node v6.11.3
-39 error npm  v3.10.10
-40 error code ENEEDAUTH
-41 error need auth auth required for publishing
-42 error need auth You need to authorize this machine using `npm adduser`
-43 verbose exit [ 1, true ]
+4 info git [ 'status', '--porcelain' ]
+5 info lifecycle thai-address-database@0.0.11~preversion: thai-address-database@0.0.11
+6 silly lifecycle thai-address-database@0.0.11~preversion: no script for preversion, continuing
+7 verbose version.write data { name: 'thai-address-database',
+7 verbose version.write   version: '0.0.11',
+7 verbose version.write   description: '',
+7 verbose version.write   main: 'lib/index.js',
+7 verbose version.write   engines: { node: '>=4.2.4' },
+7 verbose version.write   babel: { presets: [ 'es2015' ] },
+7 verbose version.write   scripts:
+7 verbose version.write    { test: 'mocha --reporter spec',
+7 verbose version.write      prepublish: 'node_modules/babel-cli/bin/babel.js src --out-dir lib',
+7 verbose version.write      lint: 'eslint --ext .js src test',
+7 verbose version.write      deploy: 'git add -A && git commit -m prepare && npm version patch && npm publish' },
+7 verbose version.write   repository:
+7 verbose version.write    { type: 'git',
+7 verbose version.write      url: 'git+https://github.com/Sellsuki/thai-address-database.git' },
+7 verbose version.write   author: '',
+7 verbose version.write   license: 'ISC',
+7 verbose version.write   bugs: { url: 'https://github.com/Sellsuki/thai-address-database/issues' },
+7 verbose version.write   homepage: 'https://github.com/Sellsuki/thai-address-database#readme',
+7 verbose version.write   devDependencies:
+7 verbose version.write    { 'babel-cli': '^6.24.1',
+7 verbose version.write      'babel-core': '^6.25.0',
+7 verbose version.write      'babel-eslint': '^7.1.1',
+7 verbose version.write      'babel-preset-es2015': '^6.24.1',
+7 verbose version.write      chai: '^4.1.0',
+7 verbose version.write      eslint: '^3.19.0',
+7 verbose version.write      'eslint-config-standard': '^6.2.1',
+7 verbose version.write      'eslint-friendly-formatter': '^3.0.0',
+7 verbose version.write      mocha: '^3.4.2' },
+7 verbose version.write   dependencies:
+7 verbose version.write    { 'eslint-plugin-promise': '^3.5.0',
+7 verbose version.write      'eslint-plugin-standard': '^3.0.1' } } to package.json
+8 info lifecycle thai-address-database@0.0.11~version: thai-address-database@0.0.11
+9 silly lifecycle thai-address-database@0.0.11~version: no script for version, continuing
+10 info git [ 'add',
+10 info git   '/Users/n9ti/Working/thai-address-database/package.json' ]
+11 info git [ 'commit', '-m', '0.0.11' ]
+12 info git [ 'tag', 'v0.0.11', '-am', '0.0.11' ]
+13 verbose stack Error: Command failed: git tag v0.0.11 -am 0.0.11
+13 verbose stack fatal: tag 'v0.0.11' already exists
+13 verbose stack
+13 verbose stack     at ChildProcess.exithandler (child_process.js:198:12)
+13 verbose stack     at emitTwo (events.js:106:13)
+13 verbose stack     at ChildProcess.emit (events.js:191:7)
+13 verbose stack     at maybeClose (internal/child_process.js:920:16)
+13 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:230:5)
+14 verbose cwd /Users/n9ti/Working/thai-address-database
+15 error Darwin 16.7.0
+16 error argv "/Users/n9ti/.nvm/versions/node/v6.11.3/bin/node" "/Users/n9ti/.nvm/versions/node/v6.11.3/bin/npm" "version" "patch"
+17 error node v6.11.3
+18 error npm  v3.10.10
+19 error code 128
+20 error Command failed: git tag v0.0.11 -am 0.0.11
+20 error fatal: tag 'v0.0.11' already exists
+21 error If you need help, you may report this error at:
+21 error     <https://github.com/npm/npm/issues>
+22 verbose exit [ 1, true ]
