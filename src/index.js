@@ -163,13 +163,6 @@ exports.splitAddress = function (fullAddress) {
     newAddress = newAddress.trim()
     // console.log(newAddress)
 
-    this.address = newAddress
-    this.zip = zip
-    //
-    this.district = result.district
-    this.amphoe = result.amphoe
-    this.province = result.province
-
     return {
       address: newAddress,
       district: result.district,
