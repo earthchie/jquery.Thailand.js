@@ -1,5 +1,5 @@
 'use strict'
-let utilAddress = require('./util/splitAddress')
+const utilAddress = require('./util/splitAddress')
 /**
  * From jquery.Thailand.js line 38 - 100
  */
@@ -104,11 +104,15 @@ exports.searchAddressByZipcode = function (searchStr, maxResult) {
 
 exports.splitAddress = function (fullAddress) {
   let regex = /\s(\d{5})(\s|$)/gi
-  let zip = regex.exec(fullAddress)[1]
-  let address = utilAddress.findAddress(fullAddress, zip)
-  let result = utilAddress.findPoint(exports.searchAddressByZipcode(zip), address)
+  let regexResult = regex.exec(fullAddress)
+  if (!regexResult) {
+    return null
+  }
+  let zip = regexResult[1]
+  let address = utilAddress.prepareAddress(fullAddress, zip)
+  let result = utilAddress.getBestResult(zip, address)
   if (result) {
-    let newAddress = utilAddress.cleanAddress(address, result)
+    let newAddress = utilAddress.cleanupAddress(address, result)
     return {
       address: newAddress,
       district: result.district,
@@ -117,11 +121,5 @@ exports.splitAddress = function (fullAddress) {
       zipcode: zip
     }
   }
-  return {
-    address: address,
-    district: '',
-    amphoe: '',
-    province: '',
-    zipcode: zip
-  }
+  return null
 }

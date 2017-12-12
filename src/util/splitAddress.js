@@ -1,4 +1,6 @@
-exports.findAddress = function (address, zip) {
+const lib = require('../index.js')
+
+exports.prepareAddress = function (address, zip) {
   address = address.replace(zip, '')
   address = address.replace('Thailand', '')
   address = address.replace('ต.', '')
@@ -17,7 +19,8 @@ exports.findAddress = function (address, zip) {
   return address
 }
 
-exports.findPoint = function (searchResult, address) {
+exports.getBestResult = function (zip, address) {
+  let searchResult = lib.searchAddressByZipcode(zip)
   searchResult.forEach((element, index) => {
     let district = address.indexOf(element.district)
     let next = (district !== -1) ? district + 1 : 0
@@ -28,11 +31,14 @@ exports.findPoint = function (searchResult, address) {
     searchResult[index].point = point
   })
   searchResult.sort((a, b) => b.point - a.point)
-  return searchResult
+  if (searchResult && searchResult[0] && searchResult[0].point === 3) {
+    return searchResult[0]
+  } else {
+    return null
+  }
 }
 
-
-exports.cleanAddress = function (address, result) {
+exports.cleanupAddress = function (address, result) {
   let regexDistrict = new RegExp(`\\s${result.district}`, 'g')
   let findDistrict = regexDistrict.exec(address)
   if (findDistrict) {
