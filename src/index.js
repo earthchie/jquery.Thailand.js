@@ -106,8 +106,7 @@ exports.splitAddress = function (fullAddress) {
   let regex = /\s(\d{5})(\s|$)/gi
   let zip = regex.exec(fullAddress)[1]
   let address = utilAddress.findAddress(fullAddress, zip)
-  let searchResult = utilAddress.findPoint(exports.searchAddressByZipcode(zip), address)
-  let result = searchResult[0]
+  let result = utilAddress.findPoint(exports.searchAddressByZipcode(zip), address)
   if (result) {
     let newAddress = utilAddress.cleanAddress(address, result)
     return {
