@@ -97,8 +97,9 @@ describe('#search', function () {
 })
 
 describe('Function splitAddress', function () {
-  it('', function () {
-    let result = db.splitAddress(`126/548 ถ.สุขาประชาสรรค์ ม.การเคหะนนท์ ปากเกร็ด ปากเกร็ด นนทบุรี Thailand 11120`)
+  it('Shoud split address without touching original address', function () {
+    let addr = `126/548 ถ.สุขาประชาสรรค์ ม.การเคหะนนท์ ปากเกร็ด ปากเกร็ด นนทบุรี Thailand 11120`
+    let result = db.splitAddress(addr)
     expect(result).to.deep.equal({
       'address': '126/548 ถ.สุขาประชาสรรค์ ม.การเคหะนนท์',
       'amphoe': 'ปากเกร็ด',
@@ -106,5 +107,32 @@ describe('Function splitAddress', function () {
       'province': 'นนทบุรี',
       'zipcode': '11120'
     })
+
+    expect(addr).to.equal(`126/548 ถ.สุขาประชาสรรค์ ม.การเคหะนนท์ ปากเกร็ด ปากเกร็ด นนทบุรี Thailand 11120`)
+  })
+
+  it('Shoud return null when cant split address', function () {
+    let addr = `126/548 ถ.สุขาประชาสรรค์ ม.การเคหะนนท์`
+    let result = db.splitAddress(addr)
+    expect(result).to.be.null
+
+    expect(addr).to.equal(`126/548 ถ.สุขาประชาสรรค์ ม.การเคหะนนท์`)
+  })
+
+  it('Shoud return null when cant split address', function () {
+    let addr = `126/548 ถ.สุขาประชาสรรค์ ม.การเคหะนนท์ ปากเกร็ด ปากเกร็ด Thailand 11120`
+    let result = db.splitAddress(addr)
+    expect(result).to.be.null
+
+    expect(addr).to.equal(`126/548 ถ.สุขาประชาสรรค์ ม.การเคหะนนท์ ปากเกร็ด ปากเกร็ด Thailand 11120`)
+  })
+
+  it('Shoud return null when cant split address', function () {
+    let addr = `126/548 ถ.สุขาประชาสรรค์ ม.การเคหะนนท์ Thailand 11120`
+    let result = db.splitAddress(addr)
+    console.log(result)
+    expect(result).to.be.null
+
+    expect(addr).to.equal(`126/548 ถ.สุขาประชาสรรค์ ม.การเคหะนนท์ Thailand 11120`)
   })
 })
