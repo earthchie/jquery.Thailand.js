@@ -12,6 +12,7 @@
     ]
   },
   "scripts": {
+    "migrate": "node ./database/migrate/index.js",
     "test": "mocha --reporter spec",
     "prepublish": "node_modules/babel-cli/bin/babel.js src --out-dir lib",
     "lint": "eslint --ext .js src test",
@@ -40,6 +41,8 @@
   },
   "dependencies": {
     "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1"
+    "eslint-plugin-standard": "^3.0.1",
+    "excel-as-json": "^2.0.1",
+    "wordcut": "^0.8.1"
   }
 }

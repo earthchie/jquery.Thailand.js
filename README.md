@@ -51,6 +51,15 @@ export default {
 </script>
 ```
 
+## Migration
+ใน /database/raw_database มีไฟล์ฐานข้อมูลที่เป็น excel สามารถอัปเดทฐานข้อมูลได้ในนี้โดยเมื่ออัปเดตเรียบร้อยก็รันคำสั่ง
+
+```bash
+npm run migrate
+```
+
+ตัว script จะแปลงไฟล์ database.xlsx ไปเป็น /database/db.json ให้ (ยังไม่ support geodb)
+
 ## Todos
 
 * [x] Add Standard style(ESLint)
