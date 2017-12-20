@@ -1,5 +1,5 @@
 'use strict'
-
+const utilAddress = require('./util/splitAddress')
 /**
  * From jquery.Thailand.js line 38 - 100
  */
@@ -104,65 +104,15 @@ exports.searchAddressByZipcode = function (searchStr, maxResult) {
 
 exports.splitAddress = function (fullAddress) {
   let regex = /\s(\d{5})(\s|$)/gi
-  let zip = regex.exec(fullAddress)[1]
-  // let zip = result
-  let address = fullAddress
-  address = address.replace(zip, '')
-  address = address.replace('Thailand', '')
-  address = address.replace('ต.', '')
-  address = address.replace('อ.', '')
-  address = address.replace('จ.', '')
-  address = address.replace('ตำบล', '')
-  address = address.replace('อำเภอ', '')
-  address = address.replace('จังหวัด', '')
-  address = address.replace('แขวง', '')
-  address = address.replace('เขต', '')
-  address = address.replace('แขวง.', '')
-  address = address.replace('เขต.', '')
-  address = address.replace(' กทม. ', ' กรุงเทพมหานคร ')
-  address = address.replace(' กทม ', ' กรุงเทพมหานคร ')
-  address = address.replace(' กรุงเทพ ', ' กรุงเทพมหานคร ')
-  // console.log(address)
-  let searchResult = exports.searchAddressByZipcode(zip)
-  // console.log(searchResult)
-  searchResult.forEach((element, index) => {
-    let district = address.indexOf(element.district)
-    let next = (district !== -1) ? district + 1 : 0
-    let amphoe = address.indexOf(element.amphoe, next)
-    next = (amphoe !== -1) ? amphoe + 1 : next + 1
-    let province = address.indexOf(element.province, next)
-    // console.log(district, amphoe, province)
-    let point = [district, amphoe, province].filter(el => el >= 0).length
-    // console.log(point)
-    searchResult[index].point = point
-  })
-  searchResult.sort((a, b) => b.point - a.point)
-  let result = searchResult[0]
+  let regexResult = regex.exec(fullAddress)
+  if (!regexResult) {
+    return null
+  }
+  let zip = regexResult[1]
+  let address = utilAddress.prepareAddress(fullAddress, zip)
+  let result = utilAddress.getBestResult(zip, address)
   if (result) {
-    // console.log(result)
-    let newAddress = address
-
-    let regexDistrict = new RegExp(`\\s${result.district}`, 'g')
-    let findDistrict = regexDistrict.exec(newAddress)
-    if (findDistrict) {
-      newAddress = newAddress.replace(findDistrict[0], '')
-    }
-
-    let regexAmphoe = new RegExp(`\\s${result.amphoe}|เมือง`, 'g')
-    let findAmphoe = regexAmphoe.exec(newAddress)
-    if (findAmphoe) {
-      newAddress = newAddress.replace(findAmphoe[0], '')
-    }
-
-    let regexProvince = new RegExp(`\\s${result.province}`, 'g')
-    let findProvince = regexProvince.exec(newAddress)
-    if (findProvince) {
-      newAddress = newAddress.replace(findProvince[0], '')
-    }
-
-    newAddress = newAddress.trim()
-    // console.log(newAddress)
-
+    let newAddress = utilAddress.cleanupAddress(address, result)
     return {
       address: newAddress,
       district: result.district,
@@ -171,11 +121,5 @@ exports.splitAddress = function (fullAddress) {
       zipcode: zip
     }
   }
-  return {
-    address: address,
-    district: '',
-    amphoe: '',
-    province: '',
-    zipcode: zip
-  }
+  return null
 }
