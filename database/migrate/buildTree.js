@@ -2,8 +2,6 @@
 const tree = require('./database.json')
 const fs = require('fs')
 
-console.log(tree)
-
 let provinces = []
 let resultTree = tree.map((item) => {
   if (!(provinces.find(prov => prov === item.province))) {
