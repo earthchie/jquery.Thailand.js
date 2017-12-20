@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jquery.Thailand.js - Database Tools</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/css/uikit.css">
+
+    <style>
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: Kanit, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="uk-container">
+        
+        <h1>Database Tools</h1>
+        <p>
+            เครื่องมือแปลงฐานข้อมูล <a href="https://github.com/earthchie/jquery.Thailand.js/tree/master/jquery.Thailand.js/database/raw_database" target="_blank">raw_database.json</a> เพื่อให้มีขนาดเล็กลง และนำไปใช้กับปลั๊กอินได้
+        </p>
+
+        <form id="convert">
+            <div class="uk-margin">
+                <h2>เลือกไฟล์ฐานข้อมูลต้นฉบับ</h2>
+                <input type="file" id="file" accept=".json">
+                <button class="uk-button uk-button-primary">เริ่ม</button>
+            </div>
+        </form>
+        
+        <h3>Logs</h3>
+        <pre style="font-size:0.5em;max-height:200px;overflow:auto"><code id="logs"></code></pre>
+        
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/js/uikit.min.js"></script>
+
+    <script>
+
+        var map = {
+            lookup: "iขาว|ปลายWยา|vทับ|ดินแa|Bw|SM|IU|Sพนม|สินปุน|Sดิน|rQ|SN|oI|ตลิ่งชัน|KU|Iสาน|Dชัน|Iเตย|Iตัน|Wโขนง|คันCยาว|จตุจักร|ลาดยาว|จอมN|Dขุนเทียน|Dมด|TF|ดุสิต|Dพรม|ทวีวัฒC|Jครุ|Dกะปิ|Eข้าม|Dคอแหลม|Dซื่อ|DC|Dบอน|Dพลัด|Dอ้อ|Dรัก|Dเขน|Eแร้ง|Dแค|Dh|หลักสอง|ปทุมวัน|Gu|ประเวศ|ดอกไม้|Aบอน|สำราญราษฎร์|Dจาก|Iขวาง|คูหาสวรรค์|Dด้วน|มีนบุรี|ยานCวา|ราษฎร์บูรณะ|ลาดกระบัง|ลาดพร้าว|GNหลาง|พลับพลา|วัฒC|สวนc|สะพานสูง|สัมพันธวงศ์|ตลาดf|สายไหม|Aจอก|กระทุ่มราย|Aแขม|Lขวาง|ด่านมะขามเตี้ย|Ah|pดาด|Eมะกา|Eเรือ|Eเสา|Eไม้|แสนตอ|Ek|JN|Eตะคร้อ|Bu|พังตรุ|Sf|gพลอย|Aรี|พนมทวน|Tเจดีย์|Jสมอ|Aสาหร่าย|Aโรง|Eกระดาน|Aเป็ด|Aปรือ|Aปลาไหล|Lกระเจา|Gh|Bเก่า|Bใต้|rแพรก|Gเย็น|AX|เลาขวัญ|Aปลิง|Aโสน|yโยค|Gกระแจะ|Oมงคล|สิงห์|กาฬสินธุ์|กมลาไสย|Aแปน|sn|Cขาม|สมสะอาด|qขา|Aห้าง|Zk|Cบอน|Kสะอาด|Tจาน|Eคันโท|mจิก|Clล|Cคู|gb|Cมน|สงเปลือย|Uตลาด|Cดี|Cเชือก|eงัว|eCZ|อุ่มเม่า|Rสูง|ร่องZ|qัคคี|สมเด็จ|Oสมเด็จ|Aแวง|หมูม่น|สหัสขันธ์|Cมะเขือ|นิคม|ภูสิงห์|Rศิลา|สำราญ|AกุงO|Aสรวง|Ap|AM|Zบง|Lเม็ก|iN|ep|Rสะอาด|Sวง|Aผือ|ขมิ้น|Aกุง|เชียงเครือ|sN|h|กำแพงเพชร|Iขลุง|GU|Gy|eถนน|โป่งQร้อน|xqัคคี|เทพนิมิต|YN|พรานกระต่าย|ลานกระบือ|Ac|นครชุม|GN|สระb|อ่างN|ในF|yn|พานN|มหาt|ขอนแก่น|กระนวน|Qอ้อม|Bฝาง|Aโก|Aโน|LU|Lโจด|ชนบท|Bแท่น|Gแสง|Oบุญเรือง|ชุมแพ|CAทุ่ม|Cเพียง|Rอุดม|Lเตย|Qพอง|mQใส|iมูล|XM|Bขาม|kหวาน|สะอาด|Bเหล่า|Kn|Bแฮด|Aแซง|Kสำราญ|Rสมบูรณ์|Bh|AQใส|pตั้ง|Fเพีย|Wยืน|ขามป้อม|eJ|ภูผาม่าน|Cฝาย|Lk|ภูz|ดินดำ|Cชุมแสง|Cหว้า|สงเปือย|Eศาลา|Cข่า|Cn|สีชมพู|aลาน|Oสุข|Aแa|ACZ|BK|Aสองห้อง|ตะกั่วV|Gp|สำโรง|Aเม็ก|Ahล้อม|Aเรือ|Bผือ|UZ|RN|Rทัน|CZ|Ba|Kสูง|Sสวนกวาง|Cงิ้ว|เปือยf|Gk|Bค้อ|Bหว้า|ศิลา|Aตูม|Fเก่า|แaM|Kสี|แวงf|ก้านเหลือง|แวงM|ซับสมบูรณ์|Bหัน|Aปลาหมอ|Rแa|ขลุง|g|Eu|Iขุด|สองพี่น้อง|Sb|Cยายอาม|มะขาม|Ec|ทับd|Iพลู|ตะเคียนN|ตลาด|Ed|แก่งหางแมว|IM|Iเขื่อน|Dตลาด|Eตะเกียบ|Dคล้า|ey|DQเปรี้ยว|xQรักษ์|ศาลาแa|Dปะกง|BY|Ti|สCมจันทร์|เทพราช|พนมสารคาม|Aยาว|Aแหน|Fu|DW|Dเตย|Db|Gตะเคียน|หน้าF|แปลงยาว|eสำโรง|Dละมุง|Cเกลือ|LM|Sไม้b|โป่ง|gN|ธาตุN|Bx|พนัสนิคม|Jขวาง|Bd|วัดc|วัดโบสถ์|Dหัก|Pลอย|Oราชา|x|Aขาม|สัตหีบ|Pจันทร์|CV|Bสวน|อ่างศิลา|เสม็ด|แสนสุข|tCท|Eฉนวน|วัดสิงห์|gแร่|Gหมัน|สรรพยา|Dc|Aมะโมง|mจอก|สะพานp|หันคา|เนินขาม|Et|Bกล้วย|คอนสวรรค์|ช่องqหมอ|Bโสก|Oสำราญ|Lไร่|คอนสาร|aw|aบัง|Rคูณ|Bกอก|ส้มป่อย|AXบาน|AXK|Aโดน|ซับM|Blล|Bเพชร|eทะเล|Bเขว้า|สระพัง|Aคู|แหลมN|BT|Bแก้ง|AXระเหว|AXแa|คูF|Gชมภู|BX|BU|Bเดื่อ|Bเป้า|Aข่า|Bไร่|บุ่งคล้า|Bค่าย|รอบF|ลาดM|Lบง|Rสำราญ|Aสังข์|ชุมพร|ตะโก|Pมะพร้าว|Pยอ|Eแซะ|TU|Pรัง|พะโต๊ะ|ละแม|Jc|สวนแตง|สวี|Ep|Cสัก|CY|หลังสวน|DQจืด|Bควน|lกแดด|EU|CJ|Dหมาก|BC|ตรัง|กันตัง|ย่านซื่อ|Gวน|ปะเหลียน|Jยาว|ย่านlขาว|Ag|รัษฎา|หาดสำราญ|Lยอด|Eงิ้ว|Dกุ้ง|Sขาว|Qผุด|Pกูด|Pหมาก|Pd|Sสมิง|แหลมงอบ|EสองU|พบW|qเงา|ยกกระบัตร|ย่านรี|Gจันทร์|อุ้มผาง|Hกลอง|Hจัน|ระแหง|AXใต้|โป่งแa|Hระมาด|Wธาตุ|Hตื่น|Hสอด|Hปะ|นครCยก|Nหลาง|Bพร้าว|rพลี|Aแสง|Kกรวด|องครักษ์|ชุมพล|Dปลากด|Ei|BM|SW|นครปฐม|กำแพงแสน|GQเขียว|Aกระทุ่ม|Tตูม|Bc|qง่าม|นครtO|งิ้วราย|Dกระเบา|Dระกำ|Dเลน|Dปลา|มหาสวัสดิ์|qพราน|Iu|ทรงคนอง|Dd|ทัพc|Jf|Gตะกู|Aงูเหลือม|Eอุเทน|Rlล|ธาตุพนม|ฝั่งแa|sแพง|Cทม|Cงัว|Cแก|พิมาน|Bแพง|hล้อม|ปลาr|Aฮี|Kสว่าง|AY|Oสงคราม|ขามเฒ่า|Zเตย|aขวาง|Ci|อาจqารถ|Ylก|Eลาด|sสวรรค์|Ceg|Cใน|ขามทะเลสอ|ขามสะแกแสง|RF|TM|Fคง|ครบุรี|จักราช|สีสุก|Aพลวง|pโคน|ชุมพวง|ตลาดy|Aหลัก|Rรัง|ด่านขุนทด|ตะเคียน|Ay|Xลาย|Aหว้า|ด่านd|Bเหลื่อม|ประทาย|Jสว่าง|Kw|งิ้ว|T|ตูม|ภูc|Kไทย|rช่อง|wa|Aหอย|พิมาย|aM|นิคมสร้างตนเอง|Aระz|ไพล|ไทยqัคคี|สีคิ้ว|กฤษณา|มิตรภาพ|ลาดXขาว|สีดา|qF|สูงเนิน|Cw|Aตะไก้|สารภี|ไทยเจริญ|Lแถลง|เฉลิมWเกียรติ|AU|เทพารักษ์|BP|Aไข่Q|FU|เสิงสาง|แก้งสCมนาง|โชคt|Eเยี่ยม|มะค่า|หลุมข้าว|โตนด|สำพะเนียง|Rไทย|ขนอม|JY|ฉวาง|ชะอวด|dw|ถ้ำพรรณรา|Jสง|Qตก|Aหงส์|JM|ปริก|Tตะโก|eตะพาน|นบพิตำ|Dขัน|rพนัง|If|dซ้าย|Cสาร|พิปูน|ร่อนพิบูลย์|เสาธง|ลานสกา|ขุนทะเล|สิชล|ฉลอง|เชียรM|Bเนิน|ชุมlบง|ชุมแสง|ฆะมัง|Kหม้อ|lกฟ้า|สุขสำราญ|lคลี|Aโพ|Eตะโก|Tคา|ทำนบ|GM|Aกรด|เนินมะกอก|Aกลับ|Lร่วม|เก้าเลี้ยว|มหาโพธิ|Aเต่า|ea|Dk|Bแก่ง|Wนอน|Hวงก์|Hเปิน|โกรกW|ไพศาลี|Dกรวย|DXN|ละหาร|DM|rเกร็ด|Iข่อย|IWอุดม|Eอิฐ|Dพลับ|Dพูด|ตลาดขวัญ|yf|จะแนะ|dเผือก|พร่อน|บาเจาะ|ยี่งอ|รือเสาะ|Oสาคร|กาหลง|Oบรรพต|สุคิริน|ภูSN|สุไหงปาดี|สุไหงโก-ลก|vภู|Kเคียน|แว้ง|เอราวัณ|Jd|EGผา|จอมW|lลชุม|Oภูมิ|Cf|สถาน|เชียงของ|ปัว|สองแคว|ชนแดน|สันติสุข|เชียงw|Wพุทธบาท|เชียงคาน|ในz|ไชยสถาน|Hสา|Hจริม|xกาฬ|xโขงหลง|rคาด|พรเจริญ|Tหญ้าCง|Vแฝก|Oชมภู|Aed|Oวิไล|เซกา|Eสะอาด|Aทุ่ม|ZCดี|Kก่อง|กระสัง|กันทรารมย์|vดวน|Lสำราญ|Fh|pเหล็กไฟ|ชำนิ|Cงรอง|Bสิงห์|สะเดา|Bดู่|Oสว่าง|Bกรวด|ปราสาท|pลาด|Bด่าน|Go|ประโคนt|By|ประทัดบุ|Kตูม|ไพศาล|ปะZ|Kขมิ้น|พุทไธสง|หายโศก|ละหานi|vปลายมาศ|แสลงพัน|Kล่าม|สตึก|ร่อนN|สCมt|Fแก|Aกี่|Lp|Lราช|ถลุงเหล็ก|สองห้อง|แคนa|สระX|eฝาย|Rดินแa|Rสุวรรณ|ลาดหลุมb|หน้าไม้|vลูกกา|vy|qK|กระแชง|Dกระบือ|เชียงรากf|xบอน|Dเดื่อ|Bฉาง|ประจวบคีรีขันธ์|กุยบุรี|Sแa|ทับสะแก|Dสะพาน|ธงt|ปราณบุรี|qร้อยยอด|xนคร|Aพลับ|Aแก|Li|Cแขม|Bสร้าง|Dขาม|DU|ประจันตคาม|Ab|Oมหาโพธิ|Eตูม|En|ปะCเระ|คอกกระบือ|มายอ|ยะรัง|Dปู|Dเก่า|Aจิก|Hลาน|Vไร่|kเตี้ย|KY|Vบอน|ไม้แก่น|yN|WนครOอยุธยา|Gแa|นครc|rจั่น|Hลา|Dซ้าย|Dบาล|Qเต้า|Bกุ่ม|วัดยม|Dปะหัน|ขวัญF|Bม้า|Bแป้ง|qเรือน|Dy|Dพลี|Kd|Bแพรก|ผักไห่|Bป้อม|eรอ|ภาชี|Wb|Kk|มหาราช|eh|โรงd|ลาดXc|Gf|อุทัย|เสC|TN|ez|จุน|JรวงN|ดอกZใต้|Bปิน|Vซาง|สว่างอารมณ์|Aหล่ม|ปง|Lb|ภูซาง|Vสัก|z|Hลาว|เชียงม่วน|Hต๋ำ|Hใจ|Oถ้อย|Hสุก|กะปง|ทับปุด|Dเหรียง|Kเจริญ|ท้ายเหมือง|สองแพรก|กงหรา|ควนขนุน|ตะโหมด|rพะยูน|Vพะยอม|Pเต่า|Stสน|tบุรี|Eแค|พิจิตร|aเจริญ|ตะพานp|Gสำโรง|Gหว้า|ทับคล้อ|DมูลCก|xCราง|Giพูน|AW|สากเหล็ก|Ii|ย่านยาว|hขวาง|โพทะเล|Yประทับd|ชาติตระการ|Vแa|นครไทย|CX|Dกระทุ่ม|สCมคลี|Kสลุด|นิคมพัฒC|พรหมพิราม|Gพิกุล|เนินมะปราง|ชมพู|yย้อย|งิ้วn|EN|EY|Bกร่าง|BV|วัดจันทร์|กะทู้|สาคู|ตลาดM|Pb|Cสีนวน|mรัง|ชื่นชม|mปลาดุก|Cดูน|สันVตอง|เขวาไร่|บรบือ|U|Ak|Aสิม|zt|Uสีสุราช|Bหวาย|Aไฮ|eเรือ|แคน|Yt|เชียงยืน|แกดำ|Gยาว|Aเหล็ก|เหล่า|มุกดาหาร|Zชะอี|ac|Aแคน|Tlล|Bบาก|Yy|นิคมZสร้อย|Cกอก|Cอุดม|Aสูง|หว้านM|aเย็น|si|ยะลา|กรงปินัง|กาบัง|ธารโต|บันนังสl|ยะหา|เบตง|mชุม|Aหมี|Zเขื่อนb|Jมน|ค้อG|aมะไฟ|Cz|Oฐาน|เชียงเพ็ง|k|สงU|eF|lดN|mแห่|Ob|qแยก|QZ|กะเปอร์|หงาว|ปลวกแa|Eประดู่|Bแลง|Lโป่ง|แกลง|จอมx|เบิกไพร|ดำเนินสะดวก|Xn|Dแพ|Bคา|Bโป่ง|Tกระเบื้อง|Eผา|Bk|สวนกล้วย|Aกบ|Aอ้อ|rท่อ|วัดเพลง|สวนผึ้ง|Eเคย|Eราบ|Qพุ|พิกุลN|pกอง|Lh|โพธาราม|เlปูน|ลิ้นฟ้า|ed|จังหาร|UM|JSc|xn|เทอดไทย|ธวัชบุรี|Aพอก|Ff|ขี้เหล็ก|Rสวรรค์|sสูง|พนมไพร|ค้อM|YM|Jกุลา|sF|เกษตรวิสัย|กำแพง|FX|เชียงขวัญ|เมยวดี|Fสรวง|w|Cเลิง|Cแซง|พรสวรรค์|ภูเงิน|Gc|ขามเปี้ย|เชียงu|YO|สว่าง|แวง|tบาดาล|Eวุ้ง|Bหมี่|Dพึ่ง|AF|hM|พัฒCนิคม|vสนธิ|สระโบสถ์|Vlล|Kสำโรง|สบปราบ|CU|ห้างฉัตร|Pคา|Cb|Cโป่ง|Fปาน|Bเสด็จ|พิt|zo|แจ้ห่ม|Hทะ|Vตัน|eเสือ|Hพริก|Hเมาะ|vพูน|Jed|Bธิ|Bโฮ่ง|ลี้|Vh|Oวิt|Bแป้น|Hทา|F|จาน|ดู่|Rสัง|ขุนหาญ|Qเกลี้ยง|xบูรพ์|สวาย|พยุห์|Uชุมf|ด่าน|Aแค|ธาตุ|Lทับทัน|ผักไหม|ปะอาว|Kจาน|Eคล้อ|Aฮาง|เสียว|Fจันทร์|Y|Rค้อ|ไพรx|mบาก|กุสุมาลย์|อุ่มจาน|Zlกล้า|Cแต้|นิคมQอูน|พังโคน|วานรนิวาส|วาริชภูมิ|Aลาด|สว่างแดนดิน|Bถ่อน|ส่องดาว|เจริญศิลป์|เต่างอย|กระแสสินธุ์|Iหอยโข่ง|รัตภูมิ|Lลึก|สะกอม|Cทวี|Cหม่อม|Dกล่ำ|ระโนด|Bขาว|กระดังงา|สะบ้าย้อย|kn|eS|หาดM|ฉลุง|เทพา|gU|ควนกาหลง|ควนโดน|Jหว้า|Eแพ|ละงู|Dg|Dเสาธง|Dหญ้าแพรก|Dคนที|อัมพวา|วัดประดู่|Bแพ้ว|โรงเข้|Tพุด|Bหมอ|KM|มวกเหล็ก|วิหารแa|Lขมิ้น|Bโปร่ง|เสาไห้|ต้นlล|แก่งคอย|lลเดี่ยว|Bธาตุ|สองคอน|Lแห้ง|Iหาด|lWยา|GQเย็น|Gสมบูรณ์|วัฒCนคร|อรัญประเทศ|Sฉกรรจ์|Dระจัน|พรหมบุรี|Bหม้อ|อินทร์บุรี|Dปลาม้า|Bแหลม|Oประจันต์|qชุก|Gลึก|Aหญ้าไซ|อู่N|eC|กรูด|Tสัก|Eฉาง|Eชนะ|พนม|พุนพิน|Qรอบ|Pพะงัน|เคียนซา|zสระ|กาบเชิง|ชุมพลบุรี|Oณรงค์|Xเชด|รัตนบุรี|สนม|สังขะ|สำโรงทาบ|เขวาสินรินทร์|Jเสลี่ยม|Aหญ้าปล้อง|Oนคร|OสัชCลัย|Vงิ้ว|Eg|รัตนวาปี|สระใคร|สังคม|เฝ้าไร่|ปะโค|CG|สุวรรณคูหา|Bถิ่น|ชานุมาน|พC|Cยม|เสCงคนิคม|mจับ|กุมภวาปี|Eลี่|ผาสุก|คอนสาย|Jฝน|Cยูง|Qโสม|Bดุง|Bจันทร์|Blด|wM|Fพาน|Tกลอย|Bแa|Gqหมอ|Oธาตุ|สร้างคอม|Aวัวซอ|Aหาน|เพ็ญ|จอมO|ไชยวาน|Eปลา|ฟากE|ทัพทัน|ลานสัก|Aขาหย่าง|Aฉาง|Lคต|Tมดแa|lลสุม|Cจะหลวย|Cเยีย|Rw|kqสิบ|Aเหล่า|วารินชำราบ|เขมราฐ|เขื่องใน|เหล่าเสือโก้ก|โขงเจียม|Vโมก|qโก้|แสวงหา|ไชโย|Vแดด|สันw|สันi|Hฟ้าc|Hสรวย|Hสาย|ดอยหล่อ|ดอยเต่า|Qแพร่|สันกำแพง|Tb|หางa|Bปง|อมก๋อย|ฮอด|เชียงดาว|Hอาย|Hแตง|Vแป๋|ชะอำ|Bลาด|Sย้อย|Lโรง|แก่งกระจาน|QหCว|xqพัน|Gโป่ง|Qร้อน|Oเทพ|หล่มสัก|หล่มเก่า|Sค้อ|ด่านซ้าย|Cด้วง|Cแห้ว|rชม|ผาขาว|ภูกระดึง|Gสะพุง|ร้องกวาง|Gชิ้น|สูงเม่น|Qชำ|Bกาศ|Akไข่|HZมี|เด่นt|ขุนยวม|ปางมะผ้า|สบเมย|Hลาf|Hสะเรียง".split('|'),
+            words: "หนอง|บ้าน|นา|บาง|ท่า|เมือง|วัง|แม่|คลอง|ทุ่ง|โคก|ห้วย|ใหญ่|ทอง|ศรี|เกาะ|น้ำ|โนน|เขา|ดอน|ยาง|ป่า|พระ|บัว|โพธิ์|คำ|ดง|แก้ว|หลวง|ช้าง|หัว|น้อย|บ่อ|ไผ่|ทราย|แดง|ม่วง|ตา|กุด|งาม|เหนือ|หิน|สาม|ปาก|โพน|ชัย|ใหม่|ลำ|กลาง|บึง|ไทร|เวียง".split('|')
+        };
+
+        logs('Ready...');
+
+        $('#convert').submit(function (e) {
+            e.preventDefault();
+
+            var file = $('#file')[0].files[0];
+
+            if (file) {
+                var reader = new FileReader();
+                reader.readAsText(file, 'UTF-8');
+                reader.onload = function (evt) {
+                    try {
+
+                        var raw = JSON.parse(evt.target.result);
+                        logs('พบข้อมูล ' + raw.length + ' ตำบล');
+
+                    } catch (e) {
+                        logs('Error parsing JSON file', 'error');
+                        UIkit.notification('Error parsing JSON file');
+                    }
+                    var db = [],
+                        geodb = [];
+                    
+                    logs('บีบอัดข้อมูล...');
+                    
+                    raw.forEach(function(d){
+
+                        d.district = shortenString(d.district);
+                        d.amphoe = shortenString(d.amphoe);
+                        d.province = shortenString(d.province);
+
+                        var index = findIndexByFirstValue(db, d.province);
+                        
+                        if(index < 0){
+                            
+                            db.push([d.province,[]])
+                            geodb.push([d.province,'',[]])
+                        }
+
+                        index = findIndexByFirstValue(db, d.province);
+                        
+                        var index2 = findIndexByFirstValue(db[index][1], d.amphoe);
+                        if(index2 < 0){
+                            db[index][1].push([d.amphoe,[]])
+                            geodb[index][2].push([d.amphoe,'',[]])
+                        }
+                        
+                        index2 = findIndexByFirstValue(db[index][1], d.amphoe);
+
+                        db[index][1][index2][1].push([d.district, d.zipcode]);
+
+                        geodb[index][1] = d.province_code;
+                        geodb[index][2][index2][1] = d.amphoe_code;
+                        geodb[index][2][index2][2].push([d.district, d.district_code, d.zipcode]);
+                    });
+
+                    logs('บีบอัดข้อมูลสำเร็จ');
+
+                    logs('Download db.json...', 'info');
+                    saveJSON({
+                        data: db,
+                        lookup: map.lookup.join('|'),
+                        words: map.words.join('|'),
+                    }, 'db.json');
+
+                    setTimeout(function(){
+                        logs('Download geodb.json...', 'info');
+                        saveJSON({
+                            data: geodb,
+                            lookup: map.lookup.join('|'),
+                            words: map.words.join('|'),
+                        }, 'geodb.json');
+                    }, 1000);
+
+                    setTimeout(function(){
+                        logs('Done.', 'success');
+                    }, 2000);
+
+                }
+
+                reader.onerror = function (evt) {
+                    UIkit.notification('Error loading file', 'error');
+                }
+            }
+
+            return false;
+        });
+
+        function saveJSON(data, filename) {
+            if (!data) {
+                console.error('No data')
+                return;
+            }
+
+            if (!filename) filename = 'console.json'
+
+            if (typeof data === "object") {
+                data = JSON.stringify(data)
+            }
+
+            var blob = new Blob([data], {
+                    type: 'text/json'
+                }),
+                e = document.createEvent('MouseEvents'),
+                a = document.createElement('a')
+
+            a.download = filename
+            a.href = window.URL.createObjectURL(blob)
+            a.dataset.downloadurl = ['text/json', a.download, a.href].join(':')
+            e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
+            a.dispatchEvent(e)
+        }
+
+
+        function logs(txt, status) {
+            switch (status) {
+                case 'error':
+                    txt = '<span class="uk-text-danger">' + txt + '</span>';
+                    break;
+                case 'warn':
+                    txt = '<span class="uk-text-warning">' + txt + '</span>';
+                    break;
+                case 'success':
+                    txt = '<span class="uk-text-success">' + txt + '</span>';
+                    break;
+                case 'info':
+                    txt = '<span class="uk-text-primary">' + txt + '</span>';
+                    break;
+            }
+            $('#logs').html('[' + new Date().toString().split(' ')[4] + '] ' + txt + '\r' + $('#logs').html());
+        }
+
+        function findIndexByFirstValue(haystack, needle){
+            return haystack.reduce(function(acc, self, i){
+                if(self[0] == needle){
+                    acc = i;
+                }
+                return acc;
+            }, -1);
+        }
+        
+        function num2char(num){
+            if(num < 26){
+                return String.fromCharCode(65+num*1);
+            }else{
+                return String.fromCharCode(71+num*1);
+            }
+        }
+
+        function shortenString(str){
+            
+            map.words.forEach(function(word, i){
+                str = str.replace(word, num2char(i));
+            });
+
+            if(~map.lookup.indexOf(str)){
+                str = map.lookup.indexOf(str);
+            }
+
+            if(isNaN(str)){
+                return str;
+            }else{
+                return +str;
+            }
+        }
+    </script>
+</body>
+
+</html>
