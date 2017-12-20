@@ -28,6 +28,7 @@
 - [x] Need help! with database [#4](https://github.com/earthchie/jquery.Thailand.js/issues/4)
 - [ ] Need Tester on geodb data [#4](https://github.com/earthchie/jquery.Thailand.js/issues/4)
 - [ ] Drop support for zip file, will use GZIP CDN instead.
+- [ ] English language database
 
 # วิธีใช้
 
