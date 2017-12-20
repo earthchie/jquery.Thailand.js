@@ -6,38 +6,20 @@
 
 อ่านแนวคิด และที่มาที่ไปได้ที่นี่ [ระบบ Auto Complete ที่อยู่ไทย อย่างที่มันควรเป็น](https://medium.com/@earthchie/ระบบ-auto-complete-ที่อยู่ไทย-อย่างที่มันควรเป็น-27360185d86a)
 
-## Changelogs 1.5.2
-> 21 กันยายน 2017
+## Changelog [1.5.3]
+> 20 ธันวาคม 2017
 
-- **Add:** เพิ่มอำเภอเวียงเก่า จังหวัดขอนแก่น เข้าไปในฐานข้อมูล มีผลกับไฟล์ ``db.json`` ``db.zip`` ``geodb.json`` และ ``geodb.zip``
-- **Enhancement** แปลง JQL ให้กลับมาเป็น ECMA5 แล้ว เพื่อให้รองรับเบราเซอร์เก่าๆ มากขึ้น
-- **Add:** เพิ่ม ``$.Thailand.DB`` เป็น JQL Object ที่เรียกใช้ได้หลังจากโหลดฐานข้อมูลแล้วเรียบร้อย สามารถนำไปใช้ query ได้ 
-เช่น 
-```javascript
-    $.Thailand.DB.select('*').where('province').is('เชียงใหม่').fetch();
-```
-- **Add:** เพิ่ม ``$.Thailand.setup()`` สำหรับใช้กำหนดค่า default เพื่อที่จะได้ไม่ต้องกำหนดค่าเดิมใหม่ซ้ำๆ ทุกครั้ง เช่น
-```javascript
-    $.Thailand.setup({
-        database: './jquery.Thailand.js/database/db.json'
-    });
+- **Update** ปรับปรุงรหัสไปรษณีย์ อ.แก่งหางแมว จ. จันทบุรี เป็น 22160
+- **Update** ปรับปรุงรหัสไปรษณีย์ อ.วังเจ้า จ.ตาก เป็น 63180
+- **Update** ปรับปรุงรหัสไปรษณีย์ อ.บางเสาธง จ.สมุทรปราการ เป็น 10570
+- **Update** ย้าย ต.ท่าแฝก จ.อุตรดิษฐ์ ออกจากอ.ท่าปลา ไปอยู่ อ.น้ำปาด
+- **Enhancement** กำหนดฐานข้อมูลให้อ่านไฟล์จาก GitHub CDN เป็นค่า default ทำให้ไม่จำเป็นต้องโฮสไฟล์ฐานข้อมูลเอง
+- **Enhancement** ลบโค้ดที่ไม่จำเป็นทิ้ง
+- **Enhancement** เปลี่ยนชื่อไฟล์ ``/database/raw_database/database.xls`` เป็น ``/database/raw_database/original_database_from_thaipost.xls``
+- **Enhancement** เปลี่ยนชื่อไฟล์ ``/database/raw_database/database.json`` เป็น ``/database/raw_database/raw_database.json``
+- **Add** เพิ่มเครื่องมือ build ฐานข้อมูลแบบ web-based
 
-    // ไม่ต้องกำหนด path ของ database ซ้ำ
-    $.Thailand({
-        $search: $('#demo1 [name="search"]'),
-        onDataFill: function(data){
-            console.log(data)
-        }
-    });
-
-    // ไม่ต้องกำหนด path ของ database ซ้ำเช่นกัน
-    $.Thailand({
-        $search: $('#demo2 [name="search"]'),
-        onDataFill: function(data){
-            console.log(data)
-        }
-    });
-```
+[1.5.3]: https://github.com/earthchie/jquery.Thailand.js/commit/5254a5e5745f25d93369f3085560fe6e7cb2a179
 
 อ่านทั้งหมดได้ที่ [CHANGELOG.md](https://github.com/earthchie/jquery.Thailand.js/blob/master/CHANGELOG.md)
 
@@ -45,6 +27,7 @@
 - [x] Clean up repo
 - [x] Need help! with database [#4](https://github.com/earthchie/jquery.Thailand.js/issues/4)
 - [ ] Need Tester on geodb data [#4](https://github.com/earthchie/jquery.Thailand.js/issues/4)
+- [ ] Drop support for zip file, will use GZIP CDN instead.
 
 # วิธีใช้
 
@@ -80,13 +63,13 @@
 ```javascript
 
 $.Thailand({
-    database: './jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
     $district: $('#district'), // input ของตำบล
     $amphoe: $('#amphoe'), // input ของอำเภอ
     $province: $('#province'), // input ของจังหวัด
     $zipcode: $('#zipcode'), // input ของรหัสไปรษณีย์
 });
 
+ใน version 1.5.3 เป็นต้นมา คุณไม่จำเป็นต้องระบุฐานข้อมูล ตัว lib จะทำการเรียกใช้ฐานข้อมูลจาก GitHub CDN ให้อัตโนมัติ
 ```
 
 # วิธีใช้อย่างละเอียด
@@ -249,7 +232,6 @@ $.Thailand({
 
 ```javascript
 $.Thailand({ 
-    database: './jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
     $search: $('#search'), // input ของช่องค้นหา
     onDataFill: function(data){ // callback เมื่อเกิดการ auto complete ขึ้น
         console.log(data);
