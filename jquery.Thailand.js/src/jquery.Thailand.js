@@ -1,7 +1,7 @@
 /**
  * @name jquery.Thailand.js
- * @version 1.5.2
- * @update Sep 21, 2017
+ * @version 1.5.3
+ * @update Dec 20, 2017
  * @website https://github.com/earthchie/jquery.Thailand.js
  * @license WTFPL v.2 - http://www.wtfpl.net/
  *
@@ -20,38 +20,32 @@ $.Thailand = function (options) {
             var lookup = [],
                 words = [],
                 expanded = [],
-                useLookup = false,
                 t;
 
             if (data.lookup && data.words) {
                 // compact with dictionary and lookup
-                useLookup = true;
                 lookup = data.lookup.split('|');
                 words = data.words.split('|');
                 data = data.data;
             }
 
             t = function (text) {
+                
                 function repl(m) {
                     var ch = m.charCodeAt(0);
                     return words[ch < 97 ? ch - 65 : 26 + ch - 97];
                 }
-                if (!useLookup) {
-                    return text;
-                }
+                
                 if (typeof text === 'number') {
                     text = lookup[text];
                 }
                 return text.replace(/[A-Z]/ig, repl);
             };
 
-            if (!data[0].length) {
-                // non-compacted database
-                return data;
-            }
             // decompacted database in hierarchical form of:
             // [["province",[["amphur",[["district",["zip"...]]...]]...]]...]
             data.map(function (provinces) {
+
                 var i = 1;
                 if(provinces.length === 3){ // geographic database
                     i = 2;
@@ -76,6 +70,7 @@ $.Thailand = function (options) {
                         });
                     });
                 });
+
             });
             return expanded;
         },
@@ -139,7 +134,7 @@ $.Thailand = function (options) {
                 xhr;
 
             if (type !== 'json' && type !== 'zip') {
-                type = options.database.split('.').pop(); // attempt to use file extension instead
+                type = options.database.split('.').pop(); // attempt to figure from file extension instead
             }
 
             switch (type) {
@@ -327,7 +322,7 @@ $.Thailand = function (options) {
     });
 };
 $.Thailand.defaults = {
-    database: '../database/db.json',
+    database: 'https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/database/db.json',
     database_type: 'auto', // json or zip; any other value will be ignored and script will attempt to evaluate the type from file extension instead.
     zip_worker_path: false, // path to zip worker folder e.g. './jquery.Thailand.js/dependencies/zip.js/'; Leave it to false unless you found any error.
     autocomplete_size: 20,
