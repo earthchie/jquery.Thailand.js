@@ -40,9 +40,9 @@
     "mocha": "^3.4.2"
   },
   "dependencies": {
+    "convert-excel-to-json": "^1.2.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
-    "excel-as-json": "^2.0.1",
     "wordcut": "^0.8.1"
   }
 }

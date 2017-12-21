@@ -2,6 +2,7 @@
 const tree = require('./database.json')
 const fs = require('fs')
 
+console.log('123')
 let provinces = []
 let resultTree = tree.map((item) => {
   if (!(provinces.find(prov => prov === item.province))) {
@@ -18,6 +19,7 @@ let resultTree = tree.map((item) => {
           let dis = tree.filter(data => data.province === d.province && data.amphoe === d.amphoe && data.district === d.district)
           if (!(dist.find(dis => dis === d.district))) {
             dist.push(d.district)
+            // console.log(d.province + ' -- ' + d.amphoe + ' -- ' + d.district + ' ------- Done !')
             return [d.district, dis.map((z) => {
               return z.zipcode
             })]

@@ -1,13 +1,29 @@
-let fs = require('fs')
-let convertExcel = require('excel-as-json').processFile;
+'use strict';
+const fs = require('fs')
+const excelToJson = require('convert-excel-to-json');
 
 console.log('Converting excel to JSON...')
-convertExcel('./database/raw_database/database.xlsx', './database/migrate/database.json', null, function (err, data) {
+const result = excelToJson({
+    sourceFile: './database/raw_database/database.xlsx',
+    header:{
+        rows: 1
+    },
+    columnToKey: {
+      A: 'province',
+      B: 'amphoe',
+      C: 'district',
+      D: 'zipcode'
+    }
+})
+
+console.log('Converting ---- done !')
+fs.writeFile('./database/migrate/database.json', JSON.stringify(result.Sheet1), 'utf8', function (err) {
   if (err) {
+    console.log('error')
     console.log(err)
     return
   }
-  console.log('Convert excel to JSON ---- done !')
+  
   let exec = require('child_process').exec
   exec('node ./database/migrate/buildTree.js', function (err, stdout, stderr) {
     if (err) {
@@ -21,9 +37,11 @@ convertExcel('./database/raw_database/database.xlsx', './database/migrate/databa
         return
       }
       
-      fs.unlinkSync('./database/migrate/tree.json');
-      fs.unlinkSync('./database/migrate/database.json');
+      fs.unlinkSync('./database/migrate/tree.json')
+      fs.unlinkSync('./database/migrate/database.json')
       console.log('Minify tree ---- done !')
+      console.log('All task completed and ready to go !!')
     })
   })
 })
+
