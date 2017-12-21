@@ -67,7 +67,7 @@ const preprocess = function (data) {
   return expanded
 }
 
-const db = preprocess(require('../database/geodb.json'))
+const db = preprocess(require('../database/db.json'))
 
 const resolveResultbyField = (type, searchStr, maxResult) => {
   searchStr = searchStr.toString().trim()
