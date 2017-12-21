@@ -4,7 +4,7 @@ let mocha = require('mocha')
 let describe = mocha.describe
 let it = mocha.it
 let expect = require('chai').expect
-let db = require('../src/thai-address-database')
+let db = require('../src')
 
 describe('More then 1 zipcode District', function () {
   it('District ปราณบุรี have 2 result', function () {
@@ -88,7 +88,51 @@ describe('#search', function () {
     result = db.searchAddressByZipcode(27120)
     expect(result.length).to.equal(15)
 
+    result = db.searchAddressByZipcode(27120, 5)
+    expect(result.length).to.equal(5)
+
     result = db.searchAddressByZipcode('')
     expect(result.length).to.equal(0)
+  })
+})
+
+describe('Function splitAddress', function () {
+  it('Shoud split address without touching original address', function () {
+    let addr = `126/548 ถ.สุขาประชาสรรค์ ม.การเคหะนนท์ ปากเกร็ด ปากเกร็ด นนทบุรี Thailand 11120`
+    let result = db.splitAddress(addr)
+    expect(result).to.deep.equal({
+      'address': '126/548 ถ.สุขาประชาสรรค์ ม.การเคหะนนท์',
+      'amphoe': 'ปากเกร็ด',
+      'district': 'ปากเกร็ด',
+      'province': 'นนทบุรี',
+      'zipcode': '11120'
+    })
+
+    expect(addr).to.equal(`126/548 ถ.สุขาประชาสรรค์ ม.การเคหะนนท์ ปากเกร็ด ปากเกร็ด นนทบุรี Thailand 11120`)
+  })
+
+  it('Shoud return null when cant split address', function () {
+    let addr = `126/548 ถ.สุขาประชาสรรค์ ม.การเคหะนนท์`
+    let result = db.splitAddress(addr)
+    expect(result).to.be.null
+
+    expect(addr).to.equal(`126/548 ถ.สุขาประชาสรรค์ ม.การเคหะนนท์`)
+  })
+
+  it('Shoud return null when cant split address', function () {
+    let addr = `126/548 ถ.สุขาประชาสรรค์ ม.การเคหะนนท์ ปากเกร็ด ปากเกร็ด Thailand 11120`
+    let result = db.splitAddress(addr)
+    expect(result).to.be.null
+
+    expect(addr).to.equal(`126/548 ถ.สุขาประชาสรรค์ ม.การเคหะนนท์ ปากเกร็ด ปากเกร็ด Thailand 11120`)
+  })
+
+  it('Shoud return null when cant split address', function () {
+    let addr = `126/548 ถ.สุขาประชาสรรค์ ม.การเคหะนนท์ Thailand 11120`
+    let result = db.splitAddress(addr)
+    console.log(result)
+    expect(result).to.be.null
+
+    expect(addr).to.equal(`126/548 ถ.สุขาประชาสรรค์ ม.การเคหะนนท์ Thailand 11120`)
   })
 })
