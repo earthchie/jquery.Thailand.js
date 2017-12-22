@@ -376,7 +376,7 @@ $.Thailand({
 เว้นแต่ว่าจะพบ error แจ้งว่าหาไฟล์ ``z-worker.js`` และ ``inflate.js`` ไม่เจอ (ซึ่งไม่น่าเกิดขึ้นได้ เว้นแต่จะแยกไฟล์ ``zip.js`` ออกไปไว้คนละที่กัน)
 ถ้ามันแจ้ง error ว่าหาไฟล์ไม่เจอ ก็ค่อยให้ระบุค่าลงไป เช่น ``zip_worker_path: "./jquery.Thailand.js/dependencies/zip.js/",``
 
-## ต้องการปรับปรุงฐานข้อมููล?
+## ต้องการปรับปรุงฐานข้อมูล?
 คุณสามารถปรับปรุงข้อมูลได้ที่ [raw_database.json](https://github.com/earthchie/jquery.Thailand.js/blob/master/jquery.Thailand.js/database/raw_database/raw_database.json) จากนั้นนำไฟล์ที่แก้ไขแล้ว ไป compact ให้มีขนาดเล็กลงเพื่อให้นำไปใช้กับ Libary ได้ที่ [Database Tools](https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/database/tools/)
 
 ## Contributers
