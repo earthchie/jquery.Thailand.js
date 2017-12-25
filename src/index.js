@@ -1,3 +1,4 @@
+(function(angular){ 
 'use strict'
 const utilAddress = require('./util/splitAddress')
 /**
@@ -89,20 +90,20 @@ const resolveResultbyField = (type, searchStr, maxResult) => {
   return possibles
 }
 
-exports.searchAddressByDistrict = function (searchStr, maxResult) {
+var searchAddressByDistrict = function (searchStr, maxResult) {
   return resolveResultbyField('district', searchStr, maxResult)
 }
-exports.searchAddressByAmphoe = function (searchStr, maxResult) {
+var searchAddressByAmphoe = function (searchStr, maxResult) {
   return resolveResultbyField('amphoe', searchStr, maxResult)
 }
-exports.searchAddressByProvince = function (searchStr, maxResult) {
+var searchAddressByProvince = function (searchStr, maxResult) {
   return resolveResultbyField('province', searchStr, maxResult)
 }
-exports.searchAddressByZipcode = function (searchStr, maxResult) {
+var searchAddressByZipcode = function (searchStr, maxResult) {
   return resolveResultbyField('zipcode', searchStr, maxResult)
 }
 
-exports.splitAddress = function (fullAddress) {
+var splitAddress = function (fullAddress) {
   let regex = /\s(\d{5})(\s|$)/gi
   let regexResult = regex.exec(fullAddress)
   if (!regexResult) {
@@ -122,4 +123,25 @@ exports.splitAddress = function (fullAddress) {
     }
   }
   return null
+};
+
+exports.searchAddressByDistrict = searchAddressByDistrict;
+exports.searchAddressByAmphoe = searchAddressByAmphoe;
+exports.searchAddressByProvince = searchAddressByProvince;
+exports.searchAddressByZipcode = searchAddressByZipcode;
+exports.splitAddress = splitAddress;
+
+if (angular) {
+  angular.module('thAddress', []).
+  config(function($provide) {
+    $provide.value('thad', {
+      searchAddressByDistrict: searchAddressByDistrict,
+      searchAddressByAmphoe: searchAddressByAmphoe,
+      searchAddressByProvince: searchAddressByProvince,
+      searchAddressByZipcode: searchAddressByZipcode,
+      splitAddress: splitAddress
+    });
+  });
 }
+
+})(typeof angular !== 'undefined' ? angular : false)
