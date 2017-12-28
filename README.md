@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Sellsuki/thai-address-database.svg?branch=master)](https://travis-ci.org/Sellsuki/thai-address-database)
+
 # thai-address-database
 
 ฐานข้อมูลที่อยู่ในไทย ไม่ต้องใช้ Server Side!
