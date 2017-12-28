@@ -50,7 +50,7 @@ Object.keys(words).sort((a, b) => {
 })
 
 //console.log('most freq word=', Object.keys(newWords).map(idx => [newWords[idx], words[newWords[idx]]]))
-fs.writeFileSync('words.txt', 
+fs.writeFileSync('./database/migrate/words.txt', 
   '|คำ|จำนวนครั้ง|\n' +
   '|---|---:|\n' +
   Object.keys(newWords).map(idx => '|' + newWords[idx] + '|' + words[newWords[idx]] + '|').join('\n')

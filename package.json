@@ -1,6 +1,6 @@
 {
   "name": "thai-address-database",
-  "version": "0.0.16",
+  "version": "0.0.18",
   "description": "",
   "main": "lib/index.js",
   "engines": {
@@ -16,7 +16,7 @@
     "test": "mocha --reporter spec",
     "prepublish": "node_modules/babel-cli/bin/babel.js src --out-dir lib",
     "lint": "eslint --ext .js src test",
-    "deploy": "git add -A && git commit -m prepare && npm version patch && npm publish"
+    "deploy": "npm version patch && npm publish"
   },
   "repository": {
     "type": "git",

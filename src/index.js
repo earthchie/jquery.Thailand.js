@@ -1,3 +1,4 @@
+(function(angular){ 
 'use strict'
 const utilAddress = require('./util/splitAddress')
 /**
@@ -81,7 +82,7 @@ const resolveResultbyField = (type, searchStr, maxResult) => {
   try {
     possibles = db.filter(item => {
       let regex = new RegExp(searchStr, 'g')
-      return item[type].toString().match(regex)
+      return (item[type] || '').toString().match(regex)
     }).slice(0, maxResult)
   } catch (e) {
     return []
@@ -89,20 +90,20 @@ const resolveResultbyField = (type, searchStr, maxResult) => {
   return possibles
 }
 
-exports.searchAddressByDistrict = function (searchStr, maxResult) {
+const searchAddressByDistrict = (searchStr, maxResult) => {
   return resolveResultbyField('district', searchStr, maxResult)
 }
-exports.searchAddressByAmphoe = function (searchStr, maxResult) {
+const searchAddressByAmphoe = (searchStr, maxResult) => {
   return resolveResultbyField('amphoe', searchStr, maxResult)
 }
-exports.searchAddressByProvince = function (searchStr, maxResult) {
+const searchAddressByProvince = (searchStr, maxResult) => {
   return resolveResultbyField('province', searchStr, maxResult)
 }
-exports.searchAddressByZipcode = function (searchStr, maxResult) {
+const searchAddressByZipcode = (searchStr, maxResult) => {
   return resolveResultbyField('zipcode', searchStr, maxResult)
 }
 
-exports.splitAddress = function (fullAddress) {
+const splitAddress = (fullAddress) => {
   let regex = /\s(\d{5})(\s|$)/gi
   let regexResult = regex.exec(fullAddress)
   if (!regexResult) {
@@ -123,3 +124,24 @@ exports.splitAddress = function (fullAddress) {
   }
   return null
 }
+
+exports.searchAddressByDistrict = searchAddressByDistrict
+exports.searchAddressByAmphoe = searchAddressByAmphoe
+exports.searchAddressByProvince = searchAddressByProvince
+exports.searchAddressByZipcode = searchAddressByZipcode
+exports.splitAddress = splitAddress
+
+if (angular) {
+  angular.module('thAddress', [])
+    .config(function($provide) {
+      $provide.value('thad', {
+        searchAddressByDistrict: searchAddressByDistrict,
+        searchAddressByAmphoe: searchAddressByAmphoe,
+        searchAddressByProvince: searchAddressByProvince,
+        searchAddressByZipcode: searchAddressByZipcode,
+        splitAddress: splitAddress
+      })
+    })
+}
+
+})(typeof angular !== 'undefined' ? angular : false)
