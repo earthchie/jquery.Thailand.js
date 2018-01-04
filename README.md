@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/Sellsuki/thai-address-database.svg?branch=master)](https://travis-ci.org/Sellsuki/thai-address-database)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f8046d4074243a3cc5e8/maintainability)](https://codeclimate.com/github/Sellsuki/thai-address-database/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/f8046d4074243a3cc5e8/test_coverage)](https://codeclimate.com/github/Sellsuki/thai-address-database/test_coverage)
 
 # thai-address-database
 
