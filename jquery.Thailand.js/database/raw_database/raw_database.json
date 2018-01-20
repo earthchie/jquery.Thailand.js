@@ -1782,6 +1782,24 @@
         "province_code": 10
     },
     {
+        "district": "ราษฎร์พัฒนา",
+        "amphoe": "สะพานสูง",
+        "province": "กรุงเทพมหานคร",
+        "zipcode": 10240,
+        "district_code": 104402,
+        "amphoe_code": 1044,
+        "province_code": 10
+    },
+    {
+        "district": "ทับช้าง",
+        "amphoe": "สะพานสูง",
+        "province": "กรุงเทพมหานคร",
+        "zipcode": 10250,
+        "district_code": 104403,
+        "amphoe_code": 1044,
+        "province_code": 10
+    },
+    {
         "district": "จักรวรรดิ์",
         "amphoe": "สัมพันธวงศ์",
         "province": "กรุงเทพมหานคร",

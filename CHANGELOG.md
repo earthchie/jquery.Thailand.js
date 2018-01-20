@@ -1,3 +1,7 @@
+## [1.5.3.1]
+> 20 มกราคม 2017
+- เพิ่มแขวงทับช้าง แขวงราษฎร์พัฒนา (เขตสะพานสูง กทม.)
+
 ## [1.5.3]
 > 20 ธันวาคม 2017
 
@@ -9,7 +13,7 @@
 - **Enhancement** ลบโค้ดที่ไม่จำเป็นทิ้ง
 - **Enhancement** เปลี่ยนชื่อไฟล์ ``/database/raw_database/database.xls`` เป็น ``/database/raw_database/original_database_from_thaipost.xls``
 - **Enhancement** เปลี่ยนชื่อไฟล์ ``/database/raw_database/database.json`` เป็น ``/database/raw_database/raw_database.json``
-- **Add** เพิ่มเครื่องมือ build ฐานข้อมูลแบบ web-based
+- **Add** เพิ่มเครื่องมือ build ฐานข้อมูลแบบ web-based [Database Tools](https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/database/tools/)
 
 [1.5.3]: https://github.com/earthchie/jquery.Thailand.js/commit/5254a5e5745f25d93369f3085560fe6e7cb2a179
 
