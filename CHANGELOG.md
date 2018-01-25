@@ -2,7 +2,7 @@
 > 25 มกราคม 2017
 - เพิ่มรหัสไปรษณีย์ 21150 ให้ตำบลเนินพระ จังหวัดระยอง [รายละเอียด](https://github.com/earthchie/jquery.Thailand.js/issues/23#issuecomment-359311564)
 
-[1.5.3.2]:
+[1.5.3.2]: https://github.com/earthchie/jquery.Thailand.js/commit/49dde0a4e0da753d9f6fea4dff41f44b8c67addd
 
 ## [1.5.3.1]
 > 20 มกราคม 2017
