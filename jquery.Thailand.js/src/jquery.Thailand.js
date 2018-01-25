@@ -1,7 +1,7 @@
 /**
  * @name jquery.Thailand.js
- * @version 1.5.3.1
- * @update Jan 20, 2018
+ * @version 1.5.3.2
+ * @update Jan 25, 2018
  * @website https://github.com/earthchie/jquery.Thailand.js
  * @license WTFPL v.2 - http://www.wtfpl.net/
  *

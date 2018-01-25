@@ -36495,6 +36495,15 @@
         "province_code": 21
     },
     {
+        "district": "เนินพระ",
+        "amphoe": "เมืองระยอง",
+        "province": "ระยอง",
+        "zipcode": 21150,
+        "district_code": 210109,
+        "amphoe_code": 2101,
+        "province_code": 21
+    },
+    {
         "district": "เพ",
         "amphoe": "เมืองระยอง",
         "province": "ระยอง",
