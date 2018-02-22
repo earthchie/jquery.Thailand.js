@@ -4,7 +4,7 @@
 - เพิ่มรหัสไปรษณีย์ 10240 ให้แก่แขวงคลองกุ่ม [รายละเอียด](https://github.com/earthchie/jquery.Thailand.js/issues/23#issuecomment-364639460)
 - ต.อ่าวนาง จ.กระบี่ เปลี่ยนรหัสไปรษณีย์เป็น 81000 [รายละเอียด](https://github.com/earthchie/jquery.Thailand.js/issues/23#issuecomment-366976139)
 
-[1.5.3.3]: 
+[1.5.3.3]: https://github.com/earthchie/jquery.Thailand.js/commit/cc93cf383121a19efec96be579c1fd784fa7c45c
 
 ## [1.5.3.2]
 > 25 มกราคม 2018
