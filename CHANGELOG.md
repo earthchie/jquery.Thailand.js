@@ -1,6 +1,6 @@
 ## [1.5.3.3]
 > 22 กุมภาพันธ์ 2018
-- ต.หนองเข็ง จ.บึงกาฬ เปลี่ยนชื่อ ต.โนนสว่าง [รายละเอียด](https://github.com/earthchie/jquery.Thailand.js/issues/24)
+- ต.หนองเข็ง จ.บึงกาฬ เปลี่ยนชื่อเป็น ต.โนนสว่าง [รายละเอียด](https://github.com/earthchie/jquery.Thailand.js/issues/24)
 - เพิ่มรหัสไปรษณีย์ 10240 ให้แก่แขวงคลองกุ่ม [รายละเอียด](https://github.com/earthchie/jquery.Thailand.js/issues/23#issuecomment-364639460)
 - ต.อ่าวนาง จ.กระบี่ เปลี่ยนรหัสไปรษณีย์เป็น 81000 [รายละเอียด](https://github.com/earthchie/jquery.Thailand.js/issues/23#issuecomment-366976139)
 
