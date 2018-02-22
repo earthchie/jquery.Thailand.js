@@ -21,7 +21,7 @@
 [1.5.3.2]: https://github.com/earthchie/jquery.Thailand.js/commit/49dde0a4e0da753d9f6fea4dff41f44b8c67addd
 
 ## Changelog [1.5.3.1]
-> 20 มกราคม 2017
+> 20 มกราคม 2018
 - เพิ่มแขวงทับช้าง แขวงราษฎร์พัฒนา (เขตสะพานสูง กทม.)
 
 [1.5.3.1]: https://github.com/earthchie/jquery.Thailand.js/commit/cc1a1e59e87a8a1e07d4905a8a452495800ba773
