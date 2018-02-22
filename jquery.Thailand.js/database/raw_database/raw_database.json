@@ -372,7 +372,7 @@
         "district": "อ่าวนาง",
         "amphoe": "เมืองกระบี่",
         "province": "กระบี่",
-        "zipcode": 81180,
+        "zipcode": 81000,
         "district_code": 810116,
         "amphoe_code": 8101,
         "province_code": 81
@@ -1219,6 +1219,15 @@
         "amphoe": "บึงกุ่ม",
         "province": "กรุงเทพมหานคร",
         "zipcode": 10230,
+        "district_code": 100604,
+        "amphoe_code": 1027,
+        "province_code": 10
+    },
+    {
+        "district": "คลองกุ่ม",
+        "amphoe": "บึงกุ่ม",
+        "province": "กรุงเทพมหานคร",
+        "zipcode": 10240,
         "district_code": 100604,
         "amphoe_code": 1027,
         "province_code": 10
@@ -23175,7 +23184,7 @@
         "province_code": 97
     },
     {
-        "district": "หนองเข็ง",
+        "district": "โนนสว่าง",
         "amphoe": "เมืองบึงกาฬ",
         "province": "บึงกาฬ",
         "zipcode": 38000,

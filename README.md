@@ -6,8 +6,16 @@
 
 อ่านแนวคิด และที่มาที่ไปได้ที่นี่ [ระบบ Auto Complete ที่อยู่ไทย อย่างที่มันควรเป็น](https://medium.com/@earthchie/ระบบ-auto-complete-ที่อยู่ไทย-อย่างที่มันควรเป็น-27360185d86a)
 
+## Changelog [1.5.3.3]
+> 22 กุมภาพันธ์ 2018
+- ต.หนองเข็ง จ.บึงกาฬ เปลี่ยนชื่อ ต.โนนสว่าง [รายละเอียด](https://github.com/earthchie/jquery.Thailand.js/issues/24)
+- เพิ่มรหัสไปรษณีย์ 10240 ให้แก่แขวงคลองกุ่ม [รายละเอียด](https://github.com/earthchie/jquery.Thailand.js/issues/23#issuecomment-364639460)
+- ต.อ่าวนาง จ.กระบี่ เปลี่ยนรหัสไปรษณีย์เป็น 81000 [รายละเอียด](https://github.com/earthchie/jquery.Thailand.js/issues/23#issuecomment-366976139)
+
+[1.5.3.3]: 
+
 ## Changelog [1.5.3.2]
-> 25 มกราคม 2017
+> 25 มกราคม 2018
 - เพิ่มรหัสไปรษณีย์ 21150 ให้ตำบลเนินพระ จังหวัดระยอง [รายละเอียด](https://github.com/earthchie/jquery.Thailand.js/issues/23#issuecomment-359311564)
 
 [1.5.3.2]: https://github.com/earthchie/jquery.Thailand.js/commit/49dde0a4e0da753d9f6fea4dff41f44b8c67addd
