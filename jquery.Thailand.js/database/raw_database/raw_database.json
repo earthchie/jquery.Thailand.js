@@ -585,6 +585,15 @@
         "province_code": 10
     },
     {
+        "district": "พระโขนง",
+        "amphoe": "คลองเตย",
+        "province": "กรุงเทพมหานคร",
+        "zipcode": 10260,
+        "district_code": 100903,
+        "amphoe_code": 1033,
+        "province_code": 10
+    },
+    {
         "district": "คันนายาว",
         "amphoe": "คันนายาว",
         "province": "กรุงเทพมหานคร",
@@ -751,6 +760,15 @@
         "amphoe": "ดุสิต",
         "province": "กรุงเทพมหานคร",
         "zipcode": 10300,
+        "district_code": 100203,
+        "amphoe_code": 1002,
+        "province_code": 10
+    },
+    {
+        "district": "สวนจิตรลดา",
+        "amphoe": "ดุสิต",
+        "province": "กรุงเทพมหานคร",
+        "zipcode": 10303,
         "district_code": 100203,
         "amphoe_code": 1002,
         "province_code": 10
@@ -999,6 +1017,15 @@
         "province_code": 10
     },
     {
+        "district": "หัวหมาก",
+        "amphoe": "บางกะปิ",
+        "province": "กรุงเทพมหานคร",
+        "zipcode": 10250,
+        "district_code": 100608,
+        "amphoe_code": 1006,
+        "province_code": 10
+    },
+    {
         "district": "ท่าข้าม",
         "amphoe": "บางขุนเทียน",
         "province": "กรุงเทพมหานคร",
@@ -1170,6 +1197,15 @@
         "province_code": 10
     },
     {
+        "district": "ท่าแร้ง",
+        "amphoe": "บางเขน",
+        "province": "กรุงเทพมหานคร",
+        "zipcode": 10230,
+        "district_code": 100508,
+        "amphoe_code": 1005,
+        "province_code": 10
+    },
+    {
         "district": "อนุสาวรีย์",
         "amphoe": "บางเขน",
         "province": "กรุงเทพมหานคร",
@@ -1282,6 +1318,42 @@
         "amphoe": "ปทุมวัน",
         "province": "กรุงเทพมหานคร",
         "zipcode": 10330,
+        "district_code": 100702,
+        "amphoe_code": 1007,
+        "province_code": 10
+    },
+    {
+        "district": "วังใหม่",
+        "amphoe": "ปทุมวัน",
+        "province": "กรุงเทพมหานคร",
+        "zipcode": 10110,
+        "district_code": 100702,
+        "amphoe_code": 1007,
+        "province_code": 10
+    },
+    {
+        "district": "วังใหม่",
+        "amphoe": "ปทุมวัน",
+        "province": "กรุงเทพมหานคร",
+        "zipcode": 10120,
+        "district_code": 100702,
+        "amphoe_code": 1007,
+        "province_code": 10
+    },
+    {
+        "district": "วังใหม่",
+        "amphoe": "ปทุมวัน",
+        "province": "กรุงเทพมหานคร",
+        "zipcode": 10400,
+        "district_code": 100702,
+        "amphoe_code": 1007,
+        "province_code": 10
+    },
+    {
+        "district": "วังใหม่",
+        "amphoe": "ปทุมวัน",
+        "province": "กรุงเทพมหานคร",
+        "zipcode": 10500,
         "district_code": 100702,
         "amphoe_code": 1007,
         "province_code": 10
@@ -1773,6 +1845,15 @@
         "province_code": 10
     },
     {
+        "district": "พระโขนงเหนือ",
+        "amphoe": "วัฒนา",
+        "province": "กรุงเทพมหานคร",
+        "zipcode": 10260,
+        "district_code": 103306,
+        "amphoe_code": 1039,
+        "province_code": 10
+    },
+    {
         "district": "สวนหลวง",
         "amphoe": "สวนหลวง",
         "province": "กรุงเทพมหานคร",
@@ -1786,6 +1867,15 @@
         "amphoe": "สะพานสูง",
         "province": "กรุงเทพมหานคร",
         "zipcode": 10240,
+        "district_code": 100605,
+        "amphoe_code": 1044,
+        "province_code": 10
+    },
+    {
+        "district": "สะพานสูง",
+        "amphoe": "สะพานสูง",
+        "province": "กรุงเทพมหานคร",
+        "zipcode": 10250,
         "district_code": 100605,
         "amphoe_code": 1044,
         "province_code": 10
