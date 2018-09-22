@@ -9,7 +9,7 @@
 ## ต้องการปรับปรุงฐานข้อมูล?
 คุณสามารถปรับปรุงข้อมูลได้ที่ [raw_database.json](https://github.com/earthchie/jquery.Thailand.js/blob/master/jquery.Thailand.js/database/raw_database/raw_database.json) จากนั้นนำไฟล์ที่แก้ไขแล้ว ไป compact ให้มีขนาดเล็กลงเพื่อให้นำไปใช้กับ Libary ได้ที่ [Database Tools](https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/database/tools/)
 
-## [1.5.3.5]
+## Changelog [1.5.3.5]
 > 23 กันยายน 2018
 - ต.บางวัว อ.บางปะกง เปลี่ยนรหัสไปรษณีย์เป็น 24130
 
