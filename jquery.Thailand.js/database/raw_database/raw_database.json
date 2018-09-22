@@ -7662,7 +7662,7 @@
         "district": "บางวัว",
         "amphoe": "บางปะกง",
         "province": "ฉะเชิงเทรา",
-        "zipcode": 24180,
+        "zipcode": 24130,
         "district_code": 240403,
         "amphoe_code": 2404,
         "province_code": 24
@@ -32994,6 +32994,15 @@
         "province_code": 83
     },
     {
+        "district": "ฉลอง",
+        "amphoe": "เมืองภูเก็ต",
+        "province": "ภูเก็ต",
+        "zipcode": 83130,
+        "district_code": 830106,
+        "amphoe_code": 8301,
+        "province_code": 83
+    },
+    {
         "district": "ตลาดเหนือ",
         "amphoe": "เมืองภูเก็ต",
         "province": "ภูเก็ต",
@@ -33025,6 +33034,15 @@
         "amphoe": "เมืองภูเก็ต",
         "province": "ภูเก็ต",
         "zipcode": 83100,
+        "district_code": 830107,
+        "amphoe_code": 8301,
+        "province_code": 83
+    },
+    {
+        "district": "ราไวย์",
+        "amphoe": "เมืองภูเก็ต",
+        "province": "ภูเก็ต",
+        "zipcode": 83130,
         "district_code": 830107,
         "amphoe_code": 8301,
         "province_code": 83
@@ -44955,6 +44973,15 @@
         "province_code": 90
     },
     {
+        "district": "โคกม่วง",
+        "amphoe": "คลองหอยโข่ง",
+        "province": "สงขลา",
+        "zipcode": 90115,
+        "district_code": 901121,
+        "amphoe_code": 9016,
+        "province_code": 90
+    },
+    {
         "district": "ควนโส",
         "amphoe": "ควนเนียง",
         "province": "สงขลา",
@@ -51232,6 +51259,15 @@
         "amphoe": "เกาะพะงัน",
         "province": "สุราษฎร์ธานี",
         "zipcode": 84280,
+        "district_code": 840503,
+        "amphoe_code": 8405,
+        "province_code": 84
+    },
+    {
+        "district": "เกาะเต่า",
+        "amphoe": "เกาะพะงัน",
+        "province": "สุราษฎร์ธานี",
+        "zipcode": 84360,
         "district_code": 840503,
         "amphoe_code": 8405,
         "province_code": 84
