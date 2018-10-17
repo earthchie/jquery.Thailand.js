@@ -198,7 +198,7 @@ $.Thailand = function (options) {
         $.Thailand.DB = DB;
         var i,
             key,
-            templates = { // template of autocomplete choices
+            defaultTemplates = { // template of autocomplete choices
                 empty: ' ',
                 suggestion: function (data) {
                     if (data.zipcode) {
@@ -222,6 +222,7 @@ $.Thailand = function (options) {
                 }
 
             };
+        var templates = typeof options.templates === 'object' ? Object.assign(defaultTemplates, options.templates) : defaultTemplates
 
         for (i in options) {
             if (i.indexOf('$') > -1 && i !== '$search' && options.hasOwnProperty(i) && options[i]) {
@@ -329,7 +330,7 @@ $.Thailand.defaults = {
 
     onLoad: function () {},
     onDataFill: function () {},
-
+    templates: false,
     $district: false,
     $district_code: false, // geodb only
     $amphoe: false,

@@ -412,6 +412,19 @@ $.Thailand({
     // (ไม่ระบุก็ได้หากไม่จำเป็นต้องใช้)
     onLoad: function(){ 
         console.info('Autocomplete is ready!');
+    },
+
+    // object templates ใช้สำหรับ render dataset ใน typeahead.js
+    // สามารถอ่านเพิ่มเติมได้ที่ field templates ใน https://github.com/twitter/typeahead.js/blob/master/doc/jquery_typeahead.md#datasets
+    // (ไม่ระบุก็ได้หากไม่จำเป็นต้องใช้)
+    templates: {
+        empty: ' ',
+        suggestion: function (data) {
+            if (data.zipcode) {
+                data.zipcode = ' » ' + data.zipcode;
+            }
+            return '<div>' + data.district + ' » ' + data.amphoe + ' » ' + data.province + data.zipcode + '</div>';
+        }
     }
 });
 ```
