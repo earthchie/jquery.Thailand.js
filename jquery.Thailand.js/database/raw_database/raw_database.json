@@ -1089,7 +1089,16 @@
         "province_code": 10
     },
     {
-        "district": "บางนา",
+        "district": "บางนาเหนือ",
+        "amphoe": "บางนา",
+        "province": "กรุงเทพมหานคร",
+        "zipcode": 10260,
+        "district_code": 100904,
+        "amphoe_code": 1047,
+        "province_code": 10
+    },
+    {
+        "district": "บางนาใต้",
         "amphoe": "บางนา",
         "province": "กรุงเทพมหานคร",
         "zipcode": 10260,
@@ -6534,6 +6543,15 @@
         "province_code": 40
     },
     {
+        "district": "มหาวิทยาลัยขอนแก่น",
+        "amphoe": "เมืองขอนแก่น",
+        "province": "ขอนแก่น",
+        "zipcode": 40002,
+        "district_code": 400101,
+        "amphoe_code": 4001,
+        "province_code": 40
+    },
+    {
         "district": "ก้านเหลือง",
         "amphoe": "แวงน้อย",
         "province": "ขอนแก่น",
@@ -9022,6 +9040,15 @@
         "amphoe": "เมืองชลบุรี",
         "province": "ชลบุรี",
         "zipcode": 20000,
+        "district_code": 200115,
+        "amphoe_code": 2001,
+        "province_code": 20
+    },
+    {
+        "district": "ห้วยกะปิ",
+        "amphoe": "เมืองชลบุรี",
+        "province": "ชลบุรี",
+        "zipcode": 20130,
         "district_code": 200115,
         "amphoe_code": 2001,
         "province_code": 20
