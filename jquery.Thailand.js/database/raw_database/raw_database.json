@@ -1881,6 +1881,15 @@
         "province_code": 10
     },
     {
+        "district": "พัฒนาการ",
+        "amphoe": "สวนหลวง",
+        "province": "กรุงเทพมหานคร",
+        "zipcode": 10250,
+        "district_code": 103403,
+        "amphoe_code": 1034,
+        "province_code": 10
+    },
+    {
         "district": "สะพานสูง",
         "amphoe": "สะพานสูง",
         "province": "กรุงเทพมหานคร",
