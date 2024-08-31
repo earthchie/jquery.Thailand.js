@@ -1116,6 +1116,15 @@
         "province_code": 10
     },
     {
+        "district": "คลองบางพราน",
+        "amphoe": "บางบอน",
+        "province": "กรุงเทพมหานคร",
+        "zipcode": 10150,
+        "district_code": 102108,
+        "amphoe_code": 1050,
+        "province_code": 10
+    },
+    {
         "district": "บางบำหรุ",
         "amphoe": "บางพลัด",
         "province": "กรุงเทพมหานคร",
