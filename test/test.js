@@ -6,35 +6,17 @@ const it = mocha.it
 const expect = require('chai').expect
 const db = require('../src/index.js')
 
-describe('More then 1 zipcode District', function () {
-  it('District ปราณบุรี have 2 result', function () {
-    const result = db.searchAddressByDistrict('ปราณบุรี')
-    expect(result.length).to.equal(2)
-    expect(result.filter((item) => item.province === 'ประจวบคีรีขันธ์').length).to.equal(2)
-  })
-  it('District วังก์พง have 2 result', function () {
-    const result = db.searchAddressByDistrict('วังก์พง')
-    expect(result.length).to.equal(2)
-    expect(result.filter((item) => item.province === 'ประจวบคีรีขันธ์').length).to.equal(2)
-  })
-  it('District หนองตาแต้ม have 2 result', function () {
-    const result = db.searchAddressByDistrict('หนองตาแต้ม')
-    expect(result.length).to.equal(2)
-    expect(result.filter((item) => item.province === 'ประจวบคีรีขันธ์').length).to.equal(2)
-  })
-  it('District เขาจ้าว have 2 result', function () {
-    const result = db.searchAddressByDistrict('เขาจ้าว')
-    expect(result.length).to.equal(2)
-    expect(result.filter((item) => item.province === 'ประจวบคีรีขันธ์').length).to.equal(2)
-  })
-  it('District สามร้อยยอด have 2 result', function () {
-    const result = db.searchAddressByDistrict('สามร้อยยอด')
-    expect(result.length).to.equal(2)
-    expect(result.filter((item) => item.province === 'ประจวบคีรีขันธ์').length).to.equal(2)
-  })
-  it('District เขาน้อย have 2 result', function () {
-    const result = db.searchAddressByDistrict('เขาน้อย')
-    expect(result.filter((item) => item.province === 'ประจวบคีรีขันธ์').length).to.equal(2)
+// Updated for the new master data (thailand-province): these Prachuap Khiri Khan
+// tambons now resolve to a single zipcode (77120) instead of [77120, 77160].
+describe('Prachuap Khiri Khan single zipcode (updated master data)', function () {
+  const tambons = ['ปราณบุรี', 'วังก์พง', 'หนองตาแต้ม', 'เขาจ้าว', 'สามร้อยยอด', 'เขาน้อย']
+  tambons.forEach((name) => {
+    it('District ' + name + ' resolves to 77120 in ประจวบคีรีขันธ์', function () {
+      const result = db.searchAddressByDistrict(name)
+        .filter((item) => item.province === 'ประจวบคีรีขันธ์')
+      expect(result.length).to.equal(1)
+      expect(Number(result[0].zipcode)).to.equal(77120)
+    })
   })
 })
 
