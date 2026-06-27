@@ -728,6 +728,15 @@
         "amphoe_code": 1026,
         "province_code": 10
     },
+     { 
+        "district": "รัชดาภิเษก", 
+         "amphoe": "ดินแดง", 
+         "province": "กรุงเทพมหานคร", 
+         "zipcode": 10400, 
+         "district_code": 102602, 
+         "amphoe_code": 1026, 
+         "province_code": 10 
+     },
     {
         "district": "ดุสิต",
         "amphoe": "ดุสิต",
@@ -1124,6 +1133,33 @@
         "amphoe_code": 1050,
         "province_code": 10
     },
+    { 
+        "district": "คลองบางบอน", 
+        "amphoe": "บางบอน", 
+        "province": "กรุงเทพมหานคร", 
+        "zipcode": 10150, 
+        "district_code": 105005, 
+        "amphoe_code": 1050, 
+        "province_code": 10 
+    },
+    { 
+        "district": "บางบอนเหนือ", 
+        "amphoe": "บางบอน", 
+        "province": "กรุงเทพมหานคร", 
+        "zipcode": 10150, 
+        "district_code": 105002, 
+        "amphoe_code": 1050, 
+        "province_code": 10 
+    },
+    { 
+        "district": "บางบอนใต้", 
+        "amphoe": "บางบอน", 
+        "province": "กรุงเทพมหานคร", 
+        "zipcode": 10150, 
+        "district_code": 105003, 
+        "amphoe_code": 1050, 
+        "province_code": 10 
+    }, 
     {
         "district": "บางบำหรุ",
         "amphoe": "บางพลัด",
@@ -1456,6 +1492,15 @@
         "district_code": 100299,
         "amphoe_code": 1014,
         "province_code": 10
+    },
+    {
+    "district": "พญาไท",
+    "amphoe": "พญาไท",
+    "province": "กรุงเทพมหานคร",
+    "zipcode": 10400,
+    "district_code": 101402,
+    "amphoe_code": 1014,
+    "province_code": 10
     },
     {
         "district": "ชนะสงคราม",
@@ -1869,6 +1914,15 @@
         "zipcode": 10260,
         "district_code": 103306,
         "amphoe_code": 1039,
+        "province_code": 10
+    },
+    { 
+        "district": "พระโขนงใต้", 
+        "amphoe": "พระโขนง", 
+        "province": "กรุงเทพมหานคร", 
+        "zipcode": 10260, 
+        "district_code": 100902,
+        "amphoe_code": 1009, 
         "province_code": 10
     },
     {
